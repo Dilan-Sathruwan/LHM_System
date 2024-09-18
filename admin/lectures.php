@@ -7,7 +7,7 @@
     <!-- Navbar End -->
 
 
-    <!-- data student table Start -->
+    <!-- data lectures table Start -->
     <div class="container-fluid pt-4 px-4">
 
         <main id="" class="">
