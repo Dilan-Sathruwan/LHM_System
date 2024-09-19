@@ -150,82 +150,51 @@
       color: white;
     }
 
+    /* Buttons Section */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 5rem; /* Large gap for desktop view */
+  margin: 2rem;
+}
 
-    /* From Uiverse.io by Randdose */
+.Mbtn {
+  all: unset;
+  width: 8rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: rgb(250, 171, 0);
+  color: #212121;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid rgb(250, 92, 0);
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
 
-    .Mbp {
-      display: flex;
-      flex-direction: column;
-      border: 3px solid red;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-    }
+.Mbtn:hover {
+  background-color: transparent;
+  color: rgb(250, 150, 0);
+}
 
-    .Mbtn {
-      margin: auto;
-      all: unset;
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 0.6em 2em;
-      border: mediumspringgreen solid 0.15em;
-      border-radius: 0.25em;
-      color: mediumspringgreen;
-      font-size: 1.5em;
-      font-weight: 600;
-      cursor: pointer;
-      overflow: hidden;
-      transition: border 300ms, color 300ms;
-      user-select: none;
-    }
+/* Mobile View Adjustments */
+@media (max-width: 768px) {
+  .btn-group {
+    flex-direction: column; /* Stack buttons vertically on smaller screens */
+    gap: 1.5rem; /* Smaller gap between buttons */
+    margin: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .Mbtn p {
-      z-index: 1;
-    }
+  .Mbtn {
+    width: 75%; /* Full width on mobile for easier interaction */
+    padding: 0.75rem;
+  }
+}
 
-    .Mbtn:hover {
-      color: #212121;
-    }
-
-    .Mbtn:active {
-      border-color: teal;
-    }
-
-    .Mbtn::after,
-    .Mbtn::before {
-      content: "";
-      position: absolute;
-      width: 9em;
-      aspect-ratio: 1;
-      background: mediumspringgreen;
-      opacity: 50%;
-      border-radius: 50%;
-      transition: transform 500ms, background 300ms;
-    }
-
-    .Mbtn::before {
-      left: 0;
-      transform: translateX(-8em);
-    }
-
-    .Mbtn::after {
-      right: 0;
-      transform: translateX(8em);
-    }
-
-    .Mbtn:hover:before {
-      transform: translateX(-1em);
-    }
-
-    .Mbtn:hover:after {
-      transform: translateX(1em);
-    }
-
-    .Mbtn:active:before,
-    .Mbtn:active:after {
-      background: teal;
-    }
   </style>
 </head>
 
@@ -336,38 +305,14 @@
         </div>
       </div>
     </div>
-
-    <div class="container text-center mt-5">
-      <!-- Button 1: Primary -->
-      <button type="button" class="btn btn-primary">Primary Button</button>
-
-      <!-- Button 2: Success -->
-      <button type="button" class="btn btn-success">Success Button</button>
-
-      <!-- Button 3: Danger -->
-      <button type="button" class="btn btn-danger">Danger Button</button>
-    </div>
-
   </div>
 
-
-  <div class="Mbp">
-    <div class="container text-center mt-5">
-      <button class="Mbtn">
-        <p>Button</p>
-      </button>
-
-      <button class="Mbtn">
-        <p>Button</p>
-      </button>
-
-      <button class="Mbtn">
-        <p>Button</p>
-      </button>
-    </div>
+  <!-- Button Section -->
+  <div class="btn-group">
+    <button class="Mbtn">Button 1</button>
+    <button class="Mbtn">Button 2</button>
+    <button class="Mbtn">Button 3</button>
   </div>
-
-
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
