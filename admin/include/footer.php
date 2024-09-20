@@ -6,7 +6,8 @@
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> -->
+<script src="assets/vendor/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 <script src="assets/lib/chart/chart.min.js"></script>
 <script src="assets/lib/easing/easing.min.js"></script>
 <script src="assets/lib/waypoints/waypoints.min.js"></script>
@@ -17,6 +18,7 @@
 <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
 <script src="assets/vendor/tinymce/tinymce.min.js"></script>
 
+<script src="../assets/vendor/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 
 
 <!-- Template Javascript -->
