@@ -150,51 +150,141 @@
       color: white;
     }
 
+    /* From Uiverse.io by G4b413l */
+
+    .dwnbp{
+      border: 3px solid red;
+      display: flex;
+      justify-content: center;
+    }
+
+    .buttonDownload {
+      display: inline-block;
+      position: relative;
+      padding: 10px 25px;
+      background-color: #4CC713;
+      color: white;
+      font-family: sans-serif;
+      text-decoration: none;
+      font-size: 0.9em;
+      text-align: center;
+      text-indent: 15px;
+      border: none;
+    }
+
+    .buttonDownload:hover {
+      background-color: #45a21a;
+      color: white;
+    }
+
+    .buttonDownload:before,
+    .buttonDownload:after {
+      content: ' ';
+      display: block;
+      position: absolute;
+      left: 15px;
+      top: 52%;
+    }
+
+    .buttonDownload:before {
+      width: 10px;
+      height: 2px;
+      border-style: solid;
+      border-width: 0 2px 2px;
+    }
+
+    .buttonDownload:after {
+      width: 0;
+      height: 0;
+      margin-left: 1px;
+      margin-top: -9px;
+      border-style: solid;
+      border-width: 4px 4px 0 4px;
+      border-color: transparent;
+      border-top-color: inherit;
+      animation: downloadArrow 1s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .buttonDownload:hover:before {
+      border-color: #ffffff;
+    }
+
+    .buttonDownload:hover:after {
+      border-top-color: #ffffff;
+      animation-play-state: running;
+    }
+
+    @keyframes downloadArrow {
+      0% {
+        margin-top: -7px;
+        opacity: 1;
+      }
+
+      0.001% {
+        margin-top: -15px;
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        margin-top: 0;
+        opacity: 0.4;
+      }
+    }
+
+
     /* Buttons Section */
-.btn-group {
-  display: flex;
-  justify-content: center;
-  gap: 5rem; /* Large gap for desktop view */
-  margin: 2rem;
-}
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      /* Large gap for desktop view */
+      margin: 2rem;
+    }
 
-.Mbtn {
-  all: unset;
-  width: 8rem;
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: rgb(250, 171, 0);
-  color: #212121;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  border: 2px solid rgb(250, 92, 0);
-  border-radius: 0.5rem;
-  transition: background-color 0.3s ease;
-}
+    .Mbtn {
+      all: unset;
+      width: 8rem;
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: rgb(250, 171, 0);
+      color: #212121;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+      border: 2px solid rgb(250, 92, 0);
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
 
-.Mbtn:hover {
-  background-color: transparent;
-  color: rgb(250, 150, 0);
-}
+    .Mbtn:hover {
+      background-color: transparent;
+      color: rgb(250, 150, 0);
+    }
 
-/* Mobile View Adjustments */
-@media (max-width: 768px) {
-  .btn-group {
-    flex-direction: column; /* Stack buttons vertically on smaller screens */
-    gap: 1.5rem; /* Smaller gap between buttons */
-    margin: 1rem;
-    justify-content: center;
-    align-items: center;
-  }
+    /* Mobile View Adjustments */
+    @media (max-width: 768px) {
+      .btn-group {
+        flex-direction: column;
+        /* Stack buttons vertically on smaller screens */
+        gap: 1.5rem;
+        /* Smaller gap between buttons */
+        margin: 1rem;
+        justify-content: center;
+        align-items: center;
+      }
 
-  .Mbtn {
-    width: 75%; /* Full width on mobile for easier interaction */
-    padding: 0.75rem;
-  }
-}
-
+      .Mbtn {
+        width: 75%;
+        /* Full width on mobile for easier interaction */
+        padding: 0.75rem;
+      }
+    }
   </style>
 </head>
 
@@ -232,79 +322,83 @@
         </div>
       </div>
     </div>
+    
+      <div class="dwnbp"> <!--Downlod button parent -->
+        <button class="buttonDownload">Download Your TimeTable</button>
+      </div>
 
-    <div class="row">
-      <!-- Timetable Section -->
-      <div class="col-12">
-        <div class="tbl">
-          <p>This is Your Timetable for Today.</p>
-          <div class="ag">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Time</th>
-                  <th>Lecture</th>
-                  <th>Lecture Hall</th>
-                  <th>Department</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>8.30 am - 9.30 am</td>
-                  <td>OOP</td>
-                  <td>B2</td>
-                  <td>IT Department</td>
-                </tr>
-                <tr>
-                  <td>9.30 am - 10.30 am</td>
-                  <td>OOP</td>
-                  <td>B2</td>
-                  <td>IT Department</td>
-                </tr>
-                <tr>
-                  <td>10.30 am - 11.30 am</td>
-                  <td>Web</td>
-                  <td>B3 (Lab)</td>
-                  <td>English Department</td>
-                </tr>
-                <tr>
-                  <td>11.30 am - 12.30 pm</td>
-                  <td>Web</td>
-                  <td>B3 (Lab)</td>
-                  <td>English Department</td>
-                </tr>
-                <tr>
-                  <td>12.30 pm - 1.00 pm</td>
-                  <td colspan="3">Interval</td>
-                </tr>
-                <tr>
-                  <td>1.00 pm - 2.00 pm</td>
-                  <td>Web</td>
-                  <td>B2</td>
-                  <td>English Department</td>
-                </tr>
-                <tr>
-                  <td>2.00 pm - 3.00 pm</td>
-                  <td>OS</td>
-                  <td>B2</td>
-                  <td>Accounting Department</td>
-                </tr>
-                <tr>
-                  <td>3.00 pm - 4.00 pm</td>
-                  <td>OS</td>
-                  <td>B2</td>
-                  <td>Accounting Department</td>
-                </tr>
-                <tr>
-                  <td>4.00 pm - 5.00 pm</td>
-                  <td colspan="3"></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+  <div class="row">
+    <!-- Timetable Section -->
+    <div class="col-12">
+      <div class="tbl">
+        <p>This is Your Timetable for Today.</p>
+        <div class="ag">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Lecture</th>
+                <th>Lecture Hall</th>
+                <th>Department</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>8.30 am - 9.30 am</td>
+                <td>OOP</td>
+                <td>B2</td>
+                <td>IT Department</td>
+              </tr>
+              <tr>
+                <td>9.30 am - 10.30 am</td>
+                <td>OOP</td>
+                <td>B2</td>
+                <td>IT Department</td>
+              </tr>
+              <tr>
+                <td>10.30 am - 11.30 am</td>
+                <td>Web</td>
+                <td>B3 (Lab)</td>
+                <td>English Department</td>
+              </tr>
+              <tr>
+                <td>11.30 am - 12.30 pm</td>
+                <td>Web</td>
+                <td>B3 (Lab)</td>
+                <td>English Department</td>
+              </tr>
+              <tr>
+                <td>12.30 pm - 1.00 pm</td>
+                <td colspan="3">Interval</td>
+              </tr>
+              <tr>
+                <td>1.00 pm - 2.00 pm</td>
+                <td>Web</td>
+                <td>B2</td>
+                <td>English Department</td>
+              </tr>
+              <tr>
+                <td>2.00 pm - 3.00 pm</td>
+                <td>OS</td>
+                <td>B2</td>
+                <td>Accounting Department</td>
+              </tr>
+              <tr>
+                <td>3.00 pm - 4.00 pm</td>
+                <td>OS</td>
+                <td>B2</td>
+                <td>Accounting Department</td>
+              </tr>
+              <tr>
+                <td>4.00 pm - 5.00 pm</td>
+                <td colspan="3"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- Button Section -->
