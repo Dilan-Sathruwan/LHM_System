@@ -1,1 +1,10 @@
-
+.container {
+  background-color: aqua;
+  border: 6px solid green;
+}
+h1 {
+  color: rgb(0, 255, 110);
+}
+.login {
+  background-color: pink;
+}
