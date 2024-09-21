@@ -23,44 +23,22 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto"> <!-- Changed mr-auto to me-auto for Bootstrap 5 -->
-                <li class="nav-item active mx-2">
-                    <a class="nav-link" href="#">Home <span class="visually-hidden">(current)</span></a> <!-- Changed sr-only to visually-hidden -->
+            <ul class="navbar-nav mx-auto"> <!-- Centering the nav items -->
+                <li class="nav-item mx-2">
+                    <a class="nav-link" href="#">Home <span class="visually-hidden">(current)</span></a>
                 </li>
                 <li class="nav-item mx-2">
                     <a class="nav-link" href="./asset/About Us.php">About</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="#our-service">Our Service</a> <!-- Capitalized "Service" -->
-                </li>
-                <li class="nav-item dropdown mx-2">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false"> <!-- Changed data-toggle to data-bs-toggle -->
-                        Admin Panel
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> <!-- Changed dropdown-menu to ul -->
-                        <li><a class="dropdown-item" href="./asset/Owner Login.php">Admin Login</a></li>
-                        <li><a class="dropdown-item" href="./asset/Owner Login.php">Owner Login</a></li> <!-- Corrected spelling -->
-                        <li><hr class="dropdown-divider"></li> <!-- Added horizontal divider -->
-                        <li><a class="dropdown-item" href="./asset/Owner S.php">Registration</a></li> <!-- Corrected spelling -->
-                    </ul>
+                    <a class="nav-link" href="#our-service">Our Service</a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="#footerss">Contact Us</a> <!-- Capitalized "Us" -->
+                    <a class="nav-link" href="#footerss">Contact Us</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <?php
-                if (isset($_SESSION["uname"])) {
-                    echo '<a class="btn btn-outline-success my-2 my-sm-0 mx-2" href="#">' . 'User: ' . $_SESSION["uname"] . '</a>';
-                    echo '<a class="btn btn-outline-success my-2 my-sm-0 mx-2" id="logoutButton" href="asset\includes\logout.inc.php">Log Out</a>';
-                } else {
-                    echo '<a class="btn btn-outline-success my-2 my-sm-0 mx-2" href="./asset/User Login.php"
-                    target="_blank">User Login</a>';
-                }
-
-                ?>
-            </form>
+            <!-- Login Button -->
+            <a class="btn btn-outline-light" href="./asset/login.php">Login</a>
         </div>
     </nav>
     <!-- Navigation Stop -->
