@@ -1,7 +1,7 @@
 <!-- Back to Top -->
 <!-- <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a> -->
 <button type="button" class="btn btn-lg btn-primary btn-lg-square back-to-top" id="btn-back-to-top"> <i
-        class="fas fa-arrow-up"></i></button>
+                class="fas fa-arrow-up"></i></button>
 </div>
 
 <!-- JavaScript Libraries -->
@@ -21,6 +21,7 @@
 <!-- Template Javascript -->
 <script src="assets/js/main.js"></script>
 <script src="assets/js/maintable.js"></script>
+<script src="assets/js/modelform.js"></script>
 
 </body>
 

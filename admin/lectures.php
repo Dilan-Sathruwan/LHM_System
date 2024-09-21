@@ -9,8 +9,8 @@
 
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <!-- Lecture Add /Edit Modal -->
+    <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -28,7 +28,7 @@
 
                                 <div class="card my-1">
 
-                                    <form class="card-body cardbody-color p-lg-2">
+                                    <form id="myForm" class="card-body cardbody-color p-lg-2">
 
                                         <div class="row g-3">
 
@@ -39,7 +39,7 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Lecture Index Number</label>
+                                                <label for="firstName" class="form-label">Lecture Name</label>
                                                 <input type="text" class="form-control" id="Lecture Name" placeholder=""
                                                     value="" required>
                                                 <div class="invalid-feedback">
@@ -105,8 +105,13 @@
                                                     Please select a valid Roles.
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <button type="submit" class="btn btn-primary">Sign in</button>
+
+
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label">About
+                                                    Lecture</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                    rows="3"></textarea>
                                             </div>
                                         </div>
                                     </form>
@@ -116,10 +121,158 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="myForm" class="btn btn-primary">Submit</button>
+                </div>
             </div>
         </div>
     </div>
+    <!-- Lecture Add/Edit Modal end -->
 
+
+
+
+
+
+    <!-- Lecture view Modal model start-->
+    <div class="modal fade" id="LectureView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Lecture profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- type here -->
+
+                    <div class="container bg-primary">
+                        <div class="row ">
+                            <div class="justify-content-md-center ">
+                                <div class="card my-3 bg-primary">
+
+                                    <form id="myForm1" class=" card-body cardbody-color p-lg-2 ">
+
+                                        <div class=" row g-3">
+
+                                            <div class="text-center">
+                                                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                                                    class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+                                                    width="200px" alt="profile">
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="firstName" class="form-label">Lecture Name</label>
+                                                <input type="text" class="form-control" id="Lecture Name" placeholder=""
+                                                    value="" readonly>
+                                                <div class="invalid-feedback">
+                                                    Valid Lecture name is required.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="password" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword3"
+                                                    readonly>
+                                                <div class="invalid-feedback">
+                                                    Valid password is required.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="username" class="form-label">Username</label>
+                                                <div class="input-group has-validation">
+                                                    <input type="text" class="form-control" id="username" readonly>
+                                                    <div class="invalid-feedback">
+                                                        Your username is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="email" class="form-label">Email </label>
+                                                <input type="email" class="form-control" id="email" readonly>
+                                                <div class="invalid-feedback">
+                                                    Please enter a valid email address.
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-sm-6">
+                                                <label for="number" class="form-label">Mobile Number</label>
+                                                <input type="number" class="form-control" id="inputnumber" readonly>
+                                                <div class="invalid-feedback">
+                                                    Valid Mobile Number is required.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="address"
+                                                    placeholder="1234, Main St,kegalle" readonly>
+                                                <div class="invalid-feedback">
+                                                    Please enter your address.
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="Lecturerole" class="form-label">Lecture Roles</label>
+                                                <select class="form-select" id="lecturerole" disabled readonly>
+                                                    <option value="">Choose...</option>
+                                                    <option>Part time Lecture</option>
+                                                    <option>Visiting Lecture</option>
+                                                    <option>Permernet Lecture</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                    Please select a valid Roles.
+                                                </div>
+                                            </div>
+
+
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label">About
+                                                    Lecture</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                                                    readonly></textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" form="myForm2" class="btn btn-primary" onclick="printForm()"><i
+                            class="bi bi-printer"></i> print
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Lecture view Modal end -->
+
+
+    <script>
+    function printForm() {
+        // Get the form element
+        const form = document.getElementById('myForm1');
+        // Save the current page content
+        const originalContent = document.body.innerHTML;
+        // Replace the body content with just the form's HTML for printing
+        document.body.innerHTML = form.outerHTML;
+        // Trigger the print dialog for the form
+        window.print();
+        // Restore the original page content after printing
+        document.body.innerHTML = originalContent;
+        // Optionally, reload the JavaScript and events after restoring the content
+        location.reload(); // Reload to re-initialize events or state (if needed)
+    }
+    </script>
 
 
 
@@ -139,8 +292,13 @@
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h3 class="mb-0">Lectures Datatable</h3>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop">
+                                        data-bs-target="#Lecturecreate">
                                         Add Lecture
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#LectureView">
+                                        Add Lecture111
                                     </button>
                                 </div>
 
