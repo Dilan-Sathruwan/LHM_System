@@ -1,14 +1,14 @@
-function printForm() {
-    // Get the form element
-    const form = document.getElementById('myForm1');
-    // Save the current page content
-    const originalContent = document.body.innerHTML;
-    // Replace the body content with just the form's HTML for printing
-    document.body.innerHTML = form.outerHTML;
-    // Trigger the print dialog for the form
-    window.print();
-    // Restore the original page content after printing
-    document.body.innerHTML = originalContent;
-    // Optionally, reload the JavaScript and events after restoring the content
-    location.reload(); // Reload to re-initialize events or state (if needed)
+
+
+function printForm(formId) {
+    const form = document.getElementById(formId);  // Get the form by ID
+    if (form) {
+        const originalContent = document.body.innerHTML;
+        document.body.innerHTML = form.outerHTML;   // Replace body with form's HTML content
+        window.print();                             // Open print dialog
+        document.body.innerHTML = originalContent;  // Restore original content
+        location.reload();                          // Reload page to reset state
+    } else {
+        console.error('Form not found!');
+    }
 }

@@ -39,7 +39,7 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Lecture Name</label>
+                                                <label for="firstName" class="form-label">Lecture Index Number</label>
                                                 <input type="text" class="form-control" id="Lecture Name" placeholder=""
                                                     value="" required>
                                                 <div class="invalid-feedback">
@@ -152,7 +152,7 @@
                             <div class="justify-content-md-center ">
                                 <div class="card my-3 bg-primary">
 
-                                    <form id="myForm1" class=" card-body cardbody-color p-lg-2 ">
+                                    <form id="myForm2" class=" card-body cardbody-color p-lg-2 ">
 
                                         <div class=" row g-3">
 
@@ -245,7 +245,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" form="myForm2" class="btn btn-primary" onclick="printForm()"><i
+                    <button type="submit" form="myForm2" class="btn btn-primary" onclick="printForm('myForm2')"><i
                             class="bi bi-printer"></i> print
                     </button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -277,10 +277,6 @@
                                         Add Lecture
                                     </button>
 
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#LectureView">
-                                        Add Lecture111
-                                    </button>
                                 </div>
 
                                 <hr>
@@ -291,9 +287,8 @@
                                         <tr>
 
                                             <th>Index Number</th>
-                                            <th>Name</th>
+                                            <th>Lecture Name</th>
                                             <th>Email</th>
-                                            <th>Address</th>
                                             <th>Phone Number</th>
                                             <th>Roles</th>
                                             <th data-type="date" data-format="YYYY/DD/MM">Re. Date</th>
@@ -305,13 +300,15 @@
                                             <td>KEG/V/0001</td>
                                             <td>Dilan</td>
                                             <td>dilan@gmail.com</td>
-                                            <td>kegalle</td>
                                             <td>012345</td>
                                             <th>permernat</th>
                                             <td>2024-2-3</td>
                                             <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
+                                                <a href="" class="" data-bs-toggle="modal"
+                                                    data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>
+                                                <a href="" class="" data-bs-toggle="modal"
+                                                    data-bs-target="#Lecturecreate"><i
+                                                        class="fas fa-user-edit fa-lg"></i></a>
                                                 <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
                                             </td>
                                         </tr>
@@ -320,7 +317,6 @@
                                             <td>KEG/V/0002</td>
                                             <td>tharuka</td>
                                             <td>tharuka@gmail.com</td>
-                                            <td>kegalle</td>
                                             <td>012345</td>
                                             <th>visiting</th>
                                             <td>2024-6-3</td>
@@ -335,7 +331,6 @@
                                             <td>KEG/V/0003</td>
                                             <td>shehani</td>
                                             <td>shehanis@gmail.com</td>
-                                            <td>kegalle</td>
                                             <td>0123454</td>
                                             <th>visiting</th>
                                             <td>2024-6-3</td>
@@ -350,7 +345,6 @@
                                             <td>KEG/V/0004</td>
                                             <td>ravindu</td>
                                             <td>ravindu@gmail.com</td>
-                                            <td>kegalle</td>
                                             <td>012345</td>
                                             <th>visiting</th>
                                             <td>2024-6-3</td>
