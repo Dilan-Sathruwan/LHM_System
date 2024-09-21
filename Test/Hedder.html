@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Navbar</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f4e1; /* Light background */
+      }
+
+      /* Navbar Styling */
+      .navbar {
+        background-color: #f8f4e1; /* Matches light background */
+        padding: 10px 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      }
+
+      /* Styling for Logo and Login buttons */
+      .navbar-brand,
+      .login-btn {
+        background-color: #c33426;
+        color: white !important;
+        font-weight: bold;
+        padding: 10px 25px;
+        border-radius: 8px;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+
+      /* Hover effect for Logo and Login buttons */
+      .navbar-brand:hover,
+      .login-btn:hover {
+        background-color: #b52d21;
+      }
+
+      /* Centered Home button styling */
+      .nav-center {
+        background-color: #f98630;
+        padding: 12px 30px;
+        color: white !important;
+        font-weight: bold;
+        border-radius: 25px;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .nav-center:hover {
+        background-color: #ec7621;
+      }
+
+      /* Responsive Button Size Adjustments */
+      @media (max-width: 991.98px) {
+        .navbar-nav {
+          justify-content: center;
+        }
+
+        .login-btn,
+        .navbar-brand {
+          padding: 8px 15px; /* Slightly smaller on mobile */
+        }
+
+        .nav-center {
+          padding: 10px 20px; /* Adjust button padding for mobile */
+          font-size: 16px; /* Slightly smaller text */
+        }
+
+        .navbar-collapse {
+          justify-content: space-between;
+        }
+      }
+
+      /* Mobile View - Hamburger Menu Layout */
+      @media (max-width: 575.98px) {
+        /* Stack buttons vertically on mobile */
+        .navbar-nav {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        /* Logo and Login will go full-width */
+        .navbar-brand,
+        .login-btn {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+
+        /* Home button adjusts to be responsive */
+        .nav-center {
+          width: 100%;
+          text-align: center;
+          font-size: 18px;
+          padding: 12px 25px;
+        }
+
+        /* Adjust menu spacing */
+        .navbar-collapse {
+          align-items: center;
+        }
+
+        /* Add subtle borders for better definition */
+        .navbar-brand,
+        .nav-center,
+        .login-btn {
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Responsive Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <!-- Logo on the left -->
+        <a class="navbar-brand" href="#">LOGO</a>
+
+        <!-- Toggler for Mobile Menu -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar items -->
+        <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <!-- Centered Home Button -->
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link nav-center" href="#">Home</a>
+            </li>
+          </ul>
+
+          <!-- Login Button on the right -->
+          <a class="btn login-btn" href="#">Login</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
