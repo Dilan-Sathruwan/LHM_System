@@ -46,8 +46,8 @@
 
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3">
-            <nav class="navbar bg-dark navbar-light">
+        <div class="sidebar pe-4 pb-3 bg-primary">
+            <nav class="navbar bg-primary navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3>
                 </a>
