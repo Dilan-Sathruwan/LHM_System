@@ -1,20 +1,60 @@
-.background {
-  background: url(../img/backgroun3.jpg);
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
-  width: 100%;
+* {
+  list-style-type: none;
 }
 
-.container {
-  background-color: aqua;
-  border: 6px solid green;
-}
 h1 {
   color: rgb(0, 255, 110);
 }
+
+.background {
+  position: relative;
+  background-image: url(../img/backgroun3.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(8px); /* Apply blur to background */
+  z-index: 1;
+}
 .login {
-  background-color: pink;
+  position: relative;
+  z-index: 2;
+  background-image: url(../img/backgroun3.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  filter: none !important;
+  height: 450px;
+
+  /* background-image: url(../img/backgroun3.jpg); */
+}
+.btn_section {
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.welcome_msg {
+  color: white;
+}
+.btn_logins {
+  margin: 0 auto;
+  text-align: center;
+  align-items: center;
+}
+.card .texts h2 {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn {
   background: #fff;
