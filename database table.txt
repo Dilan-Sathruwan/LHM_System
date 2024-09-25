@@ -1,0 +1,153 @@
+CREATE DATABASE lecture_management_system;
+USE lecture_management_system;
+
+
+-- 1. Admins Table (Holds admin-specific data)
+CREATE TABLE admins (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) UNIQUE NOT NULL,
+	email VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+	role ENUM('primary', 'secondary', 'viewonly') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- 2. Lecturers Table (Holds lecturer-specific data, references departments)
+CREATE TABLE lecturers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    expertise VARCHAR(255),
+    address VARCHAR(255),
+    mobile_no VARCHAR(10),
+    image_path VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+-- 3. Departments Table (Holds department information)
+CREATE TABLE departments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    department_name VARCHAR(100) NOT NULL,
+    head_of_department INT,
+    CONSTRAINT unique_head UNIQUE (head_of_department)
+);
+
+
+-- 4. Lecturer department Table (associate multiple departments with a single lecturer)
+CREATE TABLE lecturer_department (
+    lecturer_id INT,
+    department_id INT,
+    PRIMARY KEY (lecturer_id, department_id),
+    FOREIGN KEY (lecturer_id) REFERENCES lecturers(id) ON DELETE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE
+);
+
+
+-- 5. Students Table (Holds student-specific data, references departments)
+CREATE TABLE students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    index_number VARCHAR(50) UNIQUE NOT NULL,
+    username VARCHAR(100) UNIQUE NOT NULL,
+	email VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    department_id INT,
+    batch ENUM('First-Year', 'Second-Year') NOT NULL,
+    type ENUM('Full-Time', 'Part-Time') NOT NULL,
+    semester INT NOT NULL,
+	image_path VARCHAR(255),
+    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE
+);
+
+
+-- 6. Subjects Table (Holds subject information and links to departments)
+CREATE TABLE subjects (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    subject_number VARCHAR(50) UNIQUE NOT NULL,
+    subject_name VARCHAR(100) NOT NULL,
+    department_id INT,
+    semester INT NOT NULL,
+    credits INT NOT NULL,
+    description TEXT,
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE,
+    CONSTRAINT unique_subject_department UNIQUE (subject_name, department_id)
+);
+
+-- 7. Lecture Halls Table (Holds information about lecture halls)
+CREATE TABLE lecture_halls (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    hall_name VARCHAR(100) NOT NULL,
+    capacity INT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    available BOOLEAN DEFAULT TRUE
+);
+
+-- 8. Lectures Table (Holds lecture information and references subjects and lecturers)
+CREATE TABLE lectures (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    lecture_name VARCHAR(255) NOT NULL,
+    lecturer_id INT,
+    subject_id INT,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    FOREIGN KEY (lecturer_id) REFERENCES lecturers(id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+);
+
+-- 9. Lecture Schedule Table (Holds scheduling information for lectures)
+CREATE TABLE lecture_schedule (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    lecture_id INT,
+    hall_id INT,
+    schedule_date DATE NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    duration INT NOT NULL, -- Duration in minutes
+    FOREIGN KEY (lecture_id) REFERENCES lectures(id) ON DELETE CASCADE,
+    FOREIGN KEY (hall_id) REFERENCES lecture_halls(id) ON DELETE CASCADE
+);
+
+-- 10. Student Enrollment Table (Links students with subjects they are enrolled in)
+CREATE TABLE student_enrollment (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT,
+    subject_id INT,
+    enrollment_date DATE NOT NULL,
+    semester INT NOT NULL,
+    grade VARCHAR(2),
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+);
+
+-- 11. Attendance Table (Tracks attendance of students for lectures)
+CREATE TABLE attendance (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    lecture_schedule_id INT,
+    student_id INT,
+    attended BOOLEAN DEFAULT FALSE,
+    attendance_date DATE NOT NULL,
+    FOREIGN KEY (lecture_schedule_id) REFERENCES lecture_schedule(id) ON DELETE CASCADE,
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+    CONSTRAINT unique_attendance UNIQUE (lecture_schedule_id, student_id, attendance_date)
+);
+
+-- 12. Timetable Clashes Table (Handles lecture clashes for students and halls)
+CREATE TABLE timetable_clashes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    lecture_id INT,
+    clash_type ENUM('Hall', 'Student', 'Lecturer') NOT NULL,
+    details TEXT,
+    resolved BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (lecture_id) REFERENCES lectures(id) ON DELETE CASCADE
+);
+
+-- 13. Admin Actions Table (Logs admin activities for security and auditing)
+CREATE TABLE admin_actions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    admin_id INT,
+    action_description TEXT NOT NULL,
+    action_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (admin_id) REFERENCES admins(id) ON DELETE CASCADE
+);
