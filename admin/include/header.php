@@ -1,3 +1,6 @@
+<?php
+include "include/db_connection.inc.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 

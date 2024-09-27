@@ -28,7 +28,8 @@
 
                                 <div class="card my-1">
 
-                                    <form id="myForm" class="card-body cardbody-color p-lg-2">
+                                    <form action="./include/student_create.php" id="myForm" method="POST"
+                                        class="card-body cardbody-color p-lg-2">
 
                                         <div class="row g-3">
 
@@ -39,8 +40,8 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Lecture Index Number</label>
-                                                <input type="text" class="form-control" id="Lecture Name" placeholder=""
+                                                <label for="LectureID" class="form-label">Lecture Index Number</label>
+                                                <input type="text" class="form-control" id="LectureID" placeholder=""
                                                     value="" required>
                                                 <div class="invalid-feedback">
                                                     Valid Lecture name is required.
@@ -48,8 +49,9 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="password" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="inputPassword3">
+                                                <label for="inputPassword" class="form-label">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword"
+                                                    name="password">
                                                 <div class="invalid-feedback">
                                                     Valid password is required.
                                                 </div>
@@ -59,7 +61,7 @@
                                                 <label for="username" class="form-label">Username</label>
                                                 <div class="input-group has-validation">
                                                     <input type="text" class="form-control" id="username"
-                                                        placeholder="Username" required>
+                                                        name="username" placeholder="Username" required>
                                                     <div class="invalid-feedback">
                                                         Your username is required.
                                                     </div>
@@ -68,7 +70,7 @@
 
                                             <div class="col-12">
                                                 <label for="email" class="form-label">Email </label>
-                                                <input type="email" class="form-control" id="email"
+                                                <input type="email" class="form-control" id="email" name="email"
                                                     placeholder="you@example.com">
                                                 <div class="invalid-feedback">
                                                     Please enter a valid email address.
@@ -77,7 +79,7 @@
 
 
                                             <div class="col-sm-6">
-                                                <label for="number" class="form-label">Mobile Number</label>
+                                                <label for="inputnumber" class="form-label">Mobile Number</label>
                                                 <input type="number" class="form-control" id="inputnumber">
                                                 <div class="invalid-feedback">
                                                     Valid Mobile Number is required.
@@ -121,6 +123,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" form="myForm" class="btn btn-primary">Submit</button>
