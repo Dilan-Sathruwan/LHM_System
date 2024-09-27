@@ -33,8 +33,27 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body>
-    <div class="container-xxl position-relative bg-white d-flex p-0">
+<style>
+@media (min-width: 1400px) {
+    .container-xxl {
+        max-width: 1720px;
+    }
+}
+
+.back-colors {
+    background: rgb(135, 17, 193);
+    background: linear-gradient(270deg, rgba(135, 17, 193, 1) 0%, rgba(36, 114, 252, 1) 100%);
+}
+
+.bg-colors2 {
+    background: rgb(36, 114, 252);
+    background: linear-gradient(270deg, rgba(36, 114, 252, 1) 0%, rgba(135, 17, 193, 1) 100%);
+}
+</style>
+
+
+<body class="back-colors">
+    <div class="container-xxl position-relative d-flex p-0 back-colors">
         <!-- Spinner Start -->
         <div id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -46,8 +65,8 @@
 
 
         <!-- Sidebar Start -->
-        <div class="sidebar pe-4 pb-3 bg-primary">
-            <nav class="navbar bg-primary navbar-light">
+        <div class="sidebar pe-4 pb-3 back-colors">
+            <nav class="navbar navbar-light bg-transparent">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3>
                 </a>

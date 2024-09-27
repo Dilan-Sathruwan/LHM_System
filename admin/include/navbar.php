@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand bg-primary navbar-light sticky-top px-4 py-0">
+<nav class="navbar navbar-expand navbar-light sticky-top px-4 py-0 bg-colors2">
     <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
         <h2 class="text-primary mb-0"><img src="./assets/img/Icon/FB.gif" alt=""></h2>
     </a>
