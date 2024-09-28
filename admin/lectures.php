@@ -10,23 +10,23 @@
 
 
     <!-- Lecture Add /Edit Modal -->
-    <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1 "
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
+            <div class="modal-content bg-colors2">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Lecture profile</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body ">
                     <!-- type here -->
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="justify-content-md-center">
+                    <div class="container ">
+                        <div class="row ">
+                            <div class="justify-content-md-center ">
 
 
-                                <div class="card my-1">
+                                <div class="card my-1 bg-transparent">
 
                                     <form action="./include/student_create.php" id="myForm" method="POST"
                                         class="card-body cardbody-color p-lg-2">
@@ -40,9 +40,9 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="LectureID" class="form-label">Lecture Index Number</label>
-                                                <input type="text" class="form-control" id="LectureID" placeholder=""
-                                                    value="" required>
+                                                <label for="Index_num" class="form-label">Lecture Index Number</label>
+                                                <input type="text" class="form-control" id="Index_num" placeholder=""
+                                                    name="Index_num" required>
                                                 <div class="invalid-feedback">
                                                     Valid Lecture name is required.
                                                 </div>
@@ -79,8 +79,9 @@
 
 
                                             <div class="col-sm-6">
-                                                <label for="inputnumber" class="form-label">Mobile Number</label>
-                                                <input type="number" class="form-control" id="inputnumber">
+                                                <label for="phonenumber" class="form-label">Mobile Number</label>
+                                                <input type="number" class="form-control" id="phonenumber"
+                                                    name="phonenumber">
                                                 <div class="invalid-feedback">
                                                     Valid Mobile Number is required.
                                                 </div>
@@ -88,7 +89,7 @@
 
                                             <div class="col-12">
                                                 <label for="address" class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="address"
+                                                <input type="text" class="form-control" id="address" name="address"
                                                     placeholder="1234, Main St,kegalle" required>
                                                 <div class="invalid-feedback">
                                                     Please enter your address.
@@ -97,11 +98,10 @@
 
                                             <div class="col-sm-6">
                                                 <label for="Lecturerole" class="form-label">Lecture Roles</label>
-                                                <select class="form-select" id="lecturerole" required>
-                                                    <option value="">Choose...</option>
-                                                    <option>Part time Lecture</option>
-                                                    <option>Visiting Lecture</option>
-                                                    <option>Permernet Lecture</option>
+                                                <select class="form-select" id="lecturerole" name="lecturerole">
+                                                    <option value=""></option>
+                                                    <option value="Visiting">Visiting Lecture</option>
+                                                    <option value="Permernet">Permernet Lecture</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid Roles.
@@ -113,7 +113,7 @@
                                                 <label for="exampleFormControlTextarea1" class="form-label">About
                                                     Lecture</label>
                                                 <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                    rows="3"></textarea>
+                                                    name="about" rows="3"></textarea>
                                             </div>
                                         </div>
                                     </form>
@@ -307,12 +307,12 @@
                                             <th>permernat</th>
                                             <td>2024-2-3</td>
                                             <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="" data-bs-toggle="modal"
+                                                <a href="" class="m-1" data-bs-toggle="modal"
                                                     data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class="" data-bs-toggle="modal"
+                                                <a href="" class="m-1" data-bs-toggle="modal"
                                                     data-bs-target="#Lecturecreate"><i
                                                         class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
+                                                <a href="" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>
                                             </td>
                                         </tr>
 
@@ -338,9 +338,9 @@
                                             <th>visiting</th>
                                             <td>2024-6-3</td>
                                             <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
+                                                <a href="" class="m-1"><i class="fas fa-eye fa-lg"></i></a>
+                                                <a href="" class="m-1"><i class="fas fa-user-edit fa-lg"></i></a>
+                                                <a href="" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>
                                             </td>
                                         </tr>
 
