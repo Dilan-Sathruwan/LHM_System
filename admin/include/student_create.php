@@ -18,7 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Invalid email address.');
     }
 
-    $result = registerStudent($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
+    $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
 
     // Display the result (success or error message)
     echo $result;

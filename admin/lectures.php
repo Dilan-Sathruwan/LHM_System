@@ -8,7 +8,6 @@
 
 
 
-
     <!-- Lecture Add /Edit Modal -->
     <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1 "
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -98,8 +97,9 @@
 
                                             <div class="col-sm-6">
                                                 <label for="Lecturerole" class="form-label">Lecture Roles</label>
-                                                <select class="form-select" id="lecturerole" name="lecturerole">
-                                                    <option value=""></option>
+                                                <select class="form-select" id="lecturerole" name="lecturerole"
+                                                    required>
+                                                    <option></option>
                                                     <option value="Visiting">Visiting Lecture</option>
                                                     <option value="Permernet">Permernet Lecture</option>
                                                 </select>
@@ -275,20 +275,30 @@
                             <div class="card-body table-responsive">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h3 class="mb-0">Lectures Datatable</h3>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-primary" id="mybutton1" data-bs-toggle="modal"
                                         data-bs-target="#Lecturecreate">
                                         Add Lecture
                                     </button>
-
                                 </div>
 
                                 <hr>
+
+
+                                <?php
+                                try {
+                                    // Prepare the SQL statement
+                                    $stmt = $conn->prepare("SELECT index_number, username, email, expertise, address, mobile_no FROM lecturers");
+                                    $stmt->execute();
+                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                } catch (PDOException $e) {
+                                    echo "Connection failed: " . $e->getMessage();
+                                }
+                                ?>
 
                                 <!-- Table with stripped rows -->
                                 <table class="table datatable text-start align-middle table-bordered table-hover mb-0">
                                     <thead>
                                         <tr>
-
                                             <th>Index Number</th>
                                             <th>Lecture Name</th>
                                             <th>Email</th>
@@ -299,68 +309,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>KEG/V/0001</td>
-                                            <td>Dilan</td>
-                                            <td>dilan@gmail.com</td>
-                                            <td>012345</td>
-                                            <th>permernat</th>
-                                            <td>2024-2-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#Lecturecreate"><i
-                                                        class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0002</td>
-                                            <td>tharuka</td>
-                                            <td>tharuka@gmail.com</td>
-                                            <td>012345</td>
-                                            <th>visiting</th>
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1"><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class="m-1"><i class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0003</td>
-                                            <td>shehani</td>
-                                            <td>shehanis@gmail.com</td>
-                                            <td>0123454</td>
-                                            <th>visiting</th>
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1"><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class="m-1"><i class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0004</td>
-                                            <td>ravindu</td>
-                                            <td>ravindu@gmail.com</td>
-                                            <td>012345</td>
-                                            <th>visiting</th>
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-
+                                        <?php
+                                        if (!empty($result)) {
+                                            foreach ($result as $row) {
+                                                echo '<tr>';
+                                                echo '<td>' . htmlspecialchars($row['index_number']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['username']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['email']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['expertise']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['address']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['mobile_no']) . '</td>';
+                                                echo '<td class="d-flex align-items-lg-center justify-content-around">';
+                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>';
+                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate"><i class="fas fa-user-edit fa-lg"></i></a>';
+                                                echo '<a href="#" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                                echo '</td>';
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="7">No results found</td></tr>';
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
+                                <?php
+                                // Close the connection
+                                $conn = null;
+                                ?>
                                 <!-- End Table with stripped rows -->
 
                             </div>
