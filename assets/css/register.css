@@ -1,4 +1,3 @@
-/* Global Styling */
 * {
   margin: 0;
   padding: 0;
@@ -7,9 +6,9 @@
 
 body,
 html {
-  height: 100%;
   font-family: Arial, sans-serif;
-  scroll-behavior: smooth;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .background {
@@ -20,7 +19,6 @@ html {
   width: 100%;
   height: 100%;
 }
-
 .container {
   position: relative;
   z-index: 1;
@@ -35,7 +33,6 @@ html {
   justify-content: center;
   border-radius: 20px;
   filter: none !important;
-  height: 450px;
 }
 .text-center {
   top: 0;
@@ -57,7 +54,6 @@ html {
   font-size: 18px;
   margin: 20px 0;
 }
-
 /* Form Section Styling */
 .login-section {
   position: absolute;
@@ -78,7 +74,7 @@ html {
 .form-box .input-box {
   width: 340px;
   height: 50px;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid rgb(255, 255, 255);
   margin: 20px 0;
   position: relative;
 }
@@ -88,7 +84,7 @@ html {
   border: none;
   outline: none;
   background: transparent;
-  font-size: 16px;
+  font-size: 8px;
   padding-right: 28px;
 }
 .input-box label {
@@ -105,22 +101,6 @@ html {
 .input-box input:focus ~ label {
   top: -5px;
 }
-.remember-password {
-  font-size: 14px;
-  font-weight: 500;
-  margin: -15px 0 15px;
-  display: flex;
-  justify-content: space-between;
-}
-.remember-password label input {
-  accent-color: #fff;
-  margin-right: 3px;
-}
-
-.logo img {
-  max-width: 100px;
-}
-
 .form-box {
   padding: 30px;
 }
@@ -133,6 +113,10 @@ h2 {
   margin-bottom: 20px;
 }
 
+input {
+  background-color: rgba(255, 255, 255, 0.608) !important;
+}
+
 .btn-block {
   width: 300px;
   height: 45px;
@@ -142,73 +126,14 @@ h2 {
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.4);
 }
-
-.create-account {
-  margin: 25px;
-  text-align: center;
-  font-size: 14.5px;
-}
-
-.create-account p a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.create-account p a:hover {
-  text-decoration: underline;
-}
-
-/* Button Styling */
-button.btn-primary {
-  background-color: rgb(42, 46, 243);
-  border: none;
-}
-
-button.btn-secondary {
-  background-color: rgb(42, 46, 243);
-  border: none;
-}
-
-button.btn-success {
-  background-color: rgb(42, 46, 243);
-  border: none;
-}
-
-button.btn-primary:hover,
-button.btn-secondary:hover,
-button.btn-success:hover {
-  opacity: 0.9;
-}
-
-/* Admin, Student, Lecturer Forms Styling */
-#admin-login,
-#student-login,
-#lecturer-login {
-  display: none;
-}
-
-#admin-login.active,
-#student-login.active,
-#lecturer-login.active {
+.row p {
   display: flex;
+  justify-content: space-between;
 }
 
-.login-section {
-  width: 100%;
-}
-
-/* Form Alignment */
-.min-vh-100 {
-  min-height: 100vh;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-  .row.w-75 {
-    width: 100%;
-  }
-
-  .login-section {
-    margin-top: 30px;
-  }
+.welcome {
+  height: 100%;
+  position: relative;
+  top: 120px;
+  bottom: 0;
 }

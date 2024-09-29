@@ -6,189 +6,167 @@
     <title>Document</title>
     <link
       rel="stylesheet"
-      href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="./assets/css/register.css" />
   </head>
   <body>
-    <!-- Registration-->
-    <section class="bg-light p-3 p-md-4 p-xl-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-12 col-xxl-11">
-            <div class="card border-light-subtle shadow-sm">
-              <div class="row g-0">
-                <div class="col-12 col-md-6">
-                  <img
-                    class="img-fluid rounded-start w-100 h-100 object-fit-cover"
-                    loading="lazy"
-                    src="./assets/img/Admin1.jpg"
-                    alt="Registration"
-                  />
-                </div>
-                <div
-                  class="col-12 col-md-6 d-flex align-items-center justify-content-center"
-                >
-                  <div class="col-12 col-lg-11 col-xl-10">
-                    <div class="card-body p-3 p-md-4 p-xl-5">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="mb-5">
-                            <div class="text-center mb-4"></div>
-                            <h2 class="h4 text-center">Registration</h2>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="d-flex gap-3 flex-column"></div>
-                        </div>
-                        <form action="#!">
-                          <div class="row gy-3 overflow-hidden">
-                            <div class="col-12">
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="fullName"
-                                  id="fullName"
-                                  placeholder="fullName"
-                                  required
-                                />
-                                <label for="fullName" class="form-label"
-                                  >Full Name</label
-                                >
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="nic"
-                                  id="nic"
-                                  placeholder="nic"
-                                  required
-                                />
-                                <label for="nic" class="form-label">NIC</label>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="email"
-                                  class="form-control"
-                                  name="email"
-                                  id="email"
-                                  placeholder="name@example.com"
-                                  required
-                                />
-                                <label for="email" class="form-label"
-                                  >Email</label
-                                >
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="address"
-                                  id="address"
-                                  placeholder="address"
-                                  required
-                                />
-                                <label for="address" class="form-label"
-                                  >Address</label
-                                >
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  name="telephone"
-                                  id="telephone"
-                                  placeholder="telephone"
-                                  required
-                                />
-                                <label for="telephone" class="form-label"
-                                  >Enter Phone Number</label
-                                >
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-floating mb-3">
-                                <input
-                                  type="password"
-                                  class="form-control"
-                                  name="password"
-                                  id="password"
-                                  value=""
-                                  placeholder="Password"
-                                  required
-                                />
-                                <label for="password" class="form-label"
-                                  >Password</label
-                                >
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="checkbox"
-                                  value=""
-                                  name="iAgree"
-                                  id="iAgree"
-                                  required
-                                />
-                                <label
-                                  class="form-check-label text-secondary"
-                                  for="iAgree"
-                                >
-                                  I agree to the
-                                  <a
-                                    href="#!"
-                                    class="link-primary text-decoration-none"
-                                    >terms and conditions</a
-                                  >
-                                </label>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="d-grid">
-                                <button
-                                  class="btn btn-dark btn-lg"
-                                  type="submit"
-                                >
-                                  Sign up
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
-                        <div class="row">
-                          <div class="col-12">
-                            <p class="mb-0 mt-5 text-secondary text-center">
-                              Already have an account?
-                              <a
-                                href="./login.html"
-                                class="link-primary text-decoration-none"
-                                >Sign in</a
-                              >
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+    <!-- REGISTRATION FORM LECTURER -->
+    <div class="background"></div>
+    <div
+      class="container d-flex align-items-center min-vh-100 d-none"
+      id="lecturer-register"
+    >
+      <div class="mainlog row w-100 ">
+        <div class="text-center col-md-5  welcome">
+          <h2 class="logo">
+            <img src="./assets/img/Icon/tux.png" alt="Logo" class="img-fluid" />SLIATE
+          </h2>
+          <div class="text-item">
+            <h2>Welcome!<br /><span>LHM System</span></h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
+              repellendus?
+            </p>
+          </div>
+        </div>
+        <div class="col-md-7  ">
+          <div class="">
+            <div class="login2">
+              <div class="form-box register ">
+                <form action="">
+                  <h2>Lecturer Sign Up</h2>
+
+                  <div class="col-12">
+                    <div class="form-floating mb-2">
+                      <label for="fullName" class="form-label text-white">Full Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="fullName"
+                        id="fullName"
+                        placeholder="Full Name"
+                        required
+                      />
                     </div>
                   </div>
-                </div>
+                  <div class="col-12">
+                    <div class="form-floating mb-1">
+                      <label for="nic" class="form-label text-white">NIC</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="nic"
+                        id="nic"
+                        placeholder="NIC"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating mb-1">
+                      <label for="email" class="form-label text-white">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        name="email"
+                        id="email"
+                        placeholder="name@example.com"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating mb-1">
+                      <label for="address" class="form-label text-white">Address</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="address"
+                        id="address"
+                        placeholder="Address"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating mb-1">
+                      <label for="telephone" class="form-label text-white"
+                        >Phone Number</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="telephone"
+                        id="telephone"
+                        placeholder="Enter Phone Number"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-floating mb-1">
+                      <label for="password" class="form-label text-white">Password</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        id="password"
+                        value=""
+                        placeholder="Password"
+                        required
+                      />
+
+                      <input
+                        type="password"
+                        class="form-control mt-2"
+                        name="password"
+                        id="password"
+                        value=""
+                        placeholder="Confirm Password"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 ">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value=""
+                        name="iAgree"
+                        id="iAgree"
+                        required
+                      />
+                      <label
+                        class="form-check-label text-white"
+                        for="iAgree"
+                      >
+                        I agree to the
+                        <a href="#!" class="link-primary text-decoration-none"
+                          >terms and conditions</a
+                        >
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-12 ">
+                  <div class="d-flex  justify-content-between align-items-center">
+                      <button class="btn btn-dark btn-lg" type="submit">
+                        Sign up
+                      </button>
+                      <p class="text-white">
+                 Already have an account? <a href="./login.php">sign in</a>
+                 </p>
+                    </div>
+                  </div>
+
+             
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   </body>
 </html>
