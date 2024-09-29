@@ -34,26 +34,8 @@ include "include/db_connection.inc.php";
 
     <!-- Template Stylesheet -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/adminstyle.css">
 </head>
-
-<style>
-@media (min-width: 1400px) {
-    .container-xxl {
-        max-width: 1720px;
-    }
-}
-
-.back-colors {
-    background: rgb(135, 17, 193);
-    background: linear-gradient(270deg, rgba(135, 17, 193, 1) 0%, rgba(36, 114, 252, 1) 100%);
-}
-
-.bg-colors2 {
-    background: rgb(36, 114, 252);
-    background: linear-gradient(270deg, rgba(36, 114, 252, 1) 0%, rgba(135, 17, 193, 1) 100%);
-}
-</style>
-
 
 <body class="back-colors">
     <div class="container-xxl position-relative d-flex p-0 back-colors">

@@ -26,9 +26,10 @@ function  lecturersCreate($conn, $index_num, $username, $email, $password, $lect
         ]);
 
         // Return success message
-        header("Location:../lectures.php?lecturers_register_sucssfully");
+        // header("Location:../lectures.php?lecturers_register_sucssfully");
+        return "lecturers registered successfully!";
         exit();
-        // return "lecturers registered successfully!";
+        
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }

@@ -21,7 +21,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
 
     // Display the result (success or error message)
-    echo $result;
+    // echo $result;
+    header("Location:../lectures.php?message=" . urlencode($result));
 }
 
 // ,$target_file

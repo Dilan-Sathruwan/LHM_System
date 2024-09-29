@@ -6,6 +6,12 @@
     <?php include './include/navbar.php'; ?>
     <!-- Navbar End -->
 
+    <div id="messagePopup" class="alert alert-success message-popup">
+        <i class="bi bi-check-square-fill">&nbsp;</i>
+        <span id="messageText"></span>
+        </div>
+
+    
 
 
     <!-- Lecture Add /Edit Modal -->
@@ -166,20 +172,11 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Lecture Name</label>
+                                                <label for="firstName" class="form-label">Lecture Id</label>
                                                 <input type="text" class="form-control" id="Lecture Name" placeholder=""
                                                     value="" readonly>
                                                 <div class="invalid-feedback">
                                                     Valid Lecture name is required.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="password" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="inputPassword3"
-                                                    readonly>
-                                                <div class="invalid-feedback">
-                                                    Valid password is required.
                                                 </div>
                                             </div>
 
