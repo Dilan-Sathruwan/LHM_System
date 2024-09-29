@@ -29,7 +29,55 @@ function  lecturersCreate($conn, $index_num, $username, $email, $password, $lect
         // header("Location:../lectures.php?lecturers_register_sucssfully");
         return "lecturers registered successfully!";
         exit();
-        
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
+
+
+
+
+// Function to update the lecturer's details
+function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about)
+{
+    try {
+        // Hash the password if it's being updated (if not empty)
+        // $password_sql = '';
+        // if (!empty($password)) {
+        //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        //     $password_sql = ", password = :password";
+        // }
+
+        // Prepare SQL statement to update lecturer data
+        $sql = "UPDATE lecturers SET 
+                    `index_number` = :index_num, 
+                    `username` = :username, 
+                    `email` = :email, 
+                    `role` = :role, 
+                    `address` = :address, 
+                    `mobile_no` = :phonenum, 
+                    `expertise` = :expertise, 
+                    `password` = :password 
+                WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+
+        // Execute the statement with the provided data
+        $stmt->execute([
+            ':index_num' => $index_num,
+            ':username' => $username,
+            ':email' => $email,
+            ':password' => $password,
+            ':role' => $lecturerole,
+            ':address' => $address,
+            ':phonenum' => $phonenum,
+            ':expertise' => $about, // Make sure the parameter name matches
+            ':id' => $id
+        ]);
+
+        // Return success message
+        return "Lecturer updated successfully!";
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }

@@ -41,6 +41,6 @@ window.onload = function () {
 
         setTimeout(() => {
             messagePopup.classList.remove('show-message'); // Remove class to trigger fade-out
-        }, 6000);
+        }, 600000);
     }
 };

@@ -9,10 +9,7 @@
     <div id="messagePopup" class="alert alert-success message-popup">
         <i class="bi bi-check-square-fill">&nbsp;</i>
         <span id="messageText"></span>
-        </div>
-
-    
-
+    </div>
 
     <!-- Lecture Add /Edit Modal -->
     <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1 "
@@ -37,6 +34,8 @@
                                         class="card-body cardbody-color p-lg-2">
 
                                         <div class="row g-3">
+
+                                            <input type="number" name="id" id="lecturer-id">
 
                                             <div class="text-center">
                                                 <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
@@ -116,9 +115,9 @@
 
 
                                             <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">About
+                                                <label for="about" class="form-label">About
                                                     Lecture</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                <textarea class="form-control" id="about"
                                                     name="about" rows="3"></textarea>
                                             </div>
                                         </div>
@@ -138,7 +137,6 @@
         </div>
     </div>
     <!-- Lecture Add/Edit Modal end -->
-
 
 
 
@@ -284,7 +282,7 @@
                                 <?php
                                 try {
                                     // Prepare the SQL statement
-                                    $stmt = $conn->prepare("SELECT index_number, username, email, expertise, address, mobile_no FROM lecturers");
+                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, password, expertise, address, mobile_no, role FROM lecturers");
                                     $stmt->execute();
                                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 } catch (PDOException $e) {
@@ -318,7 +316,17 @@
                                                 echo '<td>' . htmlspecialchars($row['mobile_no']) . '</td>';
                                                 echo '<td class="d-flex align-items-lg-center justify-content-around">';
                                                 echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>';
-                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate"><i class="fas fa-user-edit fa-lg"></i></a>';
+                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate" ';
+                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
+                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
+                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
+                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
+                                                echo 'data-about="' . htmlspecialchars($row['expertise']) . '" ';
+                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
+                                                echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
+                                                echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
+                                                echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
+                                                echo '><i class="fas fa-user-edit fa-lg"></i></a>';
                                                 echo '<a href="#" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
                                                 echo '</td>';
                                                 echo '</tr>';
@@ -349,3 +357,32 @@
 <!-- Content End -->
 
 <?php include './include/footer.php'; ?>
+
+
+<script>
+    // Function to pre-fill the form when edit button is clicked
+    document.querySelectorAll('[data-bs-target="#Lecturecreate"]').forEach(function(button) {
+        button.addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            const index_number = this.getAttribute('data-index_number');
+            const username = this.getAttribute('data-username');
+            const email = this.getAttribute('data-email');
+            const about = this.getAttribute('data-about');
+            const address = this.getAttribute('data-address');
+            const mobile_no = this.getAttribute('data-mobile_no');
+            const lecturerole = this.getAttribute('data-lecturerole');
+            const inputPassword = this.getAttribute('data-inputPassword');
+
+            // Populate the form fields with the selected lecturer's data
+            document.getElementById('lecturer-id').value = id;
+            document.getElementById('Index_num').value = index_number;
+            document.getElementById('username').value = username;
+            document.getElementById('email').value = email;
+            document.getElementById('phonenumber').value = mobile_no;
+            document.getElementById('address').value = address;
+            document.getElementById('lecturerole').value = lecturerole;
+            document.getElementById('about').value = about;
+            document.getElementById('inputPassword').value = inputPassword;
+        });
+    });
+</script>

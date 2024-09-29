@@ -13,12 +13,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $lecturerole = filter_input(INPUT_POST, 'lecturerole', FILTER_SANITIZE_SPECIAL_CHARS);
     $address = filter_input(INPUT_POST, 'address',  FILTER_SANITIZE_SPECIAL_CHARS);
     $about = filter_input(INPUT_POST, 'about',  FILTER_SANITIZE_SPECIAL_CHARS);
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT); // Hidden input field for the lecturer ID
 
     if ($email === false) {
         die('Invalid email address.');
     }
 
-    $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
+
+    if(!empty($id)) {
+        //update lectures details
+        $result = lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
+    }else{
+         // Creating a new lecturer
+        $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
+    }
+
+    
 
     // Display the result (success or error message)
     // echo $result;
