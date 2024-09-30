@@ -1,0 +1,88 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family:'Times New Roman', Times, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family:'Times New Roman', Times, serif;
+  background-image: url(./sliateee/ATI\ 04.jpg);
+  background-color: #620a4c;
+  color: #0c0b0b;
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: capitalize;
+}
+
+
+
+.content-01 {
+  font-weight:bolder;
+  font-size:x-large;
+  display: flex;
+  justify-content:start;
+  flex: 10;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content-01 h1 {
+  margin-bottom: 50px;
+  font-style: inherit;
+  font-family:cursive
+  
+}
+
+.content-01 input {
+  padding: 50px;
+  min-width: 300px;
+}
+.container {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.course-block {
+  border: 2px solid #050505;
+  padding: 10px;
+  width: 45%;
+}
+.course-block h3 {
+  text-align: center;
+  border-bottom: 1px solid #0a0a0a;
+  padding-bottom: 10px;
+}
+.table-container {
+  margin: 20px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+table, th, td {
+  border: 1px solid #020202;
+}
+
+  th, td {
+      padding: 10px;
+      text-align: center;
+  }
+  .table {
+    width: 80%; /* Adjusts the width of the table */
+    max-width: 600px; /* Sets a maximum width */
+    height: auto; /* Adjusts the height as needed */
+    border-collapse: collapse; /* Optional: for cleaner borders */
+}
+
+.table th, .my-table td {
+    border: 1px solid #ccc; /* Borders for the cells */
+    padding: 10px; /* Padding for cells */
+    text-align: left; /* Text alignment */
+}

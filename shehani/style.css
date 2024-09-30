@@ -1,0 +1,69 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'poppins', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-repeat: no-repeat;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  text-transform: capitalize;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url(../images/i.jpg);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+.row {
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+button,
+input {
+  cursor: pointer;
+}
+
+button,
+select,
+input {
+  font-family: inherit;
+  text-transform: capitalize;
+}
+
+::-moz-placeholder {
+  text-transform: capitalize;
+}
+
+::placeholder {
+  text-transform: capitalize;
+}
+
+.content {
+  border: 2px solid yellow;
+}
+
+.navigation {
+  margin: 0 !important;
+  background-color: #000;
+}
