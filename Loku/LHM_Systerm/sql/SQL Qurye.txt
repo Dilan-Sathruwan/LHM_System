@@ -1,169 +1,231 @@
 -- Drop the existing database if it exists
-DROP DATABASE IF EXISTS `lecture_management_system`;
+DROP DATABASE IF EXISTS lecture_management_system;
 
 -- Create a new database
-CREATE DATABASE `lecture_management_system`;
-USE `lecture_management_system`;
+CREATE DATABASE lecture_management_system;
+USE lecture_management_system;
 
--- Create the `admins` table
-CREATE TABLE `admins` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
+-- Create the admins table
+CREATE TABLE admins (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (id),
+  UNIQUE KEY username (username)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `admins` table
-INSERT INTO `admins` (`username`, `password`) VALUES
-('admin', 'admin123');
+-- Insert sample data into the admins table
+INSERT INTO admins (username, password) VALUES
+('admin', 'admin123'), 
+('superadmin', 'super123');
 
--- Create the `departments` table
-CREATE TABLE `departments` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+-- Create the departments table
+CREATE TABLE departments (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (id),
+  UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `departments` table
-INSERT INTO `departments` (`name`) VALUES
-('IT'), ('Accounting'), ('English'), ('Project Management');
+-- Insert sample data into the departments table
+INSERT INTO departments (name) VALUES
+('IT'), ('Accounting'), ('English'), ('Project Management'), ('Mathematics'), ('Biology');
 
--- Create the `halls` table
-CREATE TABLE `halls` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
-  `capacity` INT(11) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+-- Create the halls table
+CREATE TABLE halls (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  capacity INT(11) NOT NULL,
+  facilities TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (id),
+  UNIQUE KEY name (name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `halls` table
-INSERT INTO `halls` (`name`, `capacity`) VALUES
-('Hall A', 50), 
-('Hall B', 100), 
-('Hall C', 200), 
-('Hall D', 75);
+-- Insert sample data into the halls table
+INSERT INTO halls (name, capacity, facilities) VALUES
+('Hall A', 50, 'Projector, Whiteboard'), 
+('Hall B', 100, 'Projector, Sound System, Air Conditioning'), 
+('Hall C', 200, 'Projector, Whiteboard, Video Conferencing'), 
+('Hall D', 75, 'Whiteboard, Air Conditioning'),
+('Hall E', 150, 'Smart Board, Sound System');
 
--- Create the `lecturers` table
-CREATE TABLE `lecturers` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `first_name` VARCHAR(100) NOT NULL,
-  `last_name` VARCHAR(100) NOT NULL,
-  `username` VARCHAR(50) NOT NULL,
-  `email` VARCHAR(100) NOT NULL,
-  `department_id` INT(11) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  KEY `department_id` (`department_id`),
-  CONSTRAINT `lecturers_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
+-- Create the lecturers table
+CREATE TABLE lecturers (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  first_name VARCHAR(100) NOT NULL,
+  last_name VARCHAR(100) NOT NULL,
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  department_id INT(11) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  phone_number VARCHAR(15),
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (id),
+  UNIQUE KEY username (username),
+  UNIQUE KEY email (email),
+  KEY department_id (department_id),
+  CONSTRAINT lecturers_ibfk_1 FOREIGN KEY (department_id) REFERENCES departments (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `lecturers` table
-INSERT INTO `lecturers` (`first_name`, `last_name`, `username`, `email`, `department_id`, `password`) VALUES
-('John', 'Doe', 'johndoe', 'john.doe@example.com', 1, 'password1'),
-('Jane', 'Smith', 'janesmith', 'jane.smith@example.com', 2, 'password2'),
-('Alice', 'Johnson', 'alicejohnson', 'alice.johnson@example.com', 3, 'password3'),
-('Bob', 'Williams', 'bobwilliams', 'bob.williams@example.com', 4, 'password4');
+-- Insert sample data into the lecturers table
+INSERT INTO lecturers (first_name, last_name, username, email, department_id, password, phone_number) VALUES
+('John', 'Doe', 'johndoe', 'john.doe@example.com', 1, 'password1', '123-456-7890'),
+('Jane', 'Smith', 'janesmith', 'jane.smith@example.com', 2, 'password2', '234-567-8901'),
+('Alice', 'Johnson', 'alicejohnson', 'alice.johnson@example.com', 3, 'password3', '345-678-9012'),
+('Bob', 'Williams', 'bobwilliams', 'bob.williams@example.com', 4, 'password4', '456-789-0123'),
+('Charlie', 'Brown', 'charliebrown', 'charlie.brown@example.com', 5, 'password5', '567-890-1234');
 
--- Create the `subjects` table
-CREATE TABLE `subjects` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `department_id` INT(11) NOT NULL,
-  `lecturer_id` INT(11) DEFAULT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  KEY `lecturer_id` (`lecturer_id`),
-  KEY `department_id` (`department_id`),
-  CONSTRAINT `subjects_ibfk_1` FOREIGN KEY (`lecturer_id`) REFERENCES `lecturers` (`id`) ON DELETE SET NULL,
-  CONSTRAINT `subjects_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
+-- Create the subjects table
+CREATE TABLE subjects (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  department_id INT(11) NOT NULL,
+  lecturer_id INT(11) DEFAULT NULL,
+  description TEXT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (id),
+  KEY lecturer_id (lecturer_id),
+  KEY department_id (department_id),
+  CONSTRAINT subjects_ibfk_1 FOREIGN KEY (lecturer_id) REFERENCES lecturers (id) ON DELETE SET NULL,
+  CONSTRAINT subjects_ibfk_2 FOREIGN KEY (department_id) REFERENCES departments (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `subjects` table
-INSERT INTO `subjects` (`name`, `department_id`, `lecturer_id`) VALUES
-('Introduction to Programming', 1, 1),
-('Database Management Systems', 1, 1),
-('Financial Accounting', 2, 2),
-('Taxation', 2, 2),
-('English Literature', 3, 3),
-('Business Communication', 3, 3),
-('Project Management Fundamentals', 4, 4),
-('Advanced Project Management', 4, 4);
+-- Insert sample data into the subjects table
+INSERT INTO subjects (name, department_id, lecturer_id, description) VALUES
+('Introduction to Programming', 1, 1, 'Basics of programming using Python.'),
+('Database Management Systems', 1, 1, 'Understanding databases and SQL.'),
+('Financial Accounting', 2, 2, 'Principles of accounting and financial reporting.'),
+('Taxation', 2, 2, 'Overview of taxation systems and laws.'),
+('English Literature', 3, 3, 'Study of various literary works.'),
+('Business Communication', 3, 3, 'Effective communication in a business setting.'),
+('Project Management Fundamentals', 4, 4, 'Introduction to project management principles.'),
+('Advanced Project Management', 4, 4, 'In-depth study of project management methodologies.'),
+('Calculus I', 5, 5, 'Fundamentals of calculus and its applications.'),
+('Biology 101', 6, 5, 'Introduction to the study of living organisms.');
 
--- Create the `lectures` table
-CREATE TABLE `lectures` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `subject_id` INT(11) NOT NULL,
-  `hall_id` INT(11) NOT NULL,
-  `lecture_date` DATE NOT NULL,
-  `start_time` TIME NOT NULL,
-  `end_time` TIME NOT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `lecturer_id` INT(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `subject_id` (`subject_id`),
-  KEY `hall_id` (`hall_id`),
-  CONSTRAINT `lectures_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `lectures_ibfk_2` FOREIGN KEY (`hall_id`) REFERENCES `halls` (`id`) ON DELETE CASCADE
+-- Create the lectures table
+CREATE TABLE lectures (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  subject_id INT(11) NOT NULL,
+  hall_id INT(11) NOT NULL,
+  lecture_date DATE NOT NULL,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  lecturer_id INT(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY subject_id (subject_id),
+  KEY hall_id (hall_id),
+  CONSTRAINT lectures_ibfk_1 FOREIGN KEY (subject_id) REFERENCES subjects (id) ON DELETE CASCADE,
+  CONSTRAINT lectures_ibfk_2 FOREIGN KEY (hall_id) REFERENCES halls (id) ON DELETE CASCADE,
+  CONSTRAINT lectures_ibfk_3 FOREIGN KEY (lecturer_id) REFERENCES lecturers (id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `lectures` table
-INSERT INTO `lectures` (`subject_id`, `hall_id`, `lecture_date`, `start_time`, `end_time`, `lecturer_id`) VALUES
-(1, 1, '2024-09-30', '10:00:00', '12:00:00', 1),
-(2, 2, '2024-09-30', '13:00:00', '15:00:00', 1),
-(3, 3, '2024-09-30', '09:00:00', '11:00:00', 1),
-(4, 1, '2024-09-30', '11:00:00', '13:00:00', 1),
-(5, 4, '2024-09-30', '10:00:00', '12:00:00', 1),
-(6, 3, '2024-09-30', '13:00:00', '15:00:00', 1),
-(2, 2, '2024-10-26', '22:47:00', '23:47:00', 1);
+-- Insert sample data into the lectures table
+INSERT INTO lectures (subject_id, hall_id, lecture_date, start_time, end_time, lecturer_id) VALUES
+(1, 1, '2024-09-30', '08:30:00', '09:30:00', 1),
+(2, 2, '2024-09-30', '09:30:00', '10:30:00', 1),
+(3, 3, '2024-09-30', '10:30:00', '11:30:00', 2),
+(4, 1, '2024-09-30', '11:30:00', '12:30:00', 2),
+(5, 4, '2024-09-30', '01:00:00', '02:00:00', 3),
+(6, 3, '2024-09-30', '02:00:00', '03:00:00', 4),
+(7, 5, '2024-09-30', '03:00:00', '04:00:00', 5),
+(8, 2, '2024-09-30', '04:00:00', '05:00:00', 5);
 
--- Create the `students` table
-CREATE TABLE `students` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(100) NOT NULL,
-  `email` VARCHAR(50) NOT NULL,
-  `department_id` INT(11) DEFAULT NULL,
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  KEY `department_id` (`department_id`),
-  CONSTRAINT `students_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
+-- Create the students table
+CREATE TABLE students (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(100) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  department_id INT(11) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (id),
+  UNIQUE KEY username (username),
+  UNIQUE KEY email (email),
+  KEY department_id (department_id),
+  CONSTRAINT students_ibfk_1 FOREIGN KEY (department_id) REFERENCES departments (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `students` table
-INSERT INTO `students` (`username`, `email`, `department_id`) VALUES
+-- Insert sample data into the students table
+INSERT INTO students (username, email, department_id) VALUES
 ('student1', 'student1@example.com', 1),
 ('student2', 'student2@example.com', 2),
 ('student3', 'student3@example.com', 3),
-('student4', 'student4@example.com', 4);
+('student4', 'student4@example.com', 4),
+('student5', 'student5@example.com', 5),
+('student6', 'student6@example.com', 6);
 
--- Create the `student_enrollment` table
-CREATE TABLE `student_enrollment` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `student_id` INT(11) NOT NULL,
-  `subject_id` INT(11) NOT NULL,
-  `enrollment_date` DATE NOT NULL,
-  `semester` INT(11) NOT NULL,
-  `grade` VARCHAR(2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`),
-  KEY `subject_id` (`subject_id`),
-  CONSTRAINT `student_enrollment_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `student_enrollment_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE
+-- Create the student_enrollment table
+CREATE TABLE student_enrollment (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  student_id INT(11) NOT NULL,
+  subject_id INT(11) NOT NULL,
+  enrollment_date DATE NOT NULL,
+  semester INT(11) NOT NULL,
+  grade VARCHAR(2) DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY student_id (student_id),
+  KEY subject_id (subject_id),
+  CONSTRAINT student_enrollment_ibfk_1 FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
+  CONSTRAINT student_enrollment_ibfk_2 FOREIGN KEY (subject_id) REFERENCES subjects (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Insert sample data into the `student_enrollment` table
-INSERT INTO `student_enrollment` (`student_id`, `subject_id`, `enrollment_date`, `semester`, `grade`) VALUES
+-- Insert sample data into the student_enrollment table
+INSERT INTO student_enrollment (student_id, subject_id, enrollment_date, semester, grade) VALUES
 (1, 1, '2024-09-01', 1, 'A'),
 (2, 3, '2024-09-01', 1, 'B'),
 (3, 5, '2024-09-01', 1, 'C'),
-(4, 7, '2024-09-01', 1, 'B');
+(4, 7, '2024-09-01', 1, 'B'),
+(5, 8, '2024-09-01', 1, 'A'),
+(6, 6, '2024-09-01', 1, 'B');
+
+-- Create a time_slots table for managing the lecture time slots
+CREATE TABLE time_slots (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  start_time TIME NOT NULL,
+  end_time TIME NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY time_slot (start_time, end_time)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insert time slots for timetable
+INSERT INTO time_slots (start_time, end_time) VALUES
+('08:30:00', '09:30:00'),
+('09:30:00', '10:30:00'),
+('10:30:00', '11:30:00'),
+('11:30:00', '12:30:00'),
+('13:00:00', '14:00:00'),
+('14:00:00', '15:00:00'),
+('15:00:00', '16:00:00'),
+('16:00:00', '17:00:00');
+
+-- Create the timetable table to map lectures to time slots and days
+CREATE TABLE timetable (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  lecturer_id INT(11) NOT NULL,
+  subject_id INT(11) NOT NULL,
+  time_slot_id INT(11) NOT NULL,
+  day_of_week ENUM('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday') NOT NULL,
+  hall_id INT(11) NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (lecturer_id) REFERENCES lecturers (id),
+  FOREIGN KEY (subject_id) REFERENCES subjects (id),
+  FOREIGN KEY (time_slot_id) REFERENCES time_slots (id),
+  FOREIGN KEY (hall_id) REFERENCES halls (id),
+  UNIQUE KEY unique_timetable (lecturer_id, subject_id, time_slot_id, day_of_week)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Insert sample data into the timetable table
+INSERT INTO timetable (lecturer_id, subject_id, time_slot_id, day_of_week, hall_id) VALUES
+(1, 1, 1, 'Monday', 1),
+(1, 2, 2, 'Monday', 2),
+(2, 3, 3, 'Monday', 3),
+(2, 4, 4, 'Monday', 1),
+(3, 5, 5, 'Monday', 4),
+(4, 6, 6, 'Monday', 3),
+(5, 8, 7, 'Monday', 5),
+(5, 9, 8, 'Tuesday', 2),
+(3, 10, 1, 'Wednesday', 4);

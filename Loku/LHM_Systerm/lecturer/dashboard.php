@@ -41,6 +41,7 @@ $lecturer = $stmt->fetch(PDO::FETCH_ASSOC);
                 <a href="view_schedule.php" class="btn btn-primary">View Your Schedule</a>
                 <a href="manage_lectures.php" class="btn btn-warning">Manage Lectures</a>
                 <a href="view_all_lectures.php" class="btn btn-primary">View All Lecthurs</a>
+                <a href="time_table.php" class="btn btn-warning">Time table</a>
             </div>
         </div>
     </div>

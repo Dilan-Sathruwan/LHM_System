@@ -15,24 +15,30 @@ if (isset($_GET['search'])) {
 }
 
 // Fetch all lectures with lecturer details, including search functionality (for all lecturers)
-$lecturesStmt = $conn->prepare("
+$query = "
     SELECT l.id, s.name AS subject_name, d.name AS department_name, h.name AS hall_name, 
            l.lecture_date, l.start_time, l.end_time, le.first_name, le.last_name
     FROM lectures l 
     JOIN subjects s ON l.subject_id = s.id 
     JOIN halls h ON l.hall_id = h.id 
     JOIN departments d ON s.department_id = d.id
-    JOIN lecturers le ON l.lecturer_id = le.id
-    WHERE s.name LIKE :search 
-       OR d.name LIKE :search 
-       OR h.name LIKE :search 
-       OR le.first_name LIKE :search 
-       OR le.last_name LIKE :search
-    ORDER BY l.lecture_date DESC, l.start_time ASC
-");
+    JOIN lecturers le ON l.lecturer_id = le.id";
 
-$searchParam = "%$searchQuery%";
-$lecturesStmt->bindParam(':search', $searchParam, PDO::PARAM_STR);
+if (!empty($searchQuery)) {
+    $query .= " WHERE s.name LIKE :search 
+               OR d.name LIKE :search 
+               OR h.name LIKE :search 
+               OR le.first_name LIKE :search 
+               OR le.last_name LIKE :search";
+}
+
+$query .= " ORDER BY l.lecture_date DESC, l.start_time ASC";
+
+$lecturesStmt = $conn->prepare($query);
+if (!empty($searchQuery)) {
+    $searchParam = "%$searchQuery%";
+    $lecturesStmt->bindValue(':search', $searchParam, PDO::PARAM_STR);
+}
 $lecturesStmt->execute();
 $lectures = $lecturesStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -51,19 +57,35 @@ $lectures = $lecturesStmt->fetchAll(PDO::FETCH_ASSOC);
         .search-bar {
             margin-bottom: 20px;
         }
+        .search-bar input {
+            max-width: 400px;
+        }
+        .sticky-top {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            z-index: 100;
+            padding-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .table {
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center">All Lectures</h2>
+        <h2 class="text-center mb-4">All Lectures</h2>
 
         <!-- Search Bar -->
-        <div class="search-bar">
+        <div class="search-bar sticky-top">
             <form method="GET" action="">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Search by subject, department, hall, or lecturer" value="<?php echo htmlspecialchars($searchQuery); ?>">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        <a href="?" class="btn btn-outline-danger">Reset</a> <!-- Reset button -->
                     </div>
                 </div>
             </form>
