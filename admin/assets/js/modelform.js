@@ -14,7 +14,11 @@ function printForm(formId) {
 
 
 
-// Function to get query parameter by name
+
+
+// ##################Erro massage show function ########################
+
+
 function getQueryParam(param) {
     let params = new URLSearchParams(window.location.search);
     return params.get(param);
@@ -41,6 +45,6 @@ window.onload = function () {
 
         setTimeout(() => {
             messagePopup.classList.remove('show-message'); // Remove class to trigger fade-out
-        }, 600000);
+        }, 5000);
     }
 };

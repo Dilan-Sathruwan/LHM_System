@@ -170,8 +170,8 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Lecture Id</label>
-                                                <input type="text" class="form-control" id="Lecture Name" placeholder=""
+                                                <label for=" " class="form-label">Lecture Id</label>
+                                                <input type="text" class="form-control" id="view-Index_num" placeholder=""
                                                     value="" readonly>
                                                 <div class="invalid-feedback">
                                                     Valid Lecture name is required.
@@ -179,9 +179,9 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="username" class="form-label">Username</label>
+                                                <label for=" " class="form-label">Username</label>
                                                 <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" id="username" readonly>
+                                                    <input type="text" class="form-control" id="view-username" readonly>
                                                     <div class="invalid-feedback">
                                                         Your username is required.
                                                     </div>
@@ -189,8 +189,8 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="email" class="form-label">Email </label>
-                                                <input type="email" class="form-control" id="email" readonly>
+                                                <label for=" " class="form-label">Email </label>
+                                                <input type="email" class="form-control" id="view-email" readonly>
                                                 <div class="invalid-feedback">
                                                     Please enter a valid email address.
                                                 </div>
@@ -198,16 +198,16 @@
 
 
                                             <div class="col-sm-6">
-                                                <label for="number" class="form-label">Mobile Number</label>
-                                                <input type="number" class="form-control" id="inputnumber" readonly>
+                                                <label for=" " class="form-label">Mobile Number</label>
+                                                <input type="number" class="form-control" id="view-phonenumber" readonly>
                                                 <div class="invalid-feedback">
                                                     Valid Mobile Number is required.
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="address" class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="address"
+                                                <label for=" " class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="view-address"
                                                     placeholder="1234, Main St,kegalle" readonly>
                                                 <div class="invalid-feedback">
                                                     Please enter your address.
@@ -215,8 +215,8 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="Lecturerole" class="form-label">Lecture Roles</label>
-                                                <select class="form-select" id="lecturerole" disabled readonly>
+                                                <label for=" " class="form-label">Lecture Roles</label>
+                                                <select class="form-select" id="view-lecturerole" disabled readonly>
                                                     <option value="">Choose...</option>
                                                     <option>Part time Lecture</option>
                                                     <option>Visiting Lecture</option>
@@ -229,9 +229,9 @@
 
 
                                             <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">About
+                                                <label for=" " class="form-label">About
                                                     Lecture</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                                                <textarea class="form-control" id="view-about" rows="5"
                                                     readonly></textarea>
                                             </div>
                                         </div>
@@ -315,8 +315,7 @@
                                                 echo '<td>' . htmlspecialchars($row['address']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($row['mobile_no']) . '</td>';
                                                 echo '<td class="d-flex align-items-lg-center justify-content-around">';
-                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>';
-                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate" ';
+                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView" ';
                                                 echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
                                                 echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
                                                 echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
@@ -326,6 +325,16 @@
                                                 echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
                                                 echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
                                                 echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
+                                                echo '><i class="fas fa-eye fa-lg"></i></a>';
+                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate" ';
+                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
+                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
+                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
+                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
+                                                echo 'data-about="' . htmlspecialchars($row['expertise']) . '" ';
+                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
+                                                echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
+                                                echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
                                                 echo '<a href="#" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
                                                 echo '</td>';
@@ -360,29 +369,57 @@
 
 
 <script>
-    // Function to pre-fill the form when edit button is clicked
-    document.querySelectorAll('[data-bs-target="#Lecturecreate"]').forEach(function(button) {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            const index_number = this.getAttribute('data-index_number');
-            const username = this.getAttribute('data-username');
-            const email = this.getAttribute('data-email');
-            const about = this.getAttribute('data-about');
-            const address = this.getAttribute('data-address');
-            const mobile_no = this.getAttribute('data-mobile_no');
-            const lecturerole = this.getAttribute('data-lecturerole');
-            const inputPassword = this.getAttribute('data-inputPassword');
+document.addEventListener('DOMContentLoaded', function () {
 
-            // Populate the form fields with the selected lecturer's data
-            document.getElementById('lecturer-id').value = id;
-            document.getElementById('Index_num').value = index_number;
-            document.getElementById('username').value = username;
-            document.getElementById('email').value = email;
-            document.getElementById('phonenumber').value = mobile_no;
-            document.getElementById('address').value = address;
-            document.getElementById('lecturerole').value = lecturerole;
-            document.getElementById('about').value = about;
-            document.getElementById('inputPassword').value = inputPassword;
-        });
+// Function to pre-fill the form when edit button is clicked
+document.querySelectorAll('[data-bs-target="#Lecturecreate"]').forEach(function(button) {
+    button.addEventListener('click', function() {
+        const id = this.getAttribute('data-id');
+        const index_number = this.getAttribute('data-index_number');
+        const username = this.getAttribute('data-username');
+        const email = this.getAttribute('data-email');
+        const about = this.getAttribute('data-about');
+        const address = this.getAttribute('data-address');
+        const mobile_no = this.getAttribute('data-mobile_no');
+        const lecturerole = this.getAttribute('data-lecturerole');
+        const inputPassword = this.getAttribute('data-inputPassword');
+
+        // Populate the form fields with the selected lecturer's data
+        document.getElementById('lecturer-id').value = id;
+        document.getElementById('Index_num').value = index_number;
+        document.getElementById('username').value = username;
+        document.getElementById('email').value = email;
+        document.getElementById('phonenumber').value = mobile_no;
+        document.getElementById('address').value = address;
+        document.getElementById('lecturerole').value = lecturerole;
+        document.getElementById('about').value = about;
+        document.getElementById('inputPassword').value = inputPassword;
     });
+});
+
+// Function to pre-fill the LectureView form when view button is clicked
+document.querySelectorAll('[data-bs-target="#LectureView"]').forEach(function(button) {
+    button.addEventListener('click', function() {
+        const id1 = this.getAttribute('data-id');
+        const index_number1 = this.getAttribute('data-index_number');
+        const username1 = this.getAttribute('data-username');
+        const email1 = this.getAttribute('data-email');
+        const about1 = this.getAttribute('data-about');
+        const address1 = this.getAttribute('data-address');
+        const mobile_no1 = this.getAttribute('data-mobile_no');
+        const lecturerole1 = this.getAttribute('data-lecturerole');
+
+        // Populate the form fields with the selected lecturer's data
+        document.getElementById('view-Index_num').value = index_number1;
+        document.getElementById('view-username').value = username1;
+        document.getElementById('view-email').value = email1;
+        document.getElementById('view-phonenumber').value = mobile_no1;
+        document.getElementById('view-address').value = address1;
+        document.getElementById('view-lecturerole').value = lecturerole1;
+        document.getElementById('view-about').value = about1;
+    });
+});
+
+});
+
 </script>
