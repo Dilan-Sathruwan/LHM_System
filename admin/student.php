@@ -15,7 +15,7 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Lecture profile</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Student profile</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -28,9 +28,11 @@
 
                                 <div class="card my-1">
 
-                                    <form id="myFormS" class="card-body cardbody-color p-lg-2">
+                                    <form action="./include/student_create.php" method="POST" id="myFormS" class="card-body cardbody-color p-lg-2">
 
                                         <div class="row g-3">
+
+                                            <input type="number" name="id" id="student-id">
 
                                             <div class="text-center">
                                                 <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
@@ -38,31 +40,19 @@
                                                     width="200px" alt="profile">
                                             </div>
 
-                                            <div class="col-12">
-                                                <label for="username" class="form-label">Course Name</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder=" " required>
-                                                    <div class="invalid-feedback">
-                                                        Your username is required.
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                             <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Student Index Number</label>
-                                                <input type="text" class="form-control" id="Lecture Name" placeholder=""
-                                                    value="" required>
+                                                <label for="Index_num" class="form-label">Student Index Number</label>
+                                                <input type="text" name="Index_num" class="form-control" id="Index_Num" required>
                                                 <div class="invalid-feedback">
                                                     Valid Student name is required.
                                                 </div>
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="username" class="form-label">Student Name</label>
+                                                <label for="Student_name" class="form-label">Student Name</label>
                                                 <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder="Username" required>
+                                                    <input type="text" class="form-control" id="Student_name"
+                                                        placeholder="Student name" name="Student_name" required>
                                                     <div class="invalid-feedback">
                                                         Your username is required.
                                                     </div>
@@ -71,7 +61,7 @@
 
                                             <div class="col-sm-6">
                                                 <label for="email" class="form-label">Email </label>
-                                                <input type="email" class="form-control" id="email" placeholder=" ">
+                                                <input type="email" class="form-control" id="email" name="email">
                                                 <div class="invalid-feedback">
                                                     Please enter a valid email address.
                                                 </div>
@@ -79,8 +69,8 @@
 
 
                                             <div class="col-sm-6">
-                                                <label for="number" class="form-label">Mobile Number</label>
-                                                <input type="number" class="form-control" id="inputnumber">
+                                                <label for="Mobile_num" class="form-label">Mobile Number</label>
+                                                <input type="number" class="form-control" id="Mobile_num" name="Mobile_num">
                                                 <div class="invalid-feedback">
                                                     Valid Mobile Number is required.
                                                 </div>
@@ -88,49 +78,42 @@
 
                                             <div class="col-12">
                                                 <label for="address" class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="address"
+                                                <input type="text" class="form-control" id="address" name="address"
                                                     placeholder="1234, Main St,kegalle" required>
                                                 <div class="invalid-feedback">
                                                     Please enter your address.
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6">
-                                                <label for="Acadamy year" class="form-label">Acadamy year</label>
-                                                <select class="form-select" id="lecturerole" required>
+                                            <div class="col-12">
+                                                <label for="department" class="form-label">Course Name</label>
+                                                <select class="form-select" id="department" name="courses" required>
                                                     <option value=""></option>
-                                                    <option>1 year</option>
-                                                    <option>2 year</option>
-                                                    <option>3 year</option>
-                                                    <option>4 year</option>
+                                                    <option value="1">Higher National Diploma in Information Technology - (HNDIT)</option>
+                                                    <option value="2">Higher National Diploma in Accountancy - (HNDA)</option>
+                                                    <option value="3">Higher National Diploma in English - (HNDE)</option>
+                                                    <option value="4">Higher National Diploma in Project Management - (HNDPM)</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <label for="Acadamy-year" class="form-label">Acadamy Semester year </label>
+                                                <select class="form-select" id="lecturerole" name="sem_year" required>
+                                                    <option value=""></option>
+                                                    <option>1-Year 1-Semester</option>
+                                                    <option>1-Year 2-Semester</option>
+                                                    <option>2-Year 1-Semester</option>
+                                                    <option>2-Year 2-Semester</option>
+                                                    <option>3-Year 1-Semester</option>
+                                                    <option>3-Year 2-Semester</option>
+                                                    <option>4-Year 1-Semester</option>
+                                                    <option>4-Year 2-Semester</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid year
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6">
-                                                <label for="Acadamy semester" class="form-label">Acadamy
-                                                    semester</label>
-                                                <select class="form-select" id="lecturerole" required>
-                                                    <option value=""></option>
-                                                    <option>1st semester</option>
-                                                    <option>2nd semester</option>
-                                                    <option>3nd semester</option>
-                                                    <option>4nd semester</option>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid Semester
-                                                </div>
-                                            </div>
-
-
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">About
-                                                    Lecture</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                    rows="3"></textarea>
-                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -154,7 +137,7 @@
 
 
     <!-- students view Modal model start-->
-    <div class="modal fade" id="LectureView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="studentView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -317,6 +300,18 @@
 
                                 <hr>
 
+
+                                <?php
+                                try {
+                                    // Prepare the SQL statement
+                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, mobile_num, address, sem_year, enrollment_date FROM students");
+                                    $stmt->execute();
+                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                } catch (PDOException $e) {
+                                    echo "Connection failed: " . $e->getMessage();
+                                }
+                                $conn = null;
+                                ?>
                                 <!-- Table with stripped rows -->
                                 <table class="table datatable text-start align-middle table-bordered table-hover mb-0">
                                     <thead>
@@ -325,77 +320,52 @@
                                             <th>Index Number</th>
                                             <th>Student Name</th>
                                             <th>Student Email</th>
-                                            <th>Address</th>
-                                            <th>Phone Number</th>
+                                            <th>Mobile Number</th>
+                                            <th>Semester year</th>
                                             <th data-type="date" data-format="YYYY/DD/MM">Re. Date</th>
                                             <th>chekout</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>KEG/V/0001</td>
-                                            <td>Dilan</td>
-                                            <td>dilan@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>012345</td>
-                                            <td>2024-2-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#studentcreate"><i
-                                                        class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0001</td>
-                                            <td>Dilan</td>
-                                            <td>dilan@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>012345</td>
-                                            <td>2024-2-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#studentcreate"><i
-                                                        class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0003</td>
-                                            <td>shehani</td>
-                                            <td>shehanis@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>0123454</td>
-
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0004</td>
-                                            <td>ravindu</td>
-                                            <td>ravindu@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>012345</td>
-
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
+                                        <?php
+                                        if (!empty($result)) {
+                                            foreach ($result as $row) {
+                                                echo '<tr>';
+                                                echo '<td>' . htmlspecialchars($row['index_number']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['username']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['email']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['mobile_num']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['sem_year']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['enrollment_date']) . '</td>';
+                                                echo '<td class="d-flex align-items-lg-center justify-content-around">';
+                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#studentView" ';
+                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
+                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
+                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
+                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
+                                                echo 'data-mobile_num="' . htmlspecialchars($row['mobile_num']) . '" ';
+                                                echo 'data-sem_year="' . htmlspecialchars($row['sem_year']) . '" ';
+                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
+                                                echo 'data-mobile_no="' . htmlspecialchars($row['enrollment_date']) . '"';
+                                                echo '><i class="fas fa-eye fa-lg"></i></a>';
+                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#studentcreate" ';
+                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
+                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
+                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
+                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
+                                                echo 'data-mobile_num="' . htmlspecialchars($row['mobile_num']) . '" ';
+                                                echo 'data-sem_year="' . htmlspecialchars($row['sem_year']) . '" ';
+                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
+                                                echo 'data-re_date="' . htmlspecialchars($row['enrollment_date']) . '"';
+                                                echo '><i class="fas fa-user-edit fa-lg"></i></a>';
+                                                echo '<a href="include/delete.php?type=student&id=' . $row['id'] . ' class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                                echo '</td>';
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="7">No results found</td></tr>';
+                                        }
+                                        ?>
 
                                     </tbody>
                                 </table>
@@ -415,3 +385,28 @@
 <!-- Content End -->
 
 <?php include './include/footer.php'; ?>
+
+<script>
+    document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const index_number = this.getAttribute('data-index_number');
+                const username = this.getAttribute('data-username');
+                const email = this.getAttribute('data-email');
+                const mobile_num = this.getAttribute('data-mobile_num');
+                const sem_year = this.getAttribute('data-sem_year');
+                const address = this.getAttribute('data-address');
+                const re_date = this.getAttribute('data-re_date');
+
+                // Populate the form fields with the selected lecturer's data
+                document.getElementById('id').value = id;
+                document.getElementById('Index_Num').value = index_number;
+                document.getElementById('Student_name').value = username;
+                document.getElementById('email').value = email;
+                document.getElementById('Mobile_num').value = mobile_num;
+                document.getElementById('address').value = address;
+                document.getElementById('sem_year').value = sem_year ;
+                document.getElementById('about').value = re_date
+            });
+        });
+</script>

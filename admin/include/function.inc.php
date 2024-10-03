@@ -1,5 +1,6 @@
 <?php
-// Function to register a lecturers
+// ############################ Function to register a lecturers #####################
+
 function  lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum,  $about)
 {
 
@@ -38,7 +39,8 @@ function  lecturersCreate($conn, $index_num, $username, $email, $password, $lect
 
 
 
-// Function to update the lecturer's details
+// ############################# Function to update the lecturer's details ######################
+
 function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about)
 {
     try {
@@ -78,6 +80,71 @@ function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $
 
         // Return success message
         return "Lecturer updated successfully!";
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
+
+
+
+
+// ############################# Function to Add the student's details ######################
+
+function studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $sem_year)
+{
+    try {
+        $sql = "INSERT INTO students (`index_number`, `username`, `email`, `mobile_num`, `address`, `sem_year`, `department_id`) VALUES (:index_num, :username, :email, :mobile_num, :address, :sem_year, :department_id)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+
+            ':index_num' => $index_num,
+            ':username' => $student_name,
+            ':email' => $email,
+            ':mobile_num' => $mobile_num,
+            ':address' => $address,
+            ':sem_year' => $sem_year,
+            ':department_id' => $courses
+        ]);
+
+        return "student registered successfully!";
+        exit();
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
+
+// ############################# Function to Add the student's details ######################
+function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_num, $address, $courses, $sem_year)
+{
+    try {
+        $sql = "UPDATE students SET 
+                    `index_number` = :index_num, 
+                    `username` = :username, 
+                    `email` = :email, 
+                    `mobile_num` = :mobile_num, 
+                    `address` = :address, 
+                    `sem_year` = :sem_year, 
+                    `department_id` = :department_id
+                WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+
+            ':id' => $id,
+            ':index_num' => $index_num,
+            ':username' => $student_name,
+            ':email' => $email,
+            ':mobile_num' => $mobile_num,
+            ':address' => $address,
+            ':sem_year' => $sem_year,
+            ':department_id' => $courses
+        ]);
+
+        return "student registered successfully!";
+        exit();
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }

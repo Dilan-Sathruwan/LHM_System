@@ -48,6 +48,13 @@ include "include/db_connection.inc.php";
         </div>
         <!-- Spinner End -->
 
+        <!-- Massage show -->
+        <div id="messagePopup" class="alert alert-success message-popup">
+            <i class="bi bi-check-square-fill">&nbsp;</i>
+            <span id="messageText"></span>
+        </div>
+        <!--Massage End -->
+
 
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3 back-colors">

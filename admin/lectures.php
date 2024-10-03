@@ -6,11 +6,6 @@
     <?php include './include/navbar.php'; ?>
     <!-- Navbar End -->
 
-    <div id="messagePopup" class="alert alert-success message-popup">
-        <i class="bi bi-check-square-fill">&nbsp;</i>
-        <span id="messageText"></span>
-    </div>
-
     <!-- Lecture Add /Edit Modal -->
     <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1 "
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -30,7 +25,7 @@
 
                                 <div class="card my-1 bg-transparent">
 
-                                    <form action="./include/student_create.php" id="myForm" method="POST"
+                                    <form action="./include/lecturers_create.php" id="myForm" method="POST"
                                         class="card-body cardbody-color p-lg-2">
 
                                         <div class="row g-3">
@@ -288,6 +283,7 @@
                                 } catch (PDOException $e) {
                                     echo "Connection failed: " . $e->getMessage();
                                 }
+                                $conn = null;
                                 ?>
 
                                 <!-- Table with stripped rows -->
@@ -336,7 +332,7 @@
                                                 echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
                                                 echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
-                                                echo '<a href="#" class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                                echo '<a href="include/delete.php?type=lectures&id=' . $row['id'] . ' class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
                                                 echo '</td>';
                                                 echo '</tr>';
                                             }
@@ -348,7 +344,7 @@
                                 </table>
                                 <?php
                                 // Close the connection
-                                $conn = null;
+
                                 ?>
                                 <!-- End Table with stripped rows -->
 
@@ -369,57 +365,56 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
 
-// Function to pre-fill the form when edit button is clicked
-document.querySelectorAll('[data-bs-target="#Lecturecreate"]').forEach(function(button) {
-    button.addEventListener('click', function() {
-        const id = this.getAttribute('data-id');
-        const index_number = this.getAttribute('data-index_number');
-        const username = this.getAttribute('data-username');
-        const email = this.getAttribute('data-email');
-        const about = this.getAttribute('data-about');
-        const address = this.getAttribute('data-address');
-        const mobile_no = this.getAttribute('data-mobile_no');
-        const lecturerole = this.getAttribute('data-lecturerole');
-        const inputPassword = this.getAttribute('data-inputPassword');
+        // Function to pre-fill the form when edit button is clicked
+        document.querySelectorAll('[data-bs-target="#Lecturecreate"]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const index_number = this.getAttribute('data-index_number');
+                const username = this.getAttribute('data-username');
+                const email = this.getAttribute('data-email');
+                const about = this.getAttribute('data-about');
+                const address = this.getAttribute('data-address');
+                const mobile_no = this.getAttribute('data-mobile_no');
+                const lecturerole = this.getAttribute('data-lecturerole');
+                const inputPassword = this.getAttribute('data-inputPassword');
 
-        // Populate the form fields with the selected lecturer's data
-        document.getElementById('lecturer-id').value = id;
-        document.getElementById('Index_num').value = index_number;
-        document.getElementById('username').value = username;
-        document.getElementById('email').value = email;
-        document.getElementById('phonenumber').value = mobile_no;
-        document.getElementById('address').value = address;
-        document.getElementById('lecturerole').value = lecturerole;
-        document.getElementById('about').value = about;
-        document.getElementById('inputPassword').value = inputPassword;
+                // Populate the form fields with the selected lecturer's data
+                document.getElementById('lecturer-id').value = id;
+                document.getElementById('Index_num').value = index_number;
+                document.getElementById('username').value = username;
+                document.getElementById('email').value = email;
+                document.getElementById('phonenumber').value = mobile_no;
+                document.getElementById('address').value = address;
+                document.getElementById('lecturerole').value = lecturerole;
+                document.getElementById('about').value = about;
+                document.getElementById('inputPassword').value = inputPassword;
+            });
+        });
+
+        // Function to pre-fill the LectureView form when view button is clicked
+        document.querySelectorAll('[data-bs-target="#LectureView"]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id1 = this.getAttribute('data-id');
+                const index_number1 = this.getAttribute('data-index_number');
+                const username1 = this.getAttribute('data-username');
+                const email1 = this.getAttribute('data-email');
+                const about1 = this.getAttribute('data-about');
+                const address1 = this.getAttribute('data-address');
+                const mobile_no1 = this.getAttribute('data-mobile_no');
+                const lecturerole1 = this.getAttribute('data-lecturerole');
+
+                // Populate the form fields with the selected lecturer's data
+                document.getElementById('view-Index_num').value = index_number1;
+                document.getElementById('view-username').value = username1;
+                document.getElementById('view-email').value = email1;
+                document.getElementById('view-phonenumber').value = mobile_no1;
+                document.getElementById('view-address').value = address1;
+                document.getElementById('view-lecturerole').value = lecturerole1;
+                document.getElementById('view-about').value = about1;
+            });
+        });
+
     });
-});
-
-// Function to pre-fill the LectureView form when view button is clicked
-document.querySelectorAll('[data-bs-target="#LectureView"]').forEach(function(button) {
-    button.addEventListener('click', function() {
-        const id1 = this.getAttribute('data-id');
-        const index_number1 = this.getAttribute('data-index_number');
-        const username1 = this.getAttribute('data-username');
-        const email1 = this.getAttribute('data-email');
-        const about1 = this.getAttribute('data-about');
-        const address1 = this.getAttribute('data-address');
-        const mobile_no1 = this.getAttribute('data-mobile_no');
-        const lecturerole1 = this.getAttribute('data-lecturerole');
-
-        // Populate the form fields with the selected lecturer's data
-        document.getElementById('view-Index_num').value = index_number1;
-        document.getElementById('view-username').value = username1;
-        document.getElementById('view-email').value = email1;
-        document.getElementById('view-phonenumber').value = mobile_no1;
-        document.getElementById('view-address').value = address1;
-        document.getElementById('view-lecturerole').value = lecturerole1;
-        document.getElementById('view-about').value = about1;
-    });
-});
-
-});
-
 </script>
