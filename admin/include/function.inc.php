@@ -143,7 +143,7 @@ function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_nu
             ':department_id' => $courses
         ]);
 
-        return "student registered successfully!";
+        return "student updated successfully!";
         exit();
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();

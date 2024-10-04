@@ -32,7 +32,7 @@
 
                                         <div class="row g-3">
 
-                                            <input type="number" name="id" id="student-id">
+                                            <input type="number" name="id" id="student_id">
 
                                             <div class="text-center">
                                                 <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
@@ -86,8 +86,8 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="department" class="form-label">Course Name</label>
-                                                <select class="form-select" id="department" name="courses" required>
+                                                <label for="department_id" class="form-label">Course Name</label>
+                                                <select class="form-select" id="department_id" name="courses" required>
                                                     <option value=""></option>
                                                     <option value="1">Higher National Diploma in Information Technology - (HNDIT)</option>
                                                     <option value="2">Higher National Diploma in Accountancy - (HNDA)</option>
@@ -98,16 +98,16 @@
 
                                             <div class="col-sm-6">
                                                 <label for="Acadamy-year" class="form-label">Acadamy Semester year </label>
-                                                <select class="form-select" id="lecturerole" name="sem_year" required>
+                                                <select class="form-select" id="Acadamy_year" name="sem_year" required>
                                                     <option value=""></option>
-                                                    <option>1-Year 1-Semester</option>
-                                                    <option>1-Year 2-Semester</option>
-                                                    <option>2-Year 1-Semester</option>
-                                                    <option>2-Year 2-Semester</option>
-                                                    <option>3-Year 1-Semester</option>
-                                                    <option>3-Year 2-Semester</option>
-                                                    <option>4-Year 1-Semester</option>
-                                                    <option>4-Year 2-Semester</option>
+                                                    <option value="1-Year 1-Semester">1-Year 1-Semester</option>
+                                                    <option value="1-Year 2-Semester">1-Year 2-Semester</option>
+                                                    <option value="2-Year 1-Semester">2-Year 1-Semester</option>
+                                                    <option value="2-Year 2-Semester">2-Year 2-Semester</option>
+                                                    <option value="3-Year 1-Semester">3-Year 1-Semester</option>
+                                                    <option value="3-Year 2-Semester">3-Year 2-Semester</option>
+                                                    <option value="4-Year 1-Semester">4-Year 1-Semester</option>
+                                                    <option value="4-Year 2-Semester">4-Year 2-Semester</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid year
@@ -304,7 +304,7 @@
                                 <?php
                                 try {
                                     // Prepare the SQL statement
-                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, mobile_num, address, sem_year, enrollment_date FROM students");
+                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, mobile_num, address, sem_year, department_id, enrollment_date FROM students");
                                     $stmt->execute();
                                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 } catch (PDOException $e) {
@@ -339,14 +339,6 @@
                                                 echo '<td>' . htmlspecialchars($row['enrollment_date']) . '</td>';
                                                 echo '<td class="d-flex align-items-lg-center justify-content-around">';
                                                 echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#studentView" ';
-                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
-                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
-                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
-                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
-                                                echo 'data-mobile_num="' . htmlspecialchars($row['mobile_num']) . '" ';
-                                                echo 'data-sem_year="' . htmlspecialchars($row['sem_year']) . '" ';
-                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
-                                                echo 'data-mobile_no="' . htmlspecialchars($row['enrollment_date']) . '"';
                                                 echo '><i class="fas fa-eye fa-lg"></i></a>';
                                                 echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#studentcreate" ';
                                                 echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
@@ -356,6 +348,7 @@
                                                 echo 'data-mobile_num="' . htmlspecialchars($row['mobile_num']) . '" ';
                                                 echo 'data-sem_year="' . htmlspecialchars($row['sem_year']) . '" ';
                                                 echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
+                                                echo 'data-department_id="' . htmlspecialchars($row['department_id']) . '" ';
                                                 echo 'data-re_date="' . htmlspecialchars($row['enrollment_date']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
                                                 echo '<a href="include/delete.php?type=student&id=' . $row['id'] . ' class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
@@ -396,17 +389,18 @@
                 const mobile_num = this.getAttribute('data-mobile_num');
                 const sem_year = this.getAttribute('data-sem_year');
                 const address = this.getAttribute('data-address');
+                const department_id = this.getAttribute('data-department_id');
                 const re_date = this.getAttribute('data-re_date');
 
                 // Populate the form fields with the selected lecturer's data
-                document.getElementById('id').value = id;
+                document.getElementById('student_id').value = id;
                 document.getElementById('Index_Num').value = index_number;
                 document.getElementById('Student_name').value = username;
                 document.getElementById('email').value = email;
                 document.getElementById('Mobile_num').value = mobile_num;
                 document.getElementById('address').value = address;
-                document.getElementById('sem_year').value = sem_year ;
-                document.getElementById('about').value = re_date
+                document.getElementById('department_id').value = department_id ;
+                document.getElementById('Acadamy_year').value = sem_year ;
             });
         });
 </script>

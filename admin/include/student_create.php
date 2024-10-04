@@ -8,10 +8,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $index_num = filter_input(INPUT_POST, 'Index_num',  FILTER_SANITIZE_SPECIAL_CHARS);
     $student_name = filter_input(INPUT_POST, 'Student_name',  FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-    $mobile_num = filter_input(INPUT_POST, 'Mobile_num',  FILTER_SANITIZE_SPECIAL_CHARS);
-    $address = filter_input(INPUT_POST, 'address',  FILTER_VALIDATE_INT);
+    $mobile_num = filter_input(INPUT_POST, 'Mobile_num',  FILTER_VALIDATE_INT);
+    $address = filter_input(INPUT_POST, 'address',  FILTER_SANITIZE_SPECIAL_CHARS);
     $courses = filter_input(INPUT_POST, 'courses', FILTER_SANITIZE_SPECIAL_CHARS);
-    $sem_year = filter_input(INPUT_POST, 'Sem_year',  FILTER_SANITIZE_SPECIAL_CHARS);
+    $sem_year = filter_input(INPUT_POST, 'sem_year',  FILTER_SANITIZE_SPECIAL_CHARS);
     $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT); // Hidden input field for the lecturer ID
 
     if ($email === false) {
