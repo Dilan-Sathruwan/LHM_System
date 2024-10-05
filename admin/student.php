@@ -379,28 +379,4 @@
 
 <?php include './include/footer.php'; ?>
 
-<script>
-    document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function(button) {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                const index_number = this.getAttribute('data-index_number');
-                const username = this.getAttribute('data-username');
-                const email = this.getAttribute('data-email');
-                const mobile_num = this.getAttribute('data-mobile_num');
-                const sem_year = this.getAttribute('data-sem_year');
-                const address = this.getAttribute('data-address');
-                const department_id = this.getAttribute('data-department_id');
-                const re_date = this.getAttribute('data-re_date');
 
-                // Populate the form fields with the selected lecturer's data
-                document.getElementById('student_id').value = id;
-                document.getElementById('Index_Num').value = index_number;
-                document.getElementById('Student_name').value = username;
-                document.getElementById('email').value = email;
-                document.getElementById('Mobile_num').value = mobile_num;
-                document.getElementById('address').value = address;
-                document.getElementById('department_id').value = department_id ;
-                document.getElementById('Acadamy_year').value = sem_year ;
-            });
-        });
-</script>
