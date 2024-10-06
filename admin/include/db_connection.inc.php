@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "12345";
-$dbname = "lecture_management_system1";
+$dbname = "lhm_system";
 
 try {
     // Create a PDO connection

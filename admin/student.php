@@ -97,17 +97,17 @@
                                             </div>
 
                                             <div class="col-sm-6">
-                                                <label for="Acadamy-year" class="form-label">Acadamy Semester year </label>
+                                                <label for="Acadamy_year" class="form-label">Acadamy Semester year </label>
                                                 <select class="form-select" id="Acadamy_year" name="sem_year" required>
                                                     <option value=""></option>
-                                                    <option value="1-Year 1-Semester">1-Year 1-Semester</option>
-                                                    <option value="1-Year 2-Semester">1-Year 2-Semester</option>
-                                                    <option value="2-Year 1-Semester">2-Year 1-Semester</option>
-                                                    <option value="2-Year 2-Semester">2-Year 2-Semester</option>
-                                                    <option value="3-Year 1-Semester">3-Year 1-Semester</option>
-                                                    <option value="3-Year 2-Semester">3-Year 2-Semester</option>
-                                                    <option value="4-Year 1-Semester">4-Year 1-Semester</option>
-                                                    <option value="4-Year 2-Semester">4-Year 2-Semester</option>
+                                                    <option value="1">1-Year 1-Semester</option>
+                                                    <option value="2">1-Year 2-Semester</option>
+                                                    <option value="3">2-Year 1-Semester</option>
+                                                    <option value="4">2-Year 2-Semester</option>
+                                                    <option value="5">3-Year 1-Semester</option>
+                                                    <option value="6">3-Year 2-Semester</option>
+                                                    <option value="7">4-Year 1-Semester</option>
+                                                    <option value="8">4-Year 2-Semester</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid year
@@ -304,7 +304,7 @@
                                 <?php
                                 try {
                                     // Prepare the SQL statement
-                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, mobile_num, address, sem_year, department_id, enrollment_date FROM students");
+                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, mobile_num, address, semester_id, department_id, enrollment_date FROM students");
                                     $stmt->execute();
                                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 } catch (PDOException $e) {
@@ -335,7 +335,7 @@
                                                 echo '<td>' . htmlspecialchars($row['username']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($row['email']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($row['mobile_num']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['sem_year']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['semester_id']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($row['enrollment_date']) . '</td>';
                                                 echo '<td class="d-flex align-items-lg-center justify-content-around">';
                                                 echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#studentView" ';
@@ -346,7 +346,7 @@
                                                 echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
                                                 echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
                                                 echo 'data-mobile_num="' . htmlspecialchars($row['mobile_num']) . '" ';
-                                                echo 'data-sem_year="' . htmlspecialchars($row['sem_year']) . '" ';
+                                                echo 'data-sem_year="' . htmlspecialchars($row['semester_id']) . '" ';
                                                 echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
                                                 echo 'data-department_id="' . htmlspecialchars($row['department_id']) . '" ';
                                                 echo 'data-re_date="' . htmlspecialchars($row['enrollment_date']) . '"';
