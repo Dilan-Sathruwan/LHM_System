@@ -101,7 +101,7 @@
                                                     required>
                                                     <option></option>
                                                     <option value="Visiting">Visiting Lecture</option>
-                                                    <option value="Permernet">Permernet Lecture</option>
+                                                    <option value="Permanent">Permernet Lecture</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid Roles.
@@ -320,7 +320,6 @@
                                                 echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
                                                 echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
                                                 echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
-                                                echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
                                                 echo '><i class="fas fa-eye fa-lg"></i></a>';
                                                 echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate" ';
                                                 echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
@@ -331,6 +330,7 @@
                                                 echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
                                                 echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
                                                 echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
+                                                echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
                                                 echo '<a href="include/delete.php?type=lectures&id=' . $row['id'] . ' class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
                                                 echo '</td>';
