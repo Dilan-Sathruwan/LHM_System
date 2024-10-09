@@ -106,6 +106,8 @@ include "include/db_connection.inc.php";
                                                                         echo 'active';
                                                                     } elseif (basename($_SERVER['PHP_SELF']) == 'Subject.php') {
                                                                         echo 'active';
+                                                                    } elseif (basename($_SERVER['PHP_SELF']) == 'Batches.php') {
+                                                                        echo 'active';
                                                                     }
                                                                     ?>" data-bs-toggle="dropdown"><i
                                 class="fa fa-university me-2"></i>Campus Details</a>
@@ -118,7 +120,10 @@ include "include/db_connection.inc.php";
                                                                             } ?>">Lecture Hall</a>
                             <a href="Subject.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'Subject.php') {
                                                                             echo 'active';
-                                                                        } ?>">Subject</a>
+                                                                        } ?>">Subjects</a>
+                            <a href="Batches.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'Batches.php') {
+                                                                            echo 'active';
+                                                                        } ?>">Batches</a>
                         </div>
                     </div>
 
