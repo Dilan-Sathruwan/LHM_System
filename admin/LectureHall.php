@@ -18,69 +18,39 @@
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
-                            <th scope="col">Hall Number</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Hall Name</th>
                             <th scope="col">Student capacity</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">Locatin</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td class="d-flex align-items-lg-center justify-content-around">
-                                <a href="" class=""><i class="fas fa-eye fa-lg "></i></a>
-                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td class="d-flex align-items-lg-center justify-content-around">
-                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td class="d-flex align-items-lg-center justify-content-around">
-                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td class="d-flex align-items-lg-center justify-content-around">
-                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td class="d-flex align-items-lg-center justify-content-around">
-                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                            </td>
-                        </tr>
+                        <?php
+                        $stmt = $conn->query("SELECT id, hall_name, capacity, location, available FROM lecture_halls");
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        if (!empty($result)) {
+                            foreach ($result as $row) {
+                                echo '<tr>';
+                                echo '<td>' . htmlspecialchars($row['id']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['hall_name']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['capacity']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['location']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['available']) . '</td>';
+                                echo '<td class="d-flex align-items-lg-center justify-content-around">';
+                                echo '<a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>';
+                                echo '<a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                echo '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="5">No results found</td></tr>'; 
+                        }
+                        
+                        ?>
+                       
                     </tbody>
                 </table>
             </div>

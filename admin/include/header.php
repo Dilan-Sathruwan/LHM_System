@@ -112,7 +112,7 @@ include "include/db_connection.inc.php";
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="Department.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'Department.php') {
                                                                                 echo 'active';
-                                                                            } ?>">Department</a>
+                                                                            } ?>">Department & Semester</a>
                             <a href="LectureHall.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'LectureHall.php') {
                                                                                 echo 'active';
                                                                             } ?>">Lecture Hall</a>
