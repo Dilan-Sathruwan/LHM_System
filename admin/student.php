@@ -28,7 +28,7 @@
 
                                 <div class="card my-1">
 
-                                    <form action="./include/student_create.php" method="POST" id="myFormS" class="card-body cardbody-color p-lg-2">
+                                    <form action="./include/create_student.php" method="POST" id="myFormS" class="card-body cardbody-color p-lg-2">
 
                                         <div class="row g-3">
 
@@ -131,7 +131,7 @@
 
             // Create AJAX request
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "get_semesters.php?department_id=" + departmentId, true);
+            xhr.open("GET", 'get_batches.php?department_id=' + departmentId, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById("batch_id").innerHTML = xhr.responseText;

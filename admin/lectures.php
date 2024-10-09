@@ -25,7 +25,7 @@
 
                                 <div class="card my-1 bg-transparent">
 
-                                    <form action="./include/lecturers_create.php" id="myForm" method="POST"
+                                    <form action="./include/create_lecturers.php" id="myForm" method="POST"
                                         class="card-body cardbody-color p-lg-2">
 
                                         <div class="row g-3">
