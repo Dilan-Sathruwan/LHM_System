@@ -91,10 +91,10 @@ function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $
 
 // ############################# Function to Add the student's details ######################
 
-function studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $sem_year)
+function studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id)
 {
     try {
-        $sql = "INSERT INTO students (`index_number`, `username`, `email`, `mobile_num`, `address`, `sem_year`, `department_id`) VALUES (:index_num, :username, :email, :mobile_num, :address, :sem_year, :department_id)";
+        $sql = "INSERT INTO students (`index_number`, `username`, `email`, `mobile_num`, `address`, `batch_id`, `department_id`) VALUES (:index_num, :username, :email, :mobile_num, :address, :batch_id, :department_id)";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute([
@@ -104,7 +104,7 @@ function studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $a
             ':email' => $email,
             ':mobile_num' => $mobile_num,
             ':address' => $address,
-            ':sem_year' => $sem_year,
+            ':batch_id' => $batch_id,
             ':department_id' => $courses
         ]);
 
@@ -117,7 +117,7 @@ function studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $a
 
 
 // ############################# Function to Add the student's details ######################
-function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_num, $address, $courses, $sem_year)
+function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id)
 {
     try {
         $sql = "UPDATE students SET 
@@ -126,7 +126,7 @@ function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_nu
                     `email` = :email, 
                     `mobile_num` = :mobile_num, 
                     `address` = :address, 
-                    `sem_year` = :sem_year, 
+                    `batch_id` = :batch_id, 
                     `department_id` = :department_id
                 WHERE id = :id";
 
@@ -139,7 +139,7 @@ function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_nu
             ':email' => $email,
             ':mobile_num' => $mobile_num,
             ':address' => $address,
-            ':sem_year' => $sem_year,
+            ':batch_id' => $batch_id,
             ':department_id' => $courses
         ]);
 

@@ -10,8 +10,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $mobile_num = filter_input(INPUT_POST, 'Mobile_num',  FILTER_VALIDATE_INT);
     $address = filter_input(INPUT_POST, 'address',  FILTER_SANITIZE_SPECIAL_CHARS);
-    $courses = filter_input(INPUT_POST, 'courses', FILTER_SANITIZE_SPECIAL_CHARS);
-    $sem_year = filter_input(INPUT_POST, 'sem_year',  FILTER_SANITIZE_SPECIAL_CHARS);
+    $courses = filter_input(INPUT_POST, 'department_id', FILTER_SANITIZE_SPECIAL_CHARS);
+    $batch_id = filter_input(INPUT_POST, 'batch_id',  FILTER_SANITIZE_SPECIAL_CHARS);
     $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT); // Hidden input field for the lecturer ID
 
     if ($email === false) {
@@ -21,10 +21,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if(!empty($id)) {
         //update lectures details
-        $result = studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_num, $address, $courses, $sem_year);
+        $result = studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id);
     }else{
          // Creating a new lecturer
-        $result = studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $sem_year);
+        $result = studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id);
     }
 
     

@@ -7,7 +7,7 @@ document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function(
         const username = this.getAttribute('data-username');
         const email = this.getAttribute('data-email');
         const mobile_num = this.getAttribute('data-mobile_num');
-        const sem_year = this.getAttribute('data-sem_year');
+        const batch_id = this.getAttribute('data-batch_id');
         const address = this.getAttribute('data-address');
         const department_id = this.getAttribute('data-department_id');
         const re_date = this.getAttribute('data-re_date');
@@ -19,8 +19,8 @@ document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function(
         document.getElementById('email').value = email;
         document.getElementById('Mobile_num').value = mobile_num;
         document.getElementById('address').value = address;
-        document.getElementById('department_id').value = department_id ;
-        document.getElementById('Acadamy_year').value = sem_year ;
+        document.getElementById('department_id').value = department_id;
+        document.getElementById('batch_id').value = batch_id;
     });
 });
 

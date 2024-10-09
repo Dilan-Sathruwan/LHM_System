@@ -34,6 +34,7 @@
 
                                             <input type="number" name="id" id="student_id">
 
+
                                             <div class="text-center">
                                                 <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
@@ -43,9 +44,6 @@
                                             <div class="col-sm-6">
                                                 <label for="Index_num" class="form-label">Student Index Number</label>
                                                 <input type="text" name="Index_num" class="form-control" id="Index_Num" required>
-                                                <div class="invalid-feedback">
-                                                    Valid Student name is required.
-                                                </div>
                                             </div>
 
                                             <div class="col-12">
@@ -53,9 +51,6 @@
                                                 <div class="input-group has-validation">
                                                     <input type="text" class="form-control" id="Student_name"
                                                         placeholder="Student name" name="Student_name" required>
-                                                    <div class="invalid-feedback">
-                                                        Your username is required.
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -71,47 +66,43 @@
                                             <div class="col-sm-6">
                                                 <label for="Mobile_num" class="form-label">Mobile Number</label>
                                                 <input type="number" class="form-control" id="Mobile_num" name="Mobile_num">
-                                                <div class="invalid-feedback">
-                                                    Valid Mobile Number is required.
-                                                </div>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="address" class="form-label">Address</label>
                                                 <input type="text" class="form-control" id="address" name="address"
-                                                    placeholder="1234, Main St,kegalle" required>
-                                                <div class="invalid-feedback">
-                                                    Please enter your address.
-                                                </div>
+                                                    placeholder="1234, Main St,kegalle" required>  
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="department_id" class="form-label">Course Name</label>
-                                                <select class="form-select" id="department_id" name="courses" required>
-                                                    <option value=""></option>
-                                                    <option value="1">Higher National Diploma in Information Technology - (HNDIT)</option>
-                                                    <option value="2">Higher National Diploma in Accountancy - (HNDA)</option>
-                                                    <option value="3">Higher National Diploma in English - (HNDE)</option>
-                                                    <option value="4">Higher National Diploma in Project Management - (HNDPM)</option>
+                                                <label for="department" class="form-label">Department Name</label>
+                                                <select class="form-select" name="department_id" id="department_id" onchange="fetchSemesters(this.value)" required>
+                                                    <option value="">Check your department</option>
+                                                    <?php
+                                                    // Fetch Departments
+                                                    $stmt = $conn->query("SELECT id, department_name FROM departments");
+                                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                        echo "<option value='" . $row['id'] . "'>" . $row['department_name'] . "</option>";
+                                                    }
+                                                    ?>
+
                                                 </select>
                                             </div>
 
+
                                             <div class="col-sm-6">
-                                                <label for="Acadamy_year" class="form-label">Acadamy Semester year </label>
-                                                <select class="form-select" id="Acadamy_year" name="sem_year" required>
-                                                    <option value=""></option>
-                                                    <option value="1">1-Year 1-Semester</option>
-                                                    <option value="2">1-Year 2-Semester</option>
-                                                    <option value="3">2-Year 1-Semester</option>
-                                                    <option value="4">2-Year 2-Semester</option>
-                                                    <option value="5">3-Year 1-Semester</option>
-                                                    <option value="6">3-Year 2-Semester</option>
-                                                    <option value="7">4-Year 1-Semester</option>
-                                                    <option value="8">4-Year 2-Semester</option>
+                                                <label for="batch_id" class="form-label">Acadamy Semester year </label>
+                                                <select class="form-select" name="batch_id" id="batch_id" required>
+                                                    <option value="">Add your department</option>
+                                                    <?php
+                                                    // Fetch Departments
+                                                    $stmt = $conn->query("SELECT id, batch_name FROM batches");
+                                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                        echo "<option value='" . $row['id'] . "'>" . $row['batch_name'] . "</option>";
+                                                    }
+                                                    ?>
+                                                   
                                                 </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid year
-                                                </div>
                                             </div>
 
                                         </div>
@@ -130,6 +121,27 @@
         </div>
     </div>
     <!-- student Add/Edit Modal end -->
+
+    <script>
+        function fetchSemesters(departmentId) {
+            if (departmentId === "") {
+                document.getElementById("batch_id").innerHTML = "<option value=''>Add Your Department</option>";
+                return;
+            }
+
+            // Create AJAX request
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "get_semesters.php?department_id=" + departmentId, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById("batch_id").innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+    </script>
+
+
 
 
 
@@ -304,7 +316,9 @@
                                 <?php
                                 try {
                                     // Prepare the SQL statement
-                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, mobile_num, address, semester_id, department_id, enrollment_date FROM students");
+                                    $stmt = $conn->prepare("SELECT students.id, students.index_number, students.username, students.email, students.mobile_num, students.address, students.image_path, students.enrollment_date,students.department_id, students.batch_id, batches.batch_name AS batch_name
+                                    FROM students 
+                                    JOIN batches ON students.batch_id = batches.id ");
                                     $stmt->execute();
                                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 } catch (PDOException $e) {
@@ -335,7 +349,7 @@
                                                 echo '<td>' . htmlspecialchars($row['username']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($row['email']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($row['mobile_num']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['semester_id']) . '</td>';
+                                                echo '<td>' . htmlspecialchars($row['batch_name']) . '</td>';
                                                 echo '<td>' . htmlspecialchars($row['enrollment_date']) . '</td>';
                                                 echo '<td class="d-flex align-items-lg-center justify-content-around">';
                                                 echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#studentView" ';
@@ -346,7 +360,7 @@
                                                 echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
                                                 echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
                                                 echo 'data-mobile_num="' . htmlspecialchars($row['mobile_num']) . '" ';
-                                                echo 'data-sem_year="' . htmlspecialchars($row['semester_id']) . '" ';
+                                                echo 'data-batch_id="' . htmlspecialchars($row['batch_id']) . '" ';
                                                 echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
                                                 echo 'data-department_id="' . htmlspecialchars($row['department_id']) . '" ';
                                                 echo 'data-re_date="' . htmlspecialchars($row['enrollment_date']) . '"';
@@ -378,5 +392,3 @@
 <!-- Content End -->
 
 <?php include './include/footer.php'; ?>
-
-
