@@ -149,3 +149,79 @@ function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_nu
         return "Error: " . $e->getMessage();
     }
 }
+
+
+
+
+
+// ############################# Function to Create the Batch ######################
+function batchCreate($conn, $batch_name, $batch_year, $dept_id, $sem_id) {
+    try {
+        // Check if batch name or batch year already exists
+        $sql_check = "SELECT * FROM batches WHERE batch_name = :batch_name OR batch_year = :batch_year";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->bindParam(':batch_name', $batch_name);
+        $stmt_check->bindParam(':batch_year', $batch_year);
+
+        $stmt_check->execute();
+        $existingBatch = $stmt_check->fetch(PDO::FETCH_ASSOC);
+        if ($existingBatch) {
+            return "Error: Batch with this name or year already exists.";
+        }
+
+        // If no batch exists, proceed to insert the new batch
+        $sql_insert = "INSERT INTO batches (batch_name, batch_year, department_id, semester_id) VALUES (:batch_name, :batch_year, :department_id, :semester_id)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bindParam(':batch_name', $batch_name);
+        $stmt_insert->bindParam(':batch_year', $batch_year);
+        $stmt_insert->bindParam(':department_id', $dept_id);
+        $stmt_insert->bindParam(':semester_id', $sem_id);
+        
+        if ($stmt_insert->execute()) {
+            return "Batch successfully created!";
+        } else {
+            return "Error creating batch.";
+        }
+        
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
+
+
+
+// ############################# Function to Create the Batch ######################
+
+function batchUpdate($conn, $id,$batch_name, $batch_year, $dept_id, $sem_id){
+    try {
+        // Check if batch name or batch year already exists
+        $sql_check = "SELECT * FROM batches WHERE batch_name = :batch_name OR batch_year = :batch_year";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->bindParam(':batch_name', $batch_name);
+        $stmt_check->bindParam(':batch_year', $batch_year);
+
+        $stmt_check->execute();
+        $existingBatch = $stmt_check->fetch(PDO::FETCH_ASSOC);
+        if ($existingBatch) {
+            return "Error: Batch with this name or year already exists.";
+        }
+
+        // If no batch exists, proceed to insert the new batch
+        $sql_insert = "UPDATE batches SET (batch_name, batch_year, department_id, semester_id) VALUES (:batch_name, :batch_year, :department_id, :semester_id)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bindParam(':batch_name', $batch_name);
+        $stmt_insert->bindParam(':batch_year', $batch_year);
+        $stmt_insert->bindParam(':department_id', $dept_id);
+        $stmt_insert->bindParam(':semester_id', $sem_id);
+        
+        if ($stmt_insert->execute()) {
+            return "Batch successfully created!";
+        } else {
+            return "Error creating batch.";
+        }
+        
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}

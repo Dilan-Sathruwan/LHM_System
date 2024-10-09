@@ -20,4 +20,43 @@ if (isset($_GET['department_id'])) {
         echo "<option value=''>No Semesters Available</option>";
     }
 }
+
+
+
+
+if (isset($_GET['id'])) {
+    $batchId = $_GET['id'];
+
+    // Fetch batch details
+    $stmt = $conn->prepare("SELECT * FROM batches WHERE id = :id");
+    $stmt->bindParam(':id', $batchId);
+    $stmt->execute();
+    $batch = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Fetch departments and semesters for select options
+    $stmtDept = $conn->query("SELECT id, department_name FROM departments");
+    $departments = $stmtDept->fetchAll(PDO::FETCH_ASSOC);
+
+    $stmtSem = $conn->query("SELECT id, sem_name FROM semester");
+    $semesters = $stmtSem->fetchAll(PDO::FETCH_ASSOC);
+
+    // Prepare the response
+    $response = [
+        'id' => $batch['id'],
+        'batch_name' => $batch['batch_name'],
+        'batch_year' => $batch['batch_year'],
+        'department_id' => $batch['department_id'],
+        'semester_id' => $batch['semester_id'],
+        'departments' => $departments,
+        'semesters' => $semesters
+    ];
+
+    // Send the response as JSON
+    echo json_encode($response);
+}
+
+
+
+
+
 ?>
