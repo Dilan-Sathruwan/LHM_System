@@ -91,7 +91,7 @@
 
 
                                             <div class="col-sm-6">
-                                                <label for="batch_id" class="form-label">Acadamy Semester year </label>
+                                                <label for="batch_id" class="form-label">Select Batch</label>
                                                 <select class="form-select" name="batch_id" id="batch_id" required>
                                                     <option value="">Add your department</option>
                                                     <?php
