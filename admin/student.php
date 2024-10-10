@@ -71,7 +71,7 @@
                                             <div class="col-12">
                                                 <label for="address" class="form-label">Address</label>
                                                 <input type="text" class="form-control" id="address" name="address"
-                                                    placeholder="1234, Main St,kegalle" required>  
+                                                    placeholder="1234, Main St,kegalle" required>
                                             </div>
 
                                             <div class="col-12">
@@ -101,7 +101,7 @@
                                                         echo "<option value='" . $row['id'] . "'>" . $row['batch_name'] . "</option>";
                                                     }
                                                     ?>
-                                                   
+
                                                 </select>
                                             </div>
 
@@ -365,7 +365,7 @@
                                                 echo 'data-department_id="' . htmlspecialchars($row['department_id']) . '" ';
                                                 echo 'data-re_date="' . htmlspecialchars($row['enrollment_date']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
-                                                echo '<a href="include/delete.php?type=student&id=' . $row['id'] . ' class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                                echo '<a href="include/delete.php?type=student&id=' . $row['id'] . '" class="m-1" onclick="return confirm(\'Are you sure you want to delete this student?\')"> <i class="fas fa-trash-alt fa-lg"></i> </a>';
                                                 echo '</td>';
                                                 echo '</tr>';
                                             }

@@ -332,7 +332,7 @@
                                                 echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
                                                 echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
-                                                echo '<a href="include/delete.php?type=lectures&id=' . $row['id'] . ' class="m-1"><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                                echo '<a href="include/delete.php?type=lectures&id=' . $row['id'] . ' class="m-1" onclick="return confirm(\'Are you sure you want to delete this Lecture?\')"><i class="fas fa-trash-alt fa-lg"></i></a>';
                                                 echo '</td>';
                                                 echo '</tr>';
                                             }

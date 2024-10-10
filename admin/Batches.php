@@ -98,7 +98,7 @@
                             echo '<td>' . htmlspecialchars($row['sem_name']) . '</td>';
                             echo '<td class="d-flex align-items-lg-center justify-content-around">';
                             echo '<a href="#" class="edit-batch" data-bs-toggle="modal" data-bs-target="#batchModal" data-id="' . $row['id'] . '"><i class="fas fa-user-edit fa-lg"></i></a>';
-                            echo '<a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>';
+                            echo '<a href="include/delete.php?type=batches&id=' . $row['id'] . '" class="m-1" onclick="return confirm(\'Are you sure you want to delete this batch?\')"> <i class="fas fa-trash-alt fa-lg"></i> </a>';
                             echo '</td>';
                             echo '</tr>';
                         }
