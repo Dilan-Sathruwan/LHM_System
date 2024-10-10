@@ -111,14 +111,20 @@
         </div>
 
         <script>
+
+            //################## batch model form fill current Id number ######################
             document.querySelectorAll('.edit-batch').forEach(function(editButton) {
                 editButton.addEventListener('click', function() {
                     var batchId = this.getAttribute('data-id');
 
-                    // Fetch batch details via AJAX
-                    fetch('get_batches.php?id=' + batchId)
-                        .then(response => response.json())
-                        .then(data => {
+                    // Fetch batch details via AJAX using XMLHttpRequest
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'get_batches.php?id=' + batchId, true);
+                    xhr.responseType = 'json';
+
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            var data = xhr.response;
                             // Populate form with batch data
                             document.getElementById('batch_id').value = data.id;
                             document.getElementById('batch_name').value = data.batch_name;
@@ -139,8 +145,16 @@
                                 var selected = sem.id == data.semester_id ? 'selected' : '';
                                 semesterSelect.innerHTML += `<option value="${sem.id}" ${selected}>${sem.sem_name}</option>`;
                             });
-                        })
-                        .catch(error => console.error('Error:', error));
+                        } else {
+                            console.error('Error:', xhr.statusText);
+                        }
+                    };
+
+                    xhr.onerror = function() {
+                        console.error('Request error...');
+                    };
+
+                    xhr.send();
                 });
             });
         </script>

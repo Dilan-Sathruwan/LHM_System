@@ -3,6 +3,7 @@
 
 include './include/db_connection.inc.php';
 
+//show depertment avalible semester
 if (isset($_GET['department_id'])) {
     $department_id = $_GET['department_id'];
 
@@ -23,7 +24,7 @@ if (isset($_GET['department_id'])) {
 
 
 
-
+//################## batch model form fill current Id number > link batches page ######################
 if (isset($_GET['id'])) {
     $batchId = $_GET['id'];
 
