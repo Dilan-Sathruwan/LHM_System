@@ -1,3 +1,6 @@
+ 
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -146,7 +149,7 @@
             <div class="login-section">
               <div class="login2">
                 <div class="form-box login">
-                  <form action="">
+                  <form action="" method = "post"p>
                     <h2>Student Sign In</h2>
                     <div class="input-box form-group">
                       <input type="email" required />
@@ -168,7 +171,7 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button type="submit" name="submit_sutudent"  class="btn btn-primary btn-block">
                       Login In
                     </button>
                   </form>
@@ -203,18 +206,18 @@
             <div class="login-section">
               <div class="login2">
                 <div class="form-box login">
-                  <form action="">
+                  <form action="./includes/login.inc.php">
                     <h2>Lecturer Sign In</h2>
 
                     <!-- Email -->
                     <div class="input-box form-group">
-                      <input type="email" required />
+                      <input type="email" name="email" required />
                       <label for="">Email</label>
                     </div>
 
                     <!-- Password -->
                     <div class="input-box form-group">
-                      <input type="password" required />
+                      <input type="password" name="pwd" required />
                       <label for="">Password</label>
                     </div>
 
@@ -233,7 +236,7 @@
 
                     <!-- Sign Up Link -->
                     <div class="create-account">
-                      <p>Create A New Account? <a href="./register.php">Sign Up</a></p>
+                      <p>Create A New Account? <a href="register.php">Sign Up</a></p>
                     </div>
                   </form>
                 </div>

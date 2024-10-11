@@ -5,6 +5,11 @@ $username = "root";
 $password = "1234";
 $dbname = "lecture_management_system";
 
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn){
+    die("Connection failed :" .mysqli_connect_error());
+}
 try {
     // Create a PDO connection
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
