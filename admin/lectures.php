@@ -212,10 +212,9 @@
                                             <div class="col-sm-6">
                                                 <label for=" " class="form-label">Lecture Roles</label>
                                                 <select class="form-select" id="view-lecturerole" disabled readonly>
-                                                    <option value="">Choose...</option>
-                                                    <option>Part time Lecture</option>
-                                                    <option>Visiting Lecture</option>
-                                                    <option>Permernet Lecture</option>
+                                                    <option value="">Choose...</option>                                                 
+                                                    <option value="Visiting">Visiting Lecture</option>
+                                                    <option value="Permanent">Permernet Lecture</option>
                                                 </select>
                                                 <div class="invalid-feedback">
                                                     Please select a valid Roles.
