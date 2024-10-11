@@ -155,7 +155,8 @@ function studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_nu
 
 
 // ############################# Function to Create the Batch ######################
-function batchCreate($conn, $batch_name, $batch_year, $dept_id, $sem_id) {
+function batchCreate($conn, $batch_name, $batch_year, $dept_id, $sem_id)
+{
     try {
         // Check if batch name or batch year already exists
         $sql_check = "SELECT * FROM batches WHERE batch_name = :batch_name";
@@ -175,13 +176,12 @@ function batchCreate($conn, $batch_name, $batch_year, $dept_id, $sem_id) {
         $stmt_insert->bindParam(':batch_year', $batch_year);
         $stmt_insert->bindParam(':department_id', $dept_id);
         $stmt_insert->bindParam(':semester_id', $sem_id);
-        
+
         if ($stmt_insert->execute()) {
             return "Batch successfully created!";
         } else {
             return "Error creating batch.";
         }
-        
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }
@@ -192,34 +192,35 @@ function batchCreate($conn, $batch_name, $batch_year, $dept_id, $sem_id) {
 
 // ############################# Function to Update the Batch ######################
 
-function batchUpdate($conn, $id,$batch_name, $batch_year, $dept_id, $sem_id){
+function batchUpdate($conn, $id, $batch_name, $batch_year, $dept_id, $sem_id)
+{
     try {
         // Check if batch name already exists
         $sql_check = "SELECT * FROM batches WHERE batch_name = :batch_name AND id != :id";
         $stmt_check = $conn->prepare($sql_check);
         $stmt_check->bindParam(':batch_name', $batch_name);
         $stmt_check->bindParam(':id', $id);  // Exclude current batch from the check
-    
+
         $stmt_check->execute();
         $existingBatch = $stmt_check->fetch(PDO::FETCH_ASSOC);
         if ($existingBatch) {
             return "Error: Batch with this name already exists.";
         }
-    
+
         $sql_update = "UPDATE batches 
                        SET batch_name = :batch_name, 
                            batch_year = :batch_year, 
                            department_id = :department_id, 
                            semester_id = :semester_id 
-                       WHERE id = :id";  
-        
+                       WHERE id = :id";
+
         $stmt_update = $conn->prepare($sql_update);
         $stmt_update->bindParam(':batch_name', $batch_name);
         $stmt_update->bindParam(':batch_year', $batch_year);
         $stmt_update->bindParam(':department_id', $dept_id);
         $stmt_update->bindParam(':semester_id', $sem_id);
-        $stmt_update->bindParam(':id', $id);  
-    
+        $stmt_update->bindParam(':id', $id);
+
         if ($stmt_update->execute()) {
             return "Batch successfully updated!";
         } else {
@@ -228,5 +229,72 @@ function batchUpdate($conn, $id,$batch_name, $batch_year, $dept_id, $sem_id){
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }
-    
+}
+
+
+
+
+// ############################# Function to Create Lecture time ######################
+function lectureCreate($conn, $lname, $dept, $batches, $subjects, $lecture_halls, $days, $time_slot)
+{
+    try {
+        // Prepare SQL statement to insert lecture schedule data
+        $sql = "INSERT INTO lhm_system2.lecture_schedule (lecturer_id, hall_id, department_id, batch_id, subject_id, slot_id, days)
+                VALUES (:lecturer_id, :hall_id, :department_id, :batch_id, :subject_id, :slot_id, :days)";
+
+        $stmt = $conn->prepare($sql);
+
+        // Execute the statement with the provided data
+        $stmt->execute([
+            ':lecturer_id' => $lname,
+            ':hall_id' => $lecture_halls,
+            ':department_id' => $dept,
+            ':batch_id' => $batches,
+            ':subject_id' => $subjects,
+            ':slot_id' => $time_slot,
+            ':days' => $days
+        ]);
+
+        return "Lecture scheduled successfully!";
+        exit();
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
+
+
+
+// ############################# Function Update to Lecture time ######################
+function lectureUpdate($conn, $id, $lname, $dept, $batches, $subjects, $lecture_halls, $days, $time_slot)
+{
+    try {
+        $sql = "UPDATE lhm_system2.lecture_schedule SET 
+                lecturer_id = :lecturer_id,
+                hall_id = :hall_id, 
+                department_id = :department_id, 
+                batch_id = :batch_id, 
+                subject_id = :subject_id, 
+                slot_id = :slot_id, 
+                days = :days
+                WHERE id = :id";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->execute([
+            ':lecturer_id' => $lname,
+            ':hall_id' => $lecture_halls,
+            ':department_id' => $dept,
+            ':batch_id' => $batches,
+            ':subject_id' => $subjects,
+            ':slot_id' => $time_slot,
+            ':days' => $days,
+            ':id' => $id
+        ]);
+
+        return "Lecture updated successfully!";
+        exit();
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
 }

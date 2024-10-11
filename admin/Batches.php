@@ -41,7 +41,7 @@
                             <div class="col-12">
                                 <label for="inptsem" class="form-label">Semester</label>
                                 <select id="inptsem" class="form-select" name="semester">
-                                    <option selected>Choose...</option>
+                                    
                                     <?php
                                     $stmt = $conn->query("SELECT id, sem_name FROM semester");
                                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

@@ -12,24 +12,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = filter_input(INPUT_POST, 'address',  FILTER_SANITIZE_SPECIAL_CHARS);
     $courses = filter_input(INPUT_POST, 'department_id', FILTER_SANITIZE_SPECIAL_CHARS);
     $batch_id = filter_input(INPUT_POST, 'batch_id',  FILTER_SANITIZE_SPECIAL_CHARS);
-    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT); // Hidden input field for the lecturer ID
-
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
     if ($email === false) {
         die('Invalid email address.');
     }
 
 
     if(!empty($id)) {
-        //update lectures details
+
         $result = studentUpdate($conn, $id, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id);
     }else{
-         // Creating a new lecturer
         $result = studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id);
     }
 
     
 
-    // Display the result (success or error message)
     // echo $result;
     header("Location:../student.php?message=" . urlencode($result));
 }
