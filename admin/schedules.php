@@ -165,9 +165,9 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-3 mb-2">
             <div class="d-flex align-items-center justify-content-start mb-1">
-                <a class="btn  btn-primary" href="./check_batch.php">Lecture Timetables</a>
-                <a class="btn  btn-primary ms-4" href="">Batch Timetables</a>
-                <a class="btn  btn-primary ms-4" href="">Hall Timetables</a>
+                <a class="btn  btn-primary" href="timetable_lecture.php">Lecture Timetables</a>
+                <a class="btn  btn-primary ms-4" href="timetable_batch.php">Batch Timetables</a>
+                <a class="btn  btn-primary ms-4" href="timetable_hall.php">Hall Timetables</a>
             </div>
             
         </div>
