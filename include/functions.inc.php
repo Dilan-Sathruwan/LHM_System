@@ -1,6 +1,6 @@
 <?php
 function emptyInputSignup($fName, $lName, $email, $mNumber, $address, $pwd, $pwdRepeat){
-    $result;
+    $result= null;
     if(empty($fName) || empty($lName) || empty($email) || empty($mNumber) || empty($address) || empty($pwd) || empty($pwdRepeat)){
         $result= true;
     } else {
@@ -10,7 +10,7 @@ function emptyInputSignup($fName, $lName, $email, $mNumber, $address, $pwd, $pwd
 }
 
 function invalidEmail($email){
-    $result;
+    $result= null;
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result= true;
     } else {
@@ -20,7 +20,7 @@ function invalidEmail($email){
 }
 
 function pwdMatch($pwd, $pwdRepeat){
-    $result;
+    $result= null;
     if($pwd !== $pwdRepeat){
         $result= true;
     } else {
@@ -37,7 +37,7 @@ function emailExists($conn, $email){
         exit();
     }
     mysqli_stmt_bind_param($stmt,"s", $email); 
-    mtsqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt);
     $resultData= mysqli_stmt_get_result($stmt);
 
     if($row = mysqli_fetch_assoc($resultData)){
@@ -49,7 +49,7 @@ function emailExists($conn, $email){
     mysqli_stmt_close($stmt);
 }
 
-function createUserLecturer($conn, $fName, $lName, $email, $mNumber, $address, $pwd){
+function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd){
     $sql= "INSERT INTO lecturers (firstName, lastName, email, mobile_no, address, password) VALUES(?,?,?,?,?,?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -65,7 +65,7 @@ function createUserLecturer($conn, $fName, $lName, $email, $mNumber, $address, $
 }
 
 function emptyInputLogin($email, $pwd){
-    $result;
+    $result= null;
     if(empty($email) || empty($pwd)){
         $result= true;
     } else {
@@ -94,3 +94,5 @@ function LoginUser($conn, $email, $pwd){
         exit();
     }
 }
+
+
