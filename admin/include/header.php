@@ -35,6 +35,7 @@ include "include/db_connection.inc.php";
     <!-- Template Stylesheet -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/adminstyle.css">
+    
 </head>
 
 <body class="back-colors">

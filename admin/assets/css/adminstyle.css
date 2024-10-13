@@ -38,3 +38,57 @@
     opacity: 1;
     transform: translateX(-50%) translateY(0); /* Move down to its original position */
 }
+
+
+
+
+/* Time table respoonsive css list */
+.timetable-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.timetable-table th,
+.timetable-table td {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+}
+
+.timetable-table th {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.timetable-table td {
+    height: 100px;
+    transition: background-color 0.3s ease;
+}
+
+.timetable-table td:hover {
+    background-color: #e9ecef;
+}
+
+.interval-label {
+    background-color: #ffc107;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .timetable-table {
+        font-size: 12px;
+    }
+
+    .timetable-table td {
+        height: 60px;
+    }
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}

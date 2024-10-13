@@ -13,12 +13,14 @@ if (isset($_GET['department_id'])) {
     $stmt->execute();
 
     $semesters = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo "<option selected value=''>Select your batch</option>";
+
     if (count($semesters) > 0) {
         foreach ($semesters as $semester) {
             echo "<option value='" . $semester['id'] . "'>" . $semester['batch_name'] . "</option>";
         }
     } else {
-        echo "<option value=''>No Semesters Available</option>";
+        echo "<option value=''>No batch Available</option>";
     }
 }
 

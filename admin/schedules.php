@@ -22,8 +22,8 @@
 
                         <div class="col-12">
                             <label for="inputlec" class="form-label">Lecturers</label>
-                            <select id="inputlec" class="form-select" name="lecturers">
-                                <option selected>Select lecturers</option>
+                            <select id="inputlec" class="form-select" name="lecturers" required>
+                                <option selected value="">Select lecturers</option>
                                 <?php
                                 $stmt = $conn->query("SELECT id, username FROM lecturers");
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -35,7 +35,7 @@
                         <div class="col-12">
                             <label for="inputdept" class="form-label">Department</label>
                             <select id="inputdept" class="form-select" name="dept" onchange="fetchSemesters(this.value)" required>
-                                <option selected>Choose...</option>
+                                <option selected value="">Choose...</option>
                                 <?php
                                 $stmt = $conn->query("SELECT id, department_name FROM departments");
                                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -61,7 +61,7 @@
                         <div class="col-12">
                             <label for="inputsub" class="form-label">Subject</label>
                             <select id="inputsub" class="form-select" name="subjects" required>
-                                <option value="">Select Subject</option>
+                                <option selected value="">Select Subject</option>
                                 <!-- Subjects will be loaded dynamically -->
                             </select>
                         </div>

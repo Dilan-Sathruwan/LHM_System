@@ -21,6 +21,9 @@ if (isset($_GET['department_id']) && isset($_GET['batch_id'])) {
     $stmt->execute();
 
     $subjects = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo "<option selected value=''>Select your subject</option>";
+    
     if (count($subjects) > 0) {
         foreach ($subjects as $subject) {
             echo "<option value='" . $subject['id'] . "'>" . $subject['subject_name'] . "</option>";
