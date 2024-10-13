@@ -1,279 +1,85 @@
 <?php include './include/header.php'; ?>
+<?php
+
+try {
+    // Query total students
+    $studentQuery = $conn->query("SELECT COUNT(*) as total_students FROM students");
+    $total_students = $studentQuery->fetch(PDO::FETCH_ASSOC)['total_students'];
+
+    // Query total lecturers
+    $lecturerQuery = $conn->query("SELECT COUNT(*) as total_lecturers FROM lecturers");
+    $total_lecturers = $lecturerQuery->fetch(PDO::FETCH_ASSOC)['total_lecturers'];
+
+    // Query total subjects
+    $subjectQuery = $conn->query("SELECT COUNT(*) as total_subjects FROM subjects");
+    $total_subjects = $subjectQuery->fetch(PDO::FETCH_ASSOC)['total_subjects'];
+
+    // Query total lecture halls
+    $hallQuery = $conn->query("SELECT COUNT(*) as total_halls FROM lecture_halls");
+    $total_halls = $hallQuery->fetch(PDO::FETCH_ASSOC)['total_halls'];
+
+
+
+    // Query to get department names and number of students in each department
+    $query = "
+     SELECT departments.department_name, COUNT(students.id) as student_count 
+     FROM departments 
+     LEFT JOIN students ON departments.id = students.department_id
+     GROUP BY departments.department_name";
+    $stmt = $conn->query($query);
+    $departments = [];
+    $student_counts = [];
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $departments[] = $row['department_name'];
+        $student_counts[] = $row['student_count'];
+    }
+
+
+// notyet!!!!!!!!!!!!!!!!!!!!!!
+    $query1 = "
+      SELECT b.batch_year, d.dept_code, COUNT(s.id) AS student_count
+        FROM batches b
+        JOIN students s ON s.batch_id = b.id
+        JOIN departments d ON s.department_id = d.id
+        WHERE s.batch_id IS NOT NULL
+        GROUP BY b.batch_year, d.dept_code
+        ORDER BY b.batch_year ASC";
+    $stmt1 = $conn->query($query1);
+
+    $batch_years = [];
+    $department_data = [];
+
+    // Organize data by batch year and department code
+    while ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+        $batch_year = $row['batch_year'];
+        $department_code = $row['dept_code'];
+        $student_count = $row['student_count'];
+
+        // Populate the data for the chart
+        if (!isset($batch_years[$batch_year])) {
+            $batch_years[$batch_year] = $batch_year;
+        }
+
+        if (!isset($department_data[$department_code])) {
+            $department_data[$department_code] = [];
+        }
+
+        $department_data[$department_code][] = $student_count;
+    }
+} catch (PDOException $e) {
+    echo "Database connection failed: " . $e->getMessage();
+}
+?>
+
+
+
 
 <!-- Content Start -->
 <div class="content">
     <!-- Navbar Start -->
     <?php include './include/navbar.php'; ?>
     <!-- Navbar End -->
-
-
-
-    <!-- students view Modal model start-->
-    <div class="modal fade" id="studentView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Lecture profile</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- type here -->
-
-                    <div class="container bg-primary">
-                        <div class="row ">
-                            <div class="justify-content-md-center ">
-                                <div class="card my-3 bg-primary">
-
-                                    <form id="myForm1" class=" card-body cardbody-color p-lg-2 ">
-
-                                        <div class=" row g-3">
-
-                                            <div class="text-center">
-                                                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
-                                                    class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-                                                    width="200px" alt="profile">
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label for="username" class="form-label">Course Name</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder=" " readonly>
-                                                    <div class="invalid-feedback">
-                                                        Your username is required.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Student Index Number</label>
-                                                <input type="text" class="form-control" id="Lecture Name" placeholder=""
-                                                    value="" readonly>
-                                                <div class="invalid-feedback">
-                                                    Valid Student name is required.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label for="username" class="form-label">Student Name</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" id="username"
-                                                        placeholder="Username" readonly>
-                                                    <div class="invalid-feedback">
-                                                        Your username is required.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="email" class="form-label">Email </label>
-                                                <input type="email" class="form-control" id="email" placeholder=" "
-                                                    readonly>
-                                                <div class="invalid-feedback">
-                                                    Please enter a valid email address.
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-6">
-                                                <label for="number" class="form-label">Mobile Number</label>
-                                                <input type="number" class="form-control" id="inputnumber">
-                                                <div class="invalid-feedback" readonly>
-                                                    Valid Mobile Number is required.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label for="address" class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="address"
-                                                    placeholder="1234, Main St,kegalle" readonly>
-                                                <div class="invalid-feedback">
-                                                    Please enter your address.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="Acadamy year" class="form-label">Acadamy year</label>
-                                                <select class="form-select" id="lecturerole" disabled readonly>
-                                                    <option value=""></option>
-                                                    <option>1 year</option>
-                                                    <option>2 year</option>
-                                                    <option>3 year</option>
-                                                    <option>4 year</option>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid year
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="Acadamy semester" class="form-label">Acadamy
-                                                    semester</label>
-                                                <select class="form-select" id="lecturerole" disabled readonly>
-                                                    <option value=""></option>
-                                                    <option>1st semester</option>
-                                                    <option>2nd semester</option>
-                                                    <option>3nd semester</option>
-                                                    <option>4nd semester</option>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid Semester
-                                                </div>
-                                            </div>
-
-
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">About
-                                                    Lecture</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                    disabled readonly></textarea>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" form="myFormS1" class="btn btn-primary" onclick="printForm('myForm1')"><i
-                            class="bi bi-printer"></i> print
-                    </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- student view Modal end -->
-
-
-    <!-- Lecture view Modal model start-->
-    <div class="modal fade" id="LectureView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Lecture profile</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- type here -->
-
-                    <div class="container bg-primary">
-                        <div class="row ">
-                            <div class="justify-content-md-center ">
-                                <div class="card my-3 bg-primary">
-
-                                    <form id="myForm2" class=" card-body cardbody-color p-lg-2 ">
-
-                                        <div class=" row g-3">
-
-                                            <div class="text-center">
-                                                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
-                                                    class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-                                                    width="200px" alt="profile">
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="firstName" class="form-label">Lecture Name</label>
-                                                <input type="text" class="form-control" id="Lecture Name" placeholder=""
-                                                    value="" readonly>
-                                                <div class="invalid-feedback">
-                                                    Valid Lecture name is required.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="password" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="inputPassword3"
-                                                    readonly>
-                                                <div class="invalid-feedback">
-                                                    Valid password is required.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label for="username" class="form-label">Username</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" id="username" readonly>
-                                                    <div class="invalid-feedback">
-                                                        Your username is required.
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label for="email" class="form-label">Email </label>
-                                                <input type="email" class="form-control" id="email" readonly>
-                                                <div class="invalid-feedback">
-                                                    Please enter a valid email address.
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-sm-6">
-                                                <label for="number" class="form-label">Mobile Number</label>
-                                                <input type="number" class="form-control" id="inputnumber" readonly>
-                                                <div class="invalid-feedback">
-                                                    Valid Mobile Number is required.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <label for="address" class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="address"
-                                                    placeholder="1234, Main St,kegalle" readonly>
-                                                <div class="invalid-feedback">
-                                                    Please enter your address.
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <label for="Lecturerole" class="form-label">Lecture Roles</label>
-                                                <select class="form-select" id="lecturerole" disabled readonly>
-                                                    <option value="">Choose...</option>
-                                                    <option>Part time Lecture</option>
-                                                    <option>Visiting Lecture</option>
-                                                    <option>Permernet Lecture</option>
-                                                </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid Roles.
-                                                </div>
-                                            </div>
-
-
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">About
-                                                    Lecture</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
-                                                    readonly></textarea>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" form="myForm2" class="btn btn-primary" onclick="printForm('myForm2')"><i
-                            class="bi bi-printer"></i> print
-                    </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Lecture view Modal end -->
-
-
-
-
 
 
     <!-- Total card Start -->
@@ -284,7 +90,7 @@
                     <i class="fa fa-users fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Total Students</p>
-                        <h6 class="mb-0">404</h6>
+                        <h6 class="mb-0"><?= $total_students ?></h6>
                     </div>
                 </div>
             </div>
@@ -293,7 +99,7 @@
                     <i class="fa fa-user fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Total Lectures</p>
-                        <h6 class="mb-0">21</h6>
+                        <h6 class="mb-0"><?= $total_lecturers ?></h6>
                     </div>
                 </div>
             </div>
@@ -301,8 +107,8 @@
                 <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                     <i class="fa fa-book fa-3x text-primary"></i>
                     <div class="ms-3">
-                        <p class="mb-2">Today Subject</p>
-                        <h6 class="mb-0">23</h6>
+                        <p class="mb-2">Total Subject</p>
+                        <h6 class="mb-0"><?= $total_subjects ?></h6>
                     </div>
                 </div>
             </div>
@@ -311,13 +117,118 @@
                     <i class="fa fa-building fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Total Lecture Halls</p>
-                        <h6 class="mb-0">45</h6>
+                        <h6 class="mb-0"><?= $total_halls ?></h6>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Total card End -->
+
+    <!-- Chart Start -->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <!-- HTML Structure for the Chart -->
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Student Count per Department</h6>
+                    <canvas id="bar-chart"></canvas>
+                </div>
+            </div>
+            <!-- HTML Structure for the Chart -->
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Multiple Bar Chart - Students per Department by Year</h6>
+                    <canvas id="batch_students_of_year"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Chart End -->
+
+
+    <!-- ##################batch year department student count!!!!!!!!!!!!!!not yet############## -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx1 = document.getElementById("batch_students_of_year").getContext("2d");
+
+            // Fetch the batch years and department data from PHP
+            var labels = <?php echo json_encode(array_values($batch_years)); ?>;
+            var datasets = [];
+            var department_data = <?php echo json_encode($department_data); ?>;
+
+            // Define some colors for the chart
+            var colors = [
+                "rgba(0, 156, 255, .7)",
+                "rgba(0, 156, 255, .5)",
+                "rgba(0, 156, 255, .3)"
+            ];
+
+            var i = 0;
+
+            // Prepare datasets for each department code
+            for (var department_code in department_data) {
+                datasets.push({
+                    label: department_code, // Department code as label
+                    data: department_data[department_code], // Student count data
+                    backgroundColor: colors[i % colors.length]
+                });
+                i++;
+            }
+
+            // Generate the chart
+            var myChart1 = new Chart(ctx1, {
+                type: "bar",
+                data: {
+                    labels: labels, // Batch years as labels
+                    datasets: datasets // Department codes as dataset labels with student counts
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true // Ensure the y-axis starts at 0
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
+
+    <!-- ##################department student count############## -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx4 = document.getElementById("bar-chart").getContext("2d");
+
+            // Fetching the PHP data into JavaScript
+            var labels = <?php echo json_encode($departments); ?>;
+            var data = <?php echo json_encode($student_counts); ?>;
+
+            var myChart4 = new Chart(ctx4, {
+                type: "bar",
+                data: {
+                    labels: labels, // Department names
+                    datasets: [{
+                        label: 'Number of Students',
+                        backgroundColor: [
+                            "rgba(0, 156, 255, .7)",
+                            "rgba(0, 156, 255, .6)",
+                            "rgba(0, 156, 255, .5)",
+                            "rgba(0, 156, 255, .4)",
+                            "rgba(0, 156, 255, .3)"
+                        ],
+                        data: data // Number of students per department
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        });
+    </script>
 
 
     <!-- Recent Sales Start -->
