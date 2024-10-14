@@ -1,98 +1,124 @@
 <?php
-function emptyInputSignup($fName, $lName, $email, $mNumber, $address, $pwd, $pwdRepeat){
-    $result= null;
-    if(empty($fName) || empty($lName) || empty($email) || empty($mNumber) || empty($address) || empty($pwd) || empty($pwdRepeat)){
-        $result= true;
-    } else {
-        $result= false;
-    }
-    return $result;
+
+// Function to check for empty inputs in the signup form
+function emptyInputSignup($fName, $lName, $email, $mNumber, $address, $pwd, $pwdRepeat) {
+    return empty($fName) || empty($lName) || empty($email) || empty($mNumber) || empty($address) || empty($pwd) || empty($pwdRepeat);
 }
 
-function invalidEmail($email){
-    $result= null;
-    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-        $result= true;
-    } else {
-        $result= false;
-    }
-    return $result;
+// Function to check if passwords match
+function pwdMatch($pwd, $pwdRepeat) {
+    return $pwd !== $pwdRepeat;
 }
 
-function pwdMatch($pwd, $pwdRepeat){
-    $result= null;
-    if($pwd !== $pwdRepeat){
-        $result= true;
-    } else {
-        $result= false;
-    }
-    return $result;
+// Function to check if the email is valid
+function invalidEmail($email) {
+    return !filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function emailExists($conn, $email){
-    $sql = "SELECT * FROM lecturers WHERE email= ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
+// Function to check if the email already exists in the database
+function emailExists($conn, $email) {
+    $sql = "SELECT * FROM lecturers WHERE email = :email";
+    $stmt = $conn->prepare($sql);
+    
+    if (!$stmt) {
         header("Location:../register.php?error=stmtFailed");
         exit();
     }
-    mysqli_stmt_bind_param($stmt,"s", $email); 
-    mysqli_stmt_execute($stmt);
-    $resultData= mysqli_stmt_get_result($stmt);
 
-    if($row = mysqli_fetch_assoc($resultData)){
-        return $row;
-    } else{
-        return false;
+    // Bind the email parameter and execute the query
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+
+    // Fetch the result from the database
+    $resultData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($resultData) {
+        return $resultData; // Return the row if the email exists
+    } else {
+        return false; // No user found with that email
     }
-
-    mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd){
-    $sql= "INSERT INTO lecturers (firstName, lastName, email, mobile_no, address, password) VALUES(?,?,?,?,?,?);";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt, $sql)){
+// Function to create a new user in the database
+function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd) {
+    // Check if the email already exists
+    $emailExists = emailExists($conn, $email);
+    
+    if ($emailExists) {
+        // Redirect with an error if the email already exists
+        header("Location:../register.php?error=emailTaken");
+        exit();
+    }
+
+    // Insert new user into the database
+    $sql = "INSERT INTO lecturers (firstName, lastName, email, mobile_no, address, password) 
+            VALUES (:firstName, :lastName, :email, :mobile_no, :address, :password)";
+    $stmt = $conn->prepare($sql);
+
+    if (!$stmt) {
         header("Location:../register.php?error=stmtFailed");
         exit();
     }
+
+    // Hash the password
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-    mysqli_stmt_bind_param($stmt, "ssssss", $fName, $lName, $email, $mNumber, $address, $hashedPwd);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    header("Location:../login.php?error=none");
-    exit();
+
+    // Bind parameters
+    $stmt->bindParam(':firstName', $fName);
+    $stmt->bindParam(':lastName', $lName);
+    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':mobile_no', $mNumber);
+    $stmt->bindParam(':address', $address);
+    $stmt->bindParam(':password', $hashedPwd);
+
+    // Execute the statement
+    try {
+        $stmt->execute();
+        // Redirect to login page after successful registration
+        header("Location:../login.php?error=none");
+        exit();
+    } catch (PDOException $e) {
+        // Handle duplicate entry error
+        if ($e->getCode() == 23000) {
+            header("Location:../register.php?error=usernameTaken");
+            exit();
+        }
+        throw $e; // For other errors, throw the exception
+    }
 }
 
-function emptyInputLogin($email, $pwd){
-    $result= null;
-    if(empty($email) || empty($pwd)){
-        $result= true;
+
+// Function to check for empty inputs in the login form
+function emptyInputLogin($email, $pwd) {
+    return empty($email) || empty($pwd);
+}
+
+// Function to log in a user
+function loginUser($conn, $email, $pwd) {
+    // Check if the email exists in the database
+    $emailExists = emailExists($conn, $email);
+
+    if (!$emailExists) {
+        header("Location:../login.php?error=wrongLogin");
+        exit();
+    }
+
+    // Verify the entered password with the hashed password from the database
+    $pwdHashed = $emailExists['password'];
+    $checkPwd = password_verify($pwd, $pwdHashed);
+
+    if (!$checkPwd) {
+        header("Location:../login.php?error=wrongLogin");
+        exit();
     } else {
-        $result= false;
-    }
-    return $result;
-}
-
-function LoginUser($conn, $email, $pwd){
-    $emailExists= emailExists($conn, $email);
-    if($emailExists=== false){
-        header("location:../register.php?error=wrongLogin");
-        exit();
-    }
-
-    $pwdHashed = $emailExists["password"];
-    $checkpwd = password_verify($pwd, $pwdHashed);
-
-    if($checkpwd=== false){
-        header("Location:../register.php?error=wrongLogin");
-        exit();
-    } else if ($checkpwd=== true){
+        // Start a new session and store the user ID
         session_start();
         $_SESSION["id"] = $emailExists["id"];
-        header("Location:../#");
+        $_SESSION["email"] = $emailExists["email"];
+        
+        // Redirect to the homepage or dashboard
+        header("Location:../index.php");
         exit();
     }
 }
-
-
+?>

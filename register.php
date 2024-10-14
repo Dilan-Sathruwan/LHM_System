@@ -10,7 +10,7 @@
 <body>
     <div class="container" id="signup" >
       <h1 class="form-title">Register</h1>
-      <form method="post" action="include/singup.inc.php">
+      <form method="post" action="include/signup.inc.php">
         <div class="input-group">
            <i class="fas fa-user"></i>
            <input type="text" name="fName" id="fName" placeholder="First Name" required>
