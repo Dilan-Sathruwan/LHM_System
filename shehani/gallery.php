@@ -13,15 +13,17 @@
         <!-- Title Section -->
         <div class="card text-center bg-dark border-light">
             <div class="card-body">
-                <h2 class="card-title">HNDIT</h2>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2 class="card-title">Higher National Diploma In Information Technology(HNDIT)</h2>
+                <p class="card-text">The Higher National Diploma in Information Technology (HNDIT) program at the Sri Lanka Institute of Advanced Technological Education (SLIATE) was developed and commenced in the year 2000 with the objective of producing the middle level IT professional required for the new millennium.
+
+Course Duration: 2 ½ years</p>
             </div>
         </div>
 
         <!-- Semester 1 Subjects -->
         <div class="card mt-4 bg-dark border-light">
             <div class="card-header text-center">
-                Semester 1 Subjects
+                 1st Year Semester 1 Subjects
             </div>
             <table class="table table-dark table-bordered text-center">
                 <thead>
@@ -34,35 +36,35 @@
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>(HNDIT 3032) Data Structure And Algorithm</td>
+                        <td>(HNDIT 1012) Visual Application Programming</td>
                         <td>Ms.W.M.D.Wepathana</td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <th>(HNDIT 3012) Object Oriented Programming</th>
+                        <th>(HNDIT 1022) Web Designing</th>
                         <th>Mr.R.K.D.Gamlath</th>
                     </tr>
                     <tr>
                         <td>3</td>
-                        <th>(HNDIT 3052) Operating System</th>
+                        <th>(HNDIT 1032) Computer And Network System</th>
                          <th>Ms.R.P.Anoosha </th>
                     </tr>
                     <tr>
                          <td>4</td>
-                         <th>(HNDIT 3022) Web Programming</th>
-                         <th>Mr.R.K.D.Gamlath</th>
+                         <th>(HNDIT 1042)Information management and Information System</th>
+                         <th>Ms.K.l.K.K.Rathnasiri</th>
                     </tr>
                     <tr>
                           <td>5</td>
-                          <th>(HNDIT 3062) Information and Computer Security</th>
-                          <th>Ms.K.l.K.K.Rathnasiri</th>
+                          <th>(HNDIT 1062) Communication Skill</th>
+                          <th>T.T.M.Kularathne</th>
 
                     </tr>
                     <tr>
 
                           <td>6</td>
-                          <th>(HNDIT 3072) Statics For It</th>
-                          <th>Ms.K.L.M.Udani</th>
+                          <th>(HNDIT 2012)Fundermental of Programming</th>
+                          <th>Ms.W.M.D.Wepathana</th>
                     </tr>
 
 
@@ -78,14 +80,14 @@
         <!-- Semester 2 Subjects -->
         <div class="card mt-4 bg-dark border-light">
             <div class="card-header text-center">
-                Semester 2 Subjects
+               1st Year Semester 2 Subjects
             </div>
             <table class="table table-dark table-bordered text-center">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Subject</th>
-                        <th>lecturer</th>
+                        <th>Lecturer</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -131,28 +133,4 @@
 </body>
 </html>
 
-CSS (styles.css):
 
-body {
-    background-color: #212529;
-}
-
-.card {
-    background-color: #343a40;
-    border-color: #6c757d;
-}
-
-.table-dark th, .table-dark td {
-    color: #fff;
-}
-
-Explanation:
-
-HTML: The structure consists of a title section (HNDIT with lorem ipsum text) and two tables for semester subjects.
-
-CSS: The custom CSS ensures a dark theme that matches the image’s design. The bg-dark and text-light classes are used from Bootstrap for consistency.
-
-Bootstrap: Bootstrap is used for responsive design, table styling, and layout.
-
-
-Let me know if you'd like any specific adjustments!
