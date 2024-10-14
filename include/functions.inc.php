@@ -39,9 +39,7 @@ function emailExists($conn, $email) {
     }
 }
 
-// Function to create a new user in the database
 function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd) {
-    // Check if the email already exists
     $emailExists = emailExists($conn, $email);
     
     if ($emailExists) {
@@ -50,7 +48,6 @@ function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd) {
         exit();
     }
 
-    // Insert new user into the database
     $sql = "INSERT INTO lecturers (firstName, lastName, email, mobile_no, address, password) 
             VALUES (:firstName, :lastName, :email, :mobile_no, :address, :password)";
     $stmt = $conn->prepare($sql);
@@ -63,7 +60,6 @@ function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd) {
     // Hash the password
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
-    // Bind parameters
     $stmt->bindParam(':firstName', $fName);
     $stmt->bindParam(':lastName', $lName);
     $stmt->bindParam(':email', $email);
@@ -71,11 +67,9 @@ function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd) {
     $stmt->bindParam(':address', $address);
     $stmt->bindParam(':password', $hashedPwd);
 
-    // Execute the statement
     try {
         $stmt->execute();
-        // Redirect to login page after successful registration
-        header("Location:../login.php?error=none");
+        header("Location:../login.php?error=registaion sucsessfully");
         exit();
     } catch (PDOException $e) {
         // Handle duplicate entry error
@@ -83,15 +77,18 @@ function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd) {
             header("Location:../register.php?error=usernameTaken");
             exit();
         }
-        throw $e; // For other errors, throw the exception
+        throw $e;
     }
 }
 
 
-// Function to check for empty inputs in the login form
+
+
 function emptyInputLogin($email, $pwd) {
     return empty($email) || empty($pwd);
 }
+
+
 
 // Function to log in a user
 function loginUser($conn, $email, $pwd) {
