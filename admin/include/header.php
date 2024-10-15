@@ -1,13 +1,5 @@
 <?php
 session_start(); // Start the session
-
-// Check if the user is logged in
-if (isset($_SESSION['user_id'])) {
-    echo "Welcome, " . $_SESSION['user_name']; // Display the username
-} else {
-    echo "Please log in.";
-}
-
 ?>
 <?php
 include "include/db_connection.inc.php";
