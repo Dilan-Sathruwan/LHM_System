@@ -69,7 +69,7 @@ function createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd) {
 
     try {
         $stmt->execute();
-        header("Location:../login.php?error=registaion sucsessfully");
+        header("Location:../sign_in.php?error=registaion sucsessfully");
         exit();
     } catch (PDOException $e) {
         // Handle duplicate entry error
