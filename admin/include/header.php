@@ -1,8 +1,12 @@
 <?php
-session_start(); // Start the session
-?>
-<?php
+session_start();
 include "include/db_connection.inc.php";
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location:../signin.php"); 
+    exit();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +17,6 @@ include "include/db_connection.inc.php";
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
-
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,7 +66,7 @@ include "include/db_connection.inc.php";
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3 back-colors">
             <nav class="navbar navbar-light bg-transparent">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="#" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -75,10 +78,10 @@ include "include/db_connection.inc.php";
                         </div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">My Admin</h6>
-                        <span><?php if (isset($_SESSION['user_id'])) {
+                        <h6 class="mb-0"><?php if (isset($_SESSION['user_id'])) {
                                     echo "Welcome, " . $_SESSION['user_name']; // Display the username
-                                } ?></span>
+                                } ?></h6>
+                        <span>Active</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
