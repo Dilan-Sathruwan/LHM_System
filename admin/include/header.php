@@ -1,4 +1,15 @@
 <?php
+session_start(); // Start the session
+
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    echo "Welcome, " . $_SESSION['user_name']; // Display the username
+} else {
+    echo "Please log in.";
+}
+
+?>
+<?php
 include "include/db_connection.inc.php";
 ?>
 <!DOCTYPE html>
@@ -35,7 +46,7 @@ include "include/db_connection.inc.php";
     <!-- Template Stylesheet -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/adminstyle.css">
-    
+
 </head>
 
 <body class="back-colors">
@@ -73,7 +84,9 @@ include "include/db_connection.inc.php";
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">My Admin</h6>
-                        <span>Admin</span>
+                        <span><?php if (isset($_SESSION['user_id'])) {
+                                    echo "Welcome, " . $_SESSION['user_name']; // Display the username
+                                } ?></span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
