@@ -33,44 +33,26 @@ try {
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $departments[] = $row['department_name'];
         $student_counts[] = $row['student_count'];
-    }
 
 
-// notyet!!!!!!!!!!!!!!!!!!!!!!
+        // SQL query to get department names and number of students
     $query1 = "
-      SELECT b.batch_year, d.dept_code, COUNT(s.id) AS student_count
-        FROM batches b
-        JOIN students s ON s.batch_id = b.id
-        JOIN departments d ON s.department_id = d.id
-        WHERE s.batch_id IS NOT NULL
-        GROUP BY b.batch_year, d.dept_code
-        ORDER BY b.batch_year ASC";
+    SELECT d.department_name, COUNT(s.id) AS student_count1
+    FROM departments d
+    LEFT JOIN students s ON d.id = s.department_id
+    GROUP BY d.department_name
+    ";
+    
+    // Execute the query
     $stmt1 = $conn->query($query1);
-
-    $batch_years = [];
-    $department_data = [];
-
-    // Organize data by batch year and department code
-    while ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
-        $batch_year = $row['batch_year'];
-        $department_code = $row['dept_code'];
-        $student_count = $row['student_count'];
-
-        // Populate the data for the chart
-        if (!isset($batch_years[$batch_year])) {
-            $batch_years[$batch_year] = $batch_year;
-        }
-
-        if (!isset($department_data[$department_code])) {
-            $department_data[$department_code] = [];
-        }
-
-        $department_data[$department_code][] = $student_count;
+    $department = $stmt1->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (PDOException $e) {
     echo "Database connection failed: " . $e->getMessage();
 }
 ?>
+
+
 
 
 
@@ -135,11 +117,32 @@ try {
                     <canvas id="bar-chart"></canvas>
                 </div>
             </div>
-            <!-- HTML Structure for the Chart -->
+            <!-- HTML to display the table -->
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Multiple Bar Chart - Students per Department by Year</h6>
-                    <canvas id="batch_students_of_year"></canvas>
+                    <h6 class="mb-4">All Students Of Departments</h6>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Department Name</th>
+                                <th scope="col">Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($department)): ?>
+                                <?php foreach ($department as $department1): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($department1['department_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($department1['student_count1']); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="2">No data available</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -147,88 +150,6 @@ try {
     <!-- Chart End -->
 
 
-    <!-- ##################batch year department student count!!!!!!!!!!!!!!not yet############## -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var ctx1 = document.getElementById("batch_students_of_year").getContext("2d");
-
-            // Fetch the batch years and department data from PHP
-            var labels = <?php echo json_encode(array_values($batch_years)); ?>;
-            var datasets = [];
-            var department_data = <?php echo json_encode($department_data); ?>;
-
-            // Define some colors for the chart
-            var colors = [
-                "rgba(0, 156, 255, .7)",
-                "rgba(0, 156, 255, .5)",
-                "rgba(0, 156, 255, .3)"
-            ];
-
-            var i = 0;
-
-            // Prepare datasets for each department code
-            for (var department_code in department_data) {
-                datasets.push({
-                    label: department_code, // Department code as label
-                    data: department_data[department_code], // Student count data
-                    backgroundColor: colors[i % colors.length]
-                });
-                i++;
-            }
-
-            // Generate the chart
-            var myChart1 = new Chart(ctx1, {
-                type: "bar",
-                data: {
-                    labels: labels, // Batch years as labels
-                    datasets: datasets // Department codes as dataset labels with student counts
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true // Ensure the y-axis starts at 0
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-
-
-
-
-    <!-- ##################department student count############## -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var ctx4 = document.getElementById("bar-chart").getContext("2d");
-
-            // Fetching the PHP data into JavaScript
-            var labels = <?php echo json_encode($departments); ?>;
-            var data = <?php echo json_encode($student_counts); ?>;
-
-            var myChart4 = new Chart(ctx4, {
-                type: "bar",
-                data: {
-                    labels: labels, // Department names
-                    datasets: [{
-                        label: 'Number of Students',
-                        backgroundColor: [
-                            "rgba(0, 156, 255, .7)",
-                            "rgba(0, 156, 255, .6)",
-                            "rgba(0, 156, 255, .5)",
-                            "rgba(0, 156, 255, .4)",
-                            "rgba(0, 156, 255, .3)"
-                        ],
-                        data: data // Number of students per department
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
-        });
-    </script>
 
 
     <!-- Recent Sales Start -->
@@ -300,211 +221,39 @@ try {
     </div>
     <!-- Recent Sales End -->
 
-
-    <!-- data Student table Start -->
-    <div class="container-fluid pt-4 px-4">
-
-        <main id="" class="">
-
-            <section class="section">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <div class="card">
-                            <div class="card-body table-responsive">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h3 class="mb-0">Student Datatable</h3>
-
-                                </div>
-
-                                <hr>
-
-                                <!-- Table with stripped rows -->
-                                <table class="table datatable text-start align-middle table-bordered table-hover mb-0">
-                                    <thead>
-                                        <tr>
-
-                                            <th>Index Number</th>
-                                            <th>Student Name</th>
-                                            <th>Student Email</th>
-                                            <th>Address</th>
-                                            <th>Phone Number</th>
-                                            <th data-type="date" data-format="YYYY/DD/MM">Re. Date</th>
-                                            <th>View</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>KEG/V/0001</td>
-                                            <td>Dilan</td>
-                                            <td>dilan@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>012345</td>
-                                            <td>2024-2-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#studentView"><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0001</td>
-                                            <td>Dilan</td>
-                                            <td>dilan@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>012345</td>
-                                            <td>2024-2-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1" data-bs-toggle="modal"
-                                                    data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0003</td>
-                                            <td>shehani</td>
-                                            <td>shehanis@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>0123454</td>
-
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0004</td>
-                                            <td>ravindu</td>
-                                            <td>ravindu@gmail.com</td>
-                                            <td>kegalle</td>
-                                            <td>012345</td>
-
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-
-                                    </tbody>
-                                </table>
-                                <!-- End Table with stripped rows -->
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-        </main><!-- End #main -->
-    </div>
-    <!-- data table End -->
-
-    <hr>
-
-    <!-- data lectures table Start -->
-    <div class="container-fluid pt-4 px-4">
-
-        <main id="" class="">
-
-            <section class="section">
-                <div class="row">
-                    <div class="col-lg-12">
-
-                        <div class="card">
-                            <div class="card-body table-responsive">
-                                <div class="d-flex align-items-center justify-content-between mb-4">
-                                    <h3 class="mb-0">Lectures Datatable</h3>
-                                </div>
-
-                                <hr>
-
-                                <!-- Table with stripped rows -->
-                                <table class="table datatable text-start align-middle table-bordered table-hover mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Index Number</th>
-                                            <th>Lecture Name</th>
-                                            <th>Email</th>
-                                            <th>Phone Number</th>
-                                            <th>Roles</th>
-                                            <th data-type="date" data-format="YYYY/DD/MM">Re. Date</th>
-                                            <th>chekout</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>KEG/V/0001</td>
-                                            <td>Dilan</td>
-                                            <td>dilan@gmail.com</td>
-                                            <td>012345</td>
-                                            <th>permernat</th>
-                                            <td>2024-2-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="" data-bs-toggle="modal"
-                                                    data-bs-target="#LectureView"><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0002</td>
-                                            <td>tharuka</td>
-                                            <td>tharuka@gmail.com</td>
-                                            <td>012345</td>
-                                            <th>visiting</th>
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class="m-1"><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0003</td>
-                                            <td>shehani</td>
-                                            <td>shehanis@gmail.com</td>
-                                            <td>0123454</td>
-                                            <th>visiting</th>
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>KEG/V/0004</td>
-                                            <td>ravindu</td>
-                                            <td>ravindu@gmail.com</td>
-                                            <td>012345</td>
-                                            <th>visiting</th>
-                                            <td>2024-6-3</td>
-                                            <td class="d-flex align-items-lg-center justify-content-around">
-                                                <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                            </td>
-                                        </tr>
-
-
-                                    </tbody>
-                                </table>
-                                <!-- End Table with stripped rows -->
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-        </main><!-- End #main -->
-    </div>
-    <!-- data table End -->
-
-
-
-
-
 </div>
 <!-- Content End -->
 
 <?php include './include/footer.php'; ?>
+
+ <!-- ##################department student count############## -->
+ <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ctx4 = document.getElementById("bar-chart").getContext("2d");
+
+            // Fetching the PHP data into JavaScript
+            var labels = <?php echo json_encode($departments); ?>;
+            var data = <?php echo json_encode($student_counts); ?>;
+
+            var myChart4 = new Chart(ctx4, {
+                type: "bar",
+                data: {
+                    labels: labels, // Department names
+                    datasets: [{
+                        label: 'Number of Student',
+                        backgroundColor: [
+                            "rgba(0, 156, 255, .7)",
+                            "rgba(0, 156, 255, .6)",
+                            "rgba(0, 156, 255, .5)",
+                            "rgba(0, 156, 255, .4)",
+                            "rgba(0, 156, 255, .3)"
+                        ],
+                        data: data // Number of students per department
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        });
+    </script>
