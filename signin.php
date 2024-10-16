@@ -93,20 +93,20 @@
 
                                     <h3>Student Login</h3>
                                 </div>
-                                <input type="hidden" name="role" value="student">
+                                <!-- <input type="hidden" name="role" value="student"> -->
                                 <div class="form-floating mb-3">
                                     <input type="email" name="email" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com">
+                                        placeholder="name@example.com" required>
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input type="password" name="password" class="form-control" id="floatingPassword"
-                                        placeholder="Password">
+                                        placeholder="Password" required>
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" >
                                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                                     </div>
 
@@ -130,15 +130,15 @@
 
                                     <h3>Lectures Sign In</h3>
                                 </div>
-                                <input type="hidden" name="role" value="lecturer">
+                                <!-- <input type="hidden" name="role" value="lecturer"> -->
                                 <div class="form-floating mb-3">
                                     <input type="email" name="email" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com">
+                                        placeholder="name@example.com " required>
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input type="password" name="password" class="form-control" id="floatingPassword"
-                                        placeholder="Password">
+                                        placeholder="Password" required>
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
@@ -170,12 +170,12 @@
                                 <!-- <input type="hidden" name="role" value="admin"> -->
                                 <div class="form-floating mb-3">
                                     <input type="email" name="email" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com">
+                                        placeholder="name@example.com" required>
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-4">
                                     <input type="password" name="password" class="form-control" id="floatingPassword"
-                                        placeholder="Password">
+                                        placeholder="Password" required>
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">

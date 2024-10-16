@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register & Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="./assets/css/register.css">
 </head>
 <body>
     <div class="container" id="signup" >
@@ -13,13 +13,13 @@
       <form method="post" action="include/signup.inc.php">
         <div class="input-group">
            <i class="fas fa-user"></i>
-           <input type="text" name="fName" id="fName" placeholder="First Name" required>
-           <label for="fname">First Name</label>
+           <input type="text" name="id_num" id="fName" placeholder="First Name" required>
+           <label for="fname">ID Number</label>
         </div>
         <div class="input-group">
             <i class="fas fa-user"></i>
-            <input type="text" name="lName" id="lName" placeholder="Last Name" required>
-            <label for="lName">Last Name</label>
+            <input type="text" name="Name" id="lName" placeholder="User Name" required>
+            <label for="lName">User Name</label>
         </div>
         <div class="input-group">
             <i class="fas fa-envelope"></i>

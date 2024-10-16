@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST["signUp"])) {
-    $fName = trim($_POST["fName"]);
-    $lName = trim($_POST["lName"]);
+    $id_num = trim($_POST["id_num"]);
+    $Name = trim($_POST["Name"]); 
     $email = trim($_POST["email"]);
     $mNumber = trim($_POST["mNumber"]);
     $address = trim($_POST["address"]);
@@ -9,11 +9,11 @@ if (isset($_POST["signUp"])) {
     $pwdRepeat = $_POST["pwdRepeat"];
 
     // Include necessary files
-    require_once 'dbh.inc.php';
-    require_once 'functions.inc.php';
+    require_once 'database.inc.php';
+    require_once 'fun.inc.php';
 
-    // Check for empty inputs
-    if (emptyInputSignup($fName, $lName, $email, $mNumber, $address, $pwd, $pwdRepeat)) {
+    // Check for empty inputs (corrected function arguments)
+    if (emptyInputSignup($id_num, $Name, $email, $mNumber, $address, $pwd, $pwdRepeat)) {
         header("Location:../register.php?error=emptyInput");
         exit();
     }
@@ -30,10 +30,11 @@ if (isset($_POST["signUp"])) {
         exit();
     }
 
-    // If all checks pass, create the user
-    createUser($conn, $fName, $lName, $email, $mNumber, $address, $pwd);
+    // If all checks pass, create the user (added $id_num to function call)
+    createUser($conn, $id_num, $Name, $email, $mNumber, $address, $pwd);
 } else {
     header("Location:../register.php");
     exit();
 }
 ?>
+
