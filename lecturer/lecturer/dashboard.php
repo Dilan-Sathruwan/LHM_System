@@ -158,7 +158,8 @@ include '../includes/lecturer_header.php';
             <div class="col-md-4 mb-4">
                 <div class="usercard">
                     <div class="ucard_pic mb-3">
-                        <img src="https://dilan-sathruwan.github.io/Project_Grapher_Website/About%20Us/Photos/Loku.jpg" alt="Profile Image" class="img-fluid rounded-circle" />
+                        <!-- <img src="https://dilan-sathruwan.github.io/Project_Grapher_Website/About%20Us/Photos/Loku.jpg" alt="Profile Image" class="img-fluid rounded-circle" /> -->
+                        <img src="../../admin/include/<?php echo htmlspecialchars($lecturer['image_path']); ?>" alt="Profile Image" class="img-fluid rounded-circle" />
                     </div>
                     <h2>Hello, <?php echo htmlspecialchars($lecturer['username']); ?></h2>
                 </div>

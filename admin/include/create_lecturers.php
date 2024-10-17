@@ -5,6 +5,7 @@ include 'function.inc.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     
+    $profile_image = filter_input(INPUT_POST, 'profile_image',  FILTER_SANITIZE_SPECIAL_CHARS);
     $index_num = filter_input(INPUT_POST, 'Index_num',  FILTER_SANITIZE_SPECIAL_CHARS);
     $username = filter_input(INPUT_POST, 'username',  FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -20,21 +21,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-    if(!empty($id)) {
-        //update lectures details
-        $result = lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
-    }else{
-         // Creating a new lecturer
-        $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
-    }
+    $file = $_FILES['profile_image'] ?? null; // Get the uploaded file
 
+    if (!empty($id)) {
+        // Update lecturer details
+        $imageUploadResult = uploadOrUpdateImage($conn, $file, $id); // Call your image upload function
+        $result = lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
+    } else {
+        // Create a new lecturer
+        $imageUploadResult = uploadOrUpdateImage($conn, $file);
+        $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about, $imageUploadResult);
+
+    }
     
 
-    // Display the result (success or error message)
-    // echo $result;
-    header("Location:../lectures.php?message=" . urlencode($result));
+    
+    header("Location:../lectures.php?message=" . urlencode($imageUploadResult));
 }
-
-// ,$target_file
 
 ?>

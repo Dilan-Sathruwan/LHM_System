@@ -26,7 +26,7 @@
                                 <div class="card my-1 bg-transparent">
 
                                     <form action="./include/create_lecturers.php" id="myForm" method="POST"
-                                        class="card-body cardbody-color p-lg-2">
+                                        class="card-body cardbody-color p-lg-2" enctype="multipart/form-data">
 
                                         <div class="row g-3">
 
@@ -36,6 +36,9 @@
                                                 <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                                                     width="200px" alt="profile">
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="file" name="profile_image" class="form-control" id="image_path">
                                             </div>
 
                                             <div class="col-sm-6">
@@ -143,109 +146,89 @@
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Lecture profile</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">View Lecture Profile</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- type here -->
+                    <!-- Form for viewing lecturer's details -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="justify-content-md-center">
+                                <div class="card my-3">
 
-                    <div class="container bg-primary">
-                        <div class="row ">
-                            <div class="justify-content-md-center ">
-                                <div class="card my-3 bg-primary">
+                                    <form id="myForm2" class="card-body cardbody-color p-lg-2">
 
-                                    <form id="myForm2" class=" card-body cardbody-color p-lg-2 ">
-
-                                        <div class=" row g-3">
-
+                                        <div class="row g-3">
+                                            <!-- Profile Image -->
                                             <div class="text-center">
                                                 <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
-                                                    width="200px" alt="profile">
+                                                    width="200px" alt="profile" id="view-profile-image">
                                             </div>
 
+                                            <!-- Lecture ID -->
                                             <div class="col-sm-6">
-                                                <label for=" " class="form-label">Lecture Id</label>
+                                                <label for="view-Index_num" class="form-label">Lecture Index Number</label>
                                                 <input type="text" class="form-control" id="view-Index_num" placeholder=""
-                                                    value="" readonly>
-                                                <div class="invalid-feedback">
-                                                    Valid Lecture name is required.
-                                                </div>
+                                                    readonly>
                                             </div>
 
+                                            <!-- Username -->
                                             <div class="col-12">
-                                                <label for=" " class="form-label">Username</label>
-                                                <div class="input-group has-validation">
-                                                    <input type="text" class="form-control" id="view-username" readonly>
-                                                    <div class="invalid-feedback">
-                                                        Your username is required.
-                                                    </div>
-                                                </div>
+                                                <label for="view-username" class="form-label">Username</label>
+                                                <input type="text" class="form-control" id="view-username" readonly>
                                             </div>
 
+                                            <!-- Email -->
                                             <div class="col-12">
-                                                <label for=" " class="form-label">Email </label>
+                                                <label for="view-email" class="form-label">Email</label>
                                                 <input type="email" class="form-control" id="view-email" readonly>
-                                                <div class="invalid-feedback">
-                                                    Please enter a valid email address.
-                                                </div>
                                             </div>
 
-
+                                            <!-- Mobile Number -->
                                             <div class="col-sm-6">
-                                                <label for=" " class="form-label">Mobile Number</label>
+                                                <label for="view-phonenumber" class="form-label">Mobile Number</label>
                                                 <input type="number" class="form-control" id="view-phonenumber" readonly>
-                                                <div class="invalid-feedback">
-                                                    Valid Mobile Number is required.
-                                                </div>
                                             </div>
 
+                                            <!-- Address -->
                                             <div class="col-12">
-                                                <label for=" " class="form-label">Address</label>
-                                                <input type="text" class="form-control" id="view-address"
-                                                    placeholder="1234, Main St,kegalle" readonly>
-                                                <div class="invalid-feedback">
-                                                    Please enter your address.
-                                                </div>
+                                                <label for="view-address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="view-address" readonly>
                                             </div>
 
+                                            <!-- Lecture Role -->
                                             <div class="col-sm-6">
-                                                <label for=" " class="form-label">Lecture Roles</label>
-                                                <select class="form-select" id="view-lecturerole" disabled readonly>
-                                                    <option value="">Choose...</option>                                                 
-                                                    <option value="Visiting">Visiting Lecture</option>
-                                                    <option value="Permanent">Permernet Lecture</option>
+                                                <label for="view-lecturerole" class="form-label">Lecture Role</label>
+                                                <select class="form-select" id="view-lecturerole" disabled>
+                                                    <option value="Visiting">Visiting Lecturer</option>
+                                                    <option value="Permanent">Permanent Lecturer</option>
                                                 </select>
-                                                <div class="invalid-feedback">
-                                                    Please select a valid Roles.
-                                                </div>
                                             </div>
 
-
+                                            <!-- About Lecturer -->
                                             <div class="mb-3">
-                                                <label for=" " class="form-label">About
-                                                    Lecture</label>
-                                                <textarea class="form-control" id="view-about" rows="5"
-                                                    readonly></textarea>
+                                                <label for="view-about" class="form-label">About Lecturer</label>
+                                                <textarea class="form-control" id="view-about" rows="5" readonly></textarea>
                                             </div>
+
                                         </div>
                                     </form>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" form="myForm2" class="btn btn-primary" onclick="printForm('myForm2')"><i
-                            class="bi bi-printer"></i> print
-                    </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="printForm('myForm2')"><i class="bi bi-printer"></i> Print</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Lecture view Modal end -->
 
 
@@ -276,7 +259,7 @@
                                 <?php
                                 try {
                                     // Prepare the SQL statement
-                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, password, expertise, address, mobile_no, role FROM lecturers");
+                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, password, expertise, address, mobile_no, role, image_path FROM lecturers");
                                     $stmt->execute();
                                     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 } catch (PDOException $e) {
@@ -319,6 +302,7 @@
                                                 echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
                                                 echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
                                                 echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
+                                                echo 'data-image_path="' . htmlspecialchars($row['image_path']) . '"';
                                                 echo '><i class="fas fa-eye fa-lg"></i></a>';
                                                 echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate" ';
                                                 echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
@@ -330,6 +314,7 @@
                                                 echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
                                                 echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
                                                 echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
+                                                echo 'data-image_path="' . htmlspecialchars($row['image_path']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
                                                 echo '<a href="include/delete.php?type=lectures&id=' . $row['id'] . ' class="m-1" onclick="return confirm(\'Are you sure you want to delete this Lecture?\')"><i class="fas fa-trash-alt fa-lg"></i></a>';
                                                 echo '</td>';
@@ -361,4 +346,3 @@
 <!-- Content End -->
 
 <?php include './include/footer.php'; ?>
-

@@ -1,19 +1,17 @@
 <?php
 // ############################ Function to register a lecturers #####################
 
-function  lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum,  $about)
+function lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about, $imageUploadResult)
 {
-
     try {
-        // Prepare SQL statement to insert student data
-
-        $sql = "INSERT INTO lecturers (`index_number`, `username`, `email`, `password`, `expertise`, `address`, `mobile_no`, `role`) VALUES (:index_num, :username, :email, :password, :about, :address, :phone_num, :lecturerole)";
+        // Prepare SQL statement to insert lecturer data, including the image path
+        $sql = "INSERT INTO lecturers (`index_number`, `username`, `email`, `password`, `expertise`, `address`, `mobile_no`, `role`, `image_path`) 
+                VALUES (:index_num, :username, :email, :password, :about, :address, :phone_num, :lecturerole, :image_path)";
 
         $stmt = $conn->prepare($sql);
 
         // Execute the statement with the provided data
         $stmt->execute([
-
             ':index_num' => $index_num,
             ':username' => $username,
             ':email' => $email,
@@ -21,36 +19,32 @@ function  lecturersCreate($conn, $index_num, $username, $email, $password, $lect
             ':lecturerole' => $lecturerole,
             ':address' => $address,
             ':about' => $about,
-            ':phone_num' => $phonenum
-            // ':target_file'=>$target_file
-
+            ':phone_num' => $phonenum,
+            ':image_path' => $imageUploadResult  // Include the image path here
         ]);
 
-        // Return success message
-        // header("Location:../lectures.php?lecturers_register_sucssfully");
-        return "lecturers registered successfully!";
-        exit();
+        return "Lecturer registered successfully!";
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }
 }
 
 
-
-
-
-// ############################# Function to update the lecturer's details ######################
-
-function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about)
-{
-    try {
-        // Hash the password if it's being updated (if not empty)
+ // Hash the password if it's being updated (if not empty)
         // $password_sql = '';
         // if (!empty($password)) {
         //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         //     $password_sql = ", password = :password";
         // }
 
+
+
+
+
+// ############################# Function to update the lecturer's details ######################
+function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about)
+{
+    try {
         // Prepare SQL statement to update lecturer data
         $sql = "UPDATE lecturers SET 
                     `index_number` = :index_num, 
@@ -298,3 +292,64 @@ function lectureUpdate($conn, $id, $lname, $dept, $batches, $subjects, $lecture_
         return "Error: " . $e->getMessage();
     }
 }
+
+
+
+// ############################# Function Update to image ######################
+function uploadOrUpdateImage($conn, $file, $id = null) {
+    // Check if the file was uploaded
+    if ($file['error'] === UPLOAD_ERR_NO_FILE) {
+        return;
+    }
+
+    // Define allowed file types and size limit
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    $maxFileSize = 2 * 1024 * 1024; // 2MB
+
+    // Validate file type
+    if (!in_array($file['type'], $allowedTypes)) {
+        return "Only JPG, PNG, and GIF files are allowed!";
+    }
+
+    // Validate file size
+    if ($file['size'] > $maxFileSize) {
+        return "File size exceeds the 2MB limit!";
+    }
+
+    // Define upload directory
+    $uploadDir = "uploads/profile_images/";
+    
+    // Ensure directory exists, if not create it
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+
+    // Generate a unique file name
+    $fileName = uniqid() . '_' . time() . '_' . basename($file['name']);
+    $targetFile = $uploadDir . $fileName;
+
+    // Attempt to move the uploaded file to the directory
+    if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+        // If this is a creation process (no ID), return the file path
+        if (!$id) {
+            return $targetFile;
+        } else {
+            // For updates, update the existing lecturer's image path
+            try {
+                $sql = "UPDATE lecturers SET image_path = :image_path WHERE id = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([':image_path' => $targetFile, ':id' => $id]);
+                return "Image updated successfully!";
+            } catch (PDOException $e) {
+                return "Database error: " . $e->getMessage();
+            }
+        }
+    } else {
+        return "There was an error uploading the file!";
+    }
+}
+
+
+
+
+?>
