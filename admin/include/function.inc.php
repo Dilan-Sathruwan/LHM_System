@@ -352,4 +352,81 @@ function uploadOrUpdateImage($conn, $file, $id = null) {
 
 
 
+
+  // ############################# Function to Create the Subject ######################
+function SubjectCreate($conn, $subject_nam, $subject_number, $credits, $dept, $semester){
+
+    try {
+        // Check if batch name or batch year already exists
+        $sql_check = "SELECT * FROM subjects WHERE subject_name = :subject_name";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->bindParam(':subject_name', $subject_nam);
+
+        $stmt_check->execute();
+        $existingSubject = $stmt_check->fetch(PDO::FETCH_ASSOC);
+        if ($existingSubject) {
+            return "Error: Subject with this name already exists.";
+        }
+
+        // If no batch exists, proceed to insert the new batch
+        $sql_insert = "INSERT INTO subjects (subject_name, subject_number, department_id, semester_id, credits) VALUES (:subject_name, :subject_number, :department_id, :semester_id, :credits)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bindParam(':subject_name', $subject_nam);
+        $stmt_insert->bindParam(':subject_number', $subject_number);
+        $stmt_insert->bindParam(':department_id', $dept);
+        $stmt_insert->bindParam(':credits', $credits);
+        $stmt_insert->bindParam(':semester_id', $semester);
+
+        if ($stmt_insert->execute()) {
+            return "Subject successfully created!";
+        } else {
+            return "Error creating Subject.";
+        }
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}  
+
+
+
+
+function SubjectUpdate($conn, $id, $subject_nam, $subject_number, $credits, $dept, $semester){
+    try {
+        // Check if batch name already exists
+        $sql_check = "SELECT * FROM subjects WHERE subject_name = :subject_name AND id != :id";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->bindParam(':subject_name', $subject_nam);
+        $stmt_check->bindParam(':id', $id);  // Exclude current batch from the check
+
+        $stmt_check->execute();
+        $existingBatch = $stmt_check->fetch(PDO::FETCH_ASSOC);
+        if ($existingBatch) {
+            return "Error: Subject with this name already exists.";
+        }
+
+        $sql_update = "UPDATE subjects 
+                       SET subject_name = :subject_name,
+                           subject_number = :subject_number,
+                           credits = :credits,
+                           department_id = :department_id, 
+                           semester_id = :semester_id
+                       WHERE id = :id";
+
+        $stmt_update = $conn->prepare($sql_update);
+        $stmt_update->bindParam(':subject_name', $subject_nam);
+        $stmt_update->bindParam(':subject_number', $subject_number);
+        $stmt_update->bindParam(':credits', $credits);
+        $stmt_update->bindParam(':department_id', $dept);
+        $stmt_update->bindParam(':semester_id', $semester);
+        $stmt_update->bindParam(':id', $id);
+
+        if ($stmt_update->execute()) {
+            return "Subject successfully updated!";
+        } else {
+            return "Error updating batch.";
+        }
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
 ?>

@@ -6,13 +6,136 @@
     <?php include './include/navbar.php'; ?>
     <!-- Navbar End -->
 
+    <!-- Subject Add model Start -->
+    <div class="modal fade" id="subModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="BackdropLabel">Add Subject</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="./include/create_subject.php" class="row g-3 " id="subaForm" method="POST">
+                        <input type="hidden" name="subject_id" id="subject_id">
+                        <div class="col-12">
+                            <label for="subject_name" class="form-label">Subject Name</label>
+                            <input type="name" class="form-control" id="subject_name" name="subject_name" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="subject_code" class="form-label">Subject Code</label>
+                            <input type="name" class="form-control" id="subject_code" name="subject_number" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="credits" class="form-label">Credits</label>
+                            <input type="number" class="form-control" id="credits" name="credits" min="0" max="9">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputdept" class="form-label">Department</label>
+                            <select id="inputdept" class="form-select" name="dept">
+                                <option selected>Choose...</option>
+                                <?php
+                                $stmt = $conn->query("SELECT id, department_name FROM departments");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['department_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="inptsem" class="form-label">Semester</label>
+                            <select id="inptsem" class="form-select" name="semester">
+
+                                <?php
+                                $stmt = $conn->query("SELECT id, sem_name FROM semester");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['sem_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="subaForm" class="btn btn-primary" id="submitButton">Save</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Subject Add model End -->
+
+
+
+    <!-- Subject update model Start -->
+    <div class="modal fade" id="subUpdateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="BackdropLabel">Update Subject</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="./include/create_subject.php" class="row g-3 " id="subuForm" method="POST">
+                        <input type="hidden" name="subject_id" id="subject_idu">
+                        <div class="col-12">
+                            <label for="subject_name" class="form-label">Subject Name</label>
+                            <input type="name" class="form-control" id="subject_nameu" name="subject_name" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="subject_code" class="form-label">Subject Code</label>
+                            <input type="name" class="form-control" id="subject_codeu" name="subject_number" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="credits" class="form-label">Credits</label>
+                            <input type="number" class="form-control" id="creditsu" name="credits" min="0" max="9">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputdept" class="form-label">Department</label>
+                            <select id="inputdeptu" class="form-select" name="dept">
+                                <option selected>Choose...</option>
+                                <?php
+                                $stmt = $conn->query("SELECT id, department_name FROM departments");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['department_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="inptsem" class="form-label">Semester</label>
+                            <select id="inptsemu" class="form-select" name="semester">
+
+                                <?php
+                                $stmt = $conn->query("SELECT id, sem_name FROM semester");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['sem_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="subuForm" class="btn btn-primary" id="submitButton">Save</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Subject update model End -->
+
 
     <!-- data Subject table Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h3 class="mb-0">Higher National Diploma All Subject</h3>
-                <a class="btn btn-sm btn-primary" href="">Add Subject</a>
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#subModal">Add Subject
+                </button>
             </div>
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -56,7 +179,7 @@
                                         echo '<td>' . htmlspecialchars($row['semester_id']) . '</td>';
                                         echo '<td>' . htmlspecialchars($row['credits']) . '</td>';
                                         echo '<td class="d-flex align-items-lg-center justify-content-around">';
-                                        echo '<a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>';
+                                        echo '<a href="#" class="edit-subject" data-bs-toggle="modal" data-bs-target="#subUpdateModal" data-id="' . $row['id'] . '"><i class="fas fa-user-edit fa-lg"></i></a>';
                                         echo '<a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>';
                                         echo '</td>';
                                         echo '</tr>';
@@ -213,9 +336,6 @@
                         </table>
                     </div>
                 </div>
-
-
-
                 <div class="tab-pane fade" id="nav-4semester" role="tabpanel" aria-labelledby="nav-4semester-tab">
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -289,6 +409,56 @@
                     </div>
                 </div>
             </div>
+
+
+            <script>
+                //################## batch model form fill current Id number ######################
+                document.querySelectorAll('.edit-subject').forEach(function(editButton) {
+                    editButton.addEventListener('click', function() {
+                        var subId = this.getAttribute('data-id');
+
+                        // Fetch batch details via AJAX using XMLHttpRequest
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', 'get_subjects.php?id=' + subId, true);
+                        xhr.responseType = 'json';
+
+                        xhr.onload = function() {
+                            if (xhr.status === 200) {
+                                var data = xhr.response;
+                                // Populate form with batch data
+                                document.getElementById('subject_idu').value = data.id;
+                                document.getElementById('subject_nameu').value = data.subject_name;
+                                document.getElementById('subject_codeu').value = data.subject_number;
+                                document.getElementById('creditsu').value = data.credits;
+
+                                // Populate department select options
+                                var deptSelect = document.getElementById('inputdeptu');
+                                deptSelect.innerHTML = '';
+                                data.departments.forEach(function(dept) {
+                                    var selected = dept.id == data.department_id ? 'selected' : '';
+                                    deptSelect.innerHTML += `<option value="${dept.id}" ${selected}>${dept.department_name}</option>`;
+                                });
+
+                                // Populate semester select options
+                                var semesterSelect = document.getElementById('inptsemu');
+                                semesterSelect.innerHTML = '';
+                                data.semesters.forEach(function(sem) {
+                                    var selected = sem.id == data.semester_id ? 'selected' : '';
+                                    semesterSelect.innerHTML += `<option value="${sem.id}" ${selected}>${sem.sem_name}</option>`;
+                                });
+                            } else {
+                                console.error('Error:', xhr.statusText);
+                            }
+                        };
+
+                        xhr.onerror = function() {
+                            console.error('Request error...');
+                        };
+
+                        xhr.send();
+                    });
+                });
+            </script>
 
         </div>
 

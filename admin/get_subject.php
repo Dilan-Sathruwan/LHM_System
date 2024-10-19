@@ -2,6 +2,7 @@
 // require_once 'db_connection.inc.php';
 include './include/db_connection.inc.php';
 
+// #################lecture add timetable select subject for batch#############
 if (isset($_GET['department_id']) && isset($_GET['batch_id'])) {
     $department_id = $_GET['department_id'];
     $batch_id = $_GET['batch_id'];
