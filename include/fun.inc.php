@@ -42,8 +42,8 @@ function loginLecture($conn, $email, $password) {
         //    if ($password === $lecturer['password']) 
     {
                 session_start();
-                $_SESSION['user'] = $lecturer;
-                header("Location: lecturer_dashboard.php");
+                $_SESSION['user'] = $lecturer['id'];
+                header("Location:../lecturer/lecturer/dashboard.php");
                 exit();
             } else {
                 return "Invalid password.";

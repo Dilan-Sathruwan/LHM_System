@@ -1,15 +1,15 @@
 <?php
 session_start();
-include '../../include/database.inc.php';
+include '../../admin/include/db_connection.inc.php';
 
 
 // Check if user is logged in and is a lecturer
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user'])) {
     header("Location:../../signin.php"); // Redirect to login if not logged in
     exit();
 }
 
-$lecturer_id = $_SESSION['user_id'];
+$lecturer_id = $_SESSION['user'];
 // Define all days of the week (Move this outside of the POST check)
 $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 

@@ -1,23 +1,25 @@
 <?php
 session_start();
-include '../../include/database.inc.php'; // Ensure this path is correct
+include '../../admin/include/db_connection.inc.php';
 
 // Check if user is logged in and is a lecturer
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user'])) {
     header("Location:../../signin.php"); // Redirect to login if not logged in
     exit();
 }
 
 // Get the logged-in lecturer's information
-$lecturer_id = $_SESSION['user_id'];
+$lecturer_id = $_SESSION['user'];
 $query = "SELECT * FROM Lecturers WHERE id = :id";
 $stmt = $conn->prepare($query);
 $stmt->bindParam(':id', $lecturer_id, PDO::PARAM_INT);
 $stmt->execute();
 
+
 // Check if lecturer exists
 if ($stmt->rowCount() > 0) {
     $lecturer = $stmt->fetch(PDO::FETCH_ASSOC);
+
 } else {
     echo "Lecturer not found.";
     exit();

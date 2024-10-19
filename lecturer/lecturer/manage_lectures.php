@@ -117,7 +117,6 @@ $timeslots = $conn->query($timeslots_query);
             transition: background-color 0.5s, color 0.5s;
             font-family: Arial, sans-serif;
         }
-        <style>
         /* General Theme Styles */
 body {
     transition: background-color 0.3s ease, color 0.3s ease;

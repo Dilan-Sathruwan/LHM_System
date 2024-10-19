@@ -1,9 +1,9 @@
 <?php
 session_start();
-include '../../include/database.inc.php'; // Ensure this path is correct
+include '../../admin/include/db_connection.inc.php';
 
 // Check if user is logged in and is a lecturer
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['user'])) {
     header("Location:../../signin.php"); // Redirect to login if not logged in
     exit();
 }
