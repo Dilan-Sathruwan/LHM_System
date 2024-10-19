@@ -127,7 +127,7 @@
 
             // Create AJAX request
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", 'get_batches.php?department_id=' + departmentId, true);
+            xhr.open("GET", 'include/get_batches.php?department_id=' + departmentId, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById("batch_id").innerHTML = xhr.responseText;
@@ -149,7 +149,7 @@
 
             // Create AJAX request to fetch subjects based on department and batch (semester)
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", 'get_subject.php?department_id=' + selectedDepartmentId + '&batch_id=' + selectedBatchId, true);
+            xhr.open("GET", 'include/get_semsubject.php?department_id=' + selectedDepartmentId + '&batch_id=' + selectedBatchId, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById("inputsub").innerHTML = xhr.responseText;

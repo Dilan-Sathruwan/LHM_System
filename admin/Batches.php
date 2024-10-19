@@ -119,7 +119,7 @@
 
                     // Fetch batch details via AJAX using XMLHttpRequest
                     var xhr = new XMLHttpRequest();
-                    xhr.open('GET', 'get_batches.php?id=' + batchId, true);
+                    xhr.open('GET', 'include/get_batches.php?id=' + batchId, true);
                     xhr.responseType = 'json';
 
                     xhr.onload = function() {

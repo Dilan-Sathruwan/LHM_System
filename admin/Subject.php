@@ -419,7 +419,7 @@
 
                         // Fetch batch details via AJAX using XMLHttpRequest
                         var xhr = new XMLHttpRequest();
-                        xhr.open('GET', 'get_subjects.php?id=' + subId, true);
+                        xhr.open('GET', 'include/get_subjects.php?id=' + subId, true);
                         xhr.responseType = 'json';
 
                         xhr.onload = function() {

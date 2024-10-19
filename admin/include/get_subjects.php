@@ -1,6 +1,6 @@
 <?php 
 
-include './include/db_connection.inc.php';
+include 'db_connection.inc.php';
 //################## subjects model form fill current Id number > link subject page ######################
 if (isset($_GET['id'])) {
     $subId = $_GET['id'];

@@ -1,9 +1,9 @@
 
 <?php
 
-include './include/db_connection.inc.php';
+include 'db_connection.inc.php';
 
-//show depertment avalible semester
+//show depertment avalible semester /shedule page and student add
 if (isset($_GET['department_id'])) {
     $department_id = $_GET['department_id'];
 
