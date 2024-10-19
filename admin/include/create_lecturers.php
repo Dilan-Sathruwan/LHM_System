@@ -36,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     
-    header("Location:../lectures.php?message=" . urlencode($imageUploadResult));
+    header("Location:../lectures.php?message=" . urlencode($result));
 }
 
 ?>

@@ -4,7 +4,10 @@
 function lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about, $imageUploadResult)
 {
     try {
-        // Prepare SQL statement to insert lecturer data, including the image path
+        // Hash the password before storing it in the database
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Prepare SQL statement to insert lecturer data, including the image path and hashed password
         $sql = "INSERT INTO lecturers (`index_number`, `username`, `email`, `password`, `expertise`, `address`, `mobile_no`, `role`, `image_path`) 
                 VALUES (:index_num, :username, :email, :password, :about, :address, :phone_num, :lecturerole, :image_path)";
 
@@ -15,7 +18,7 @@ function lecturersCreate($conn, $index_num, $username, $email, $password, $lectu
             ':index_num' => $index_num,
             ':username' => $username,
             ':email' => $email,
-            ':password' => $password,
+            ':password' => $hashedPassword,  
             ':lecturerole' => $lecturerole,
             ':address' => $address,
             ':about' => $about,
@@ -28,6 +31,7 @@ function lecturersCreate($conn, $index_num, $username, $email, $password, $lectu
         return "Error: " . $e->getMessage();
     }
 }
+
 
 
  // Hash the password if it's being updated (if not empty)
