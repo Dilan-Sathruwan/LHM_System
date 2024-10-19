@@ -9,7 +9,7 @@ if (isset($_POST["signUp"])) {
     $pwdRepeat = $_POST["pwdRepeat"];
 
     // Include necessary files
-    require_once 'database.inc.php';
+    require_once '../admin/include/db_connection.inc.php';
     require_once 'fun.inc.php';
 
     // Check for empty inputs (corrected function arguments)
