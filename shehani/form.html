@@ -1,76 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Subject Form</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        form {
-            max-width: 400px;
-            margin: auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      form {
+        max-width: 400px;
+        margin: auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #1bc147;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #700ae4;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <h2>Add Subject</h2>
+    <form action="/submit" method="post">
+      <label for="subjectNumber">Subject Number:</label>
+      <input type="text" id="subjectNumber" name="subjectNumber" required />
 
-<h2>Add Subject</h2>
-<form action="/submit" method="post">
-    <label for="subjectNumber">Subject Number:</label>
-    <input type="text" id="subjectNumber" name="subjectNumber" required>
+      <label for="subjectName">Subject Name:</label>
+      <input type="text" id="subjectName" name="subjectName" required />
 
-    <label for="subjectName">Subject Name:</label>
-    <input type="text" id="subjectName" name="subjectName" required>
+      <label for="credits">Credits:</label>
+      <input
+        type="number"
+        id="credits"
+        name="credits"
+        min="1"
+        max="10"
+        required
+      />
 
-    <label for="credits">Credits:</label>
-    <input type="number" id="credits" name="credits" min="1" max="10" required>
-
-    <label for="department">Department:</label>
-    <select id="department" name="department" required>
+      <label for="department">Department:</label>
+      <select id="department" name="department" required>
         <option value="" disabled selected>Select Department</option>
-        <option value="Computer Science">Higher National Diploma In Information Technology</option>
+        <option value="Computer Science">
+          Higher National Diploma In Information Technology
+        </option>
         <option value="Mathematics">Higher National Diploma In English</option>
         <option value="Physics">Higher National Diploma In Accountancy</option>
-        <option value="Chemistry">Higher National Diploma In Project Management</option>
+        <option value="Chemistry">
+          Higher National Diploma In Project Management
+        </option>
         <!-- Add more departments as needed -->
-    </select>
+      </select>
 
-    <label for="semester">Semester:</label>
-    <select id="semester" name="semester" required>
+      <label for="semester">Semester:</label>
+      <select id="semester" name="semester" required>
         <option value="" disabled selected>Select Semester</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
-        
-    </select>
+      </select>
 
-    <button type="submit">Add Subject</button>
-</form>
-
-</body>
+      <button type="submit">Add Subject</button>
+    </form>
+  </body>
 </html>
