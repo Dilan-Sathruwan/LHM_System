@@ -20,7 +20,7 @@ try {
 
 
 
-    // Query to get department names and number of students in each department
+    // ##########  Query to get department names and number of students in each department
     $query = "
      SELECT departments.department_name, COUNT(students.id) as student_count 
      FROM departments 
@@ -35,17 +35,33 @@ try {
         $student_counts[] = $row['student_count'];
 
 
-        // SQL query to get department names and number of students
+        // ########### SQL query to get department names and number of students
     $query1 = "
     SELECT d.department_name, COUNT(s.id) AS student_count1
     FROM departments d
     LEFT JOIN students s ON d.id = s.department_id
     GROUP BY d.department_name
     ";
-    
-    // Execute the query
-    $stmt1 = $conn->query($query1);
-    $department = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+        // Execute the query
+        $stmt1 = $conn->query($query1);
+        $department = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+    // SQL query to get batches information and number of students
+    $query2 = "
+    SELECT b.batch_year, b.batch_name, d.department_name, sem.sem_name, COUNT(s.id) AS student_count2
+    FROM batches b
+    LEFT JOIN students s ON b.id = s.batch_id
+    LEFT JOIN departments d ON d.id = b.department_id
+    LEFT JOIN semester sem ON sem.id = b.semester_id
+    GROUP BY b.batch_year, b.batch_name, d.department_name, sem.sem_name
+    ";
+
+        // Execute the query for batches
+        $stmt2 = $conn->query($query2);
+        $batches = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (PDOException $e) {
     echo "Database connection failed: " . $e->getMessage();
@@ -156,62 +172,36 @@ try {
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Recent Salse</h6>
+                <h3 class="mb-0">Batches information and number of students</h3>
                 <a href="">Show All</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
-                            <th scope="col">Date</th>
-                            <th scope="col">Invoice</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Batch Year</th>
+                            <th scope="col">Batch Name</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Batch Semester</th>
+                            <th scope="col">Students</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
+                        <?php if (!empty($batches)): ?>
+                            <?php foreach ($batches as $batch): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($batch['batch_year']); ?></td>
+                                    <td><?php echo htmlspecialchars($batch['batch_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($batch['department_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($batch['sem_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($batch['student_count2']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5">No data available</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -226,34 +216,34 @@ try {
 
 <?php include './include/footer.php'; ?>
 
- <!-- ##################department student count############## -->
- <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var ctx4 = document.getElementById("bar-chart").getContext("2d");
+<!-- ##################department student count############## -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var ctx4 = document.getElementById("bar-chart").getContext("2d");
 
-            // Fetching the PHP data into JavaScript
-            var labels = <?php echo json_encode($departments); ?>;
-            var data = <?php echo json_encode($student_counts); ?>;
+        // Fetching the PHP data into JavaScript
+        var labels = <?php echo json_encode($departments); ?>;
+        var data = <?php echo json_encode($student_counts); ?>;
 
-            var myChart4 = new Chart(ctx4, {
-                type: "bar",
-                data: {
-                    labels: labels, // Department names
-                    datasets: [{
-                        label: 'Number of Student',
-                        backgroundColor: [
-                            "rgba(0, 156, 255, .7)",
-                            "rgba(0, 156, 255, .6)",
-                            "rgba(0, 156, 255, .5)",
-                            "rgba(0, 156, 255, .4)",
-                            "rgba(0, 156, 255, .3)"
-                        ],
-                        data: data // Number of students per department
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
+        var myChart4 = new Chart(ctx4, {
+            type: "bar",
+            data: {
+                labels: labels, // Department names
+                datasets: [{
+                    label: 'Number of Student',
+                    backgroundColor: [
+                        "rgba(0, 156, 255, .7)",
+                        "rgba(0, 156, 255, .6)",
+                        "rgba(0, 156, 255, .5)",
+                        "rgba(0, 156, 255, .4)",
+                        "rgba(0, 156, 255, .3)"
+                    ],
+                    data: data // Number of students per department
+                }]
+            },
+            options: {
+                responsive: true
+            }
         });
-    </script>
+    });
+</script>
