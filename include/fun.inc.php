@@ -72,9 +72,9 @@ function loginStudent($conn, $email, $password) {
             if ($password === $student['index_number']) {
                 session_start();    
                 // Store student info in session
-                $_SESSION['user_id'] = $student['id']; // Store user ID
+                $_SESSION['St_id'] = $student['id']; // Store user ID
                 $_SESSION['user_name'] = $student['username']; // Store username
-                header("Location: student_dashboard.php"); // Redirect to student dashboard
+                header("Location: ../student.php"); // Redirect to student dashboard
                 exit();
             } else {
                 return "Invalid password.";
