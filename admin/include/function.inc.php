@@ -264,15 +264,12 @@ function lectureCreate($conn, $lname, $dept, $batches, $subjects, $lecture_halls
 
 
 // ############################# Function Update to Lecture time ######################
-function lectureUpdate($conn, $id, $lname, $dept, $batches, $subjects, $lecture_halls, $days, $time_slot)
+function lectureUpdate($conn, $id, $lname, $lecture_halls, $days, $time_slot)
 {
     try {
         $sql = "UPDATE lhm_system2.lecture_schedule SET 
                 lecturer_id = :lecturer_id,
-                hall_id = :hall_id, 
-                department_id = :department_id, 
-                batch_id = :batch_id, 
-                subject_id = :subject_id, 
+                hall_id = :hall_id,
                 slot_id = :slot_id, 
                 days = :days
                 WHERE id = :id";
@@ -282,9 +279,6 @@ function lectureUpdate($conn, $id, $lname, $dept, $batches, $subjects, $lecture_
         $stmt->execute([
             ':lecturer_id' => $lname,
             ':hall_id' => $lecture_halls,
-            ':department_id' => $dept,
-            ':batch_id' => $batches,
-            ':subject_id' => $subjects,
             ':slot_id' => $time_slot,
             ':days' => $days,
             ':id' => $id

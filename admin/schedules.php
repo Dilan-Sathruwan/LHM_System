@@ -7,7 +7,7 @@
     <!-- Navbar End -->
 
 
-    <!-- Modal -->
+    <!-- Modal Lecture Add-->
     <div class="modal fade" id="batchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -111,6 +111,7 @@
         </div>
 
     </div>
+    <!-- Modal Lecture Add-->
     <script>
         var selectedDepartmentId = null;
         var selectedBatchId = null;
@@ -161,6 +162,120 @@
 
 
 
+
+    <!-- Modal Lecture Edit-->
+    <div class="modal fade" id="EditbatchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="BackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="BackdropLabel">Change Lecture</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="./include/create_lecture.php" class="row g-3 " id="EbatchForm" method="POST">
+                        <input type="hidden" name="id" id="eid">
+
+
+                        <div class="col-12">
+                            <label for="inputlec" class="form-label">Lecturers</label>
+                            <select id="einputlec" class="form-select" name="lecturers" required>
+                                <option selected value="">Select lecturers</option>
+                                <?php
+                                $stmt = $conn->query("SELECT id, username FROM lecturers");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['username'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputdept" class="form-label">Department</label>
+                            <select id="einputdept" class="form-select" name="dept" onchange="fetchSemesters(this.value)" disabled>
+                                <option selected value="">Choose...</option>
+                                <?php
+                                $stmt = $conn->query("SELECT id, department_name FROM departments");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['department_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="batch_id" class="form-label">Batch</label>
+                            <select id="ebatch_id" class="form-select" name="batches" onchange="fetchSubjects()" disabled>
+                                <option value="" selected>No select batch</option>
+                                <?php
+                                $stmt = $conn->query("SELECT id, batch_name FROM batches");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['batch_name'] . "</option>";
+                                }
+                                ?>
+                                <!-- Batches will be loaded dynamically -->
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="inputsub" class="form-label">Subject</label>
+                            <select id="einputsub" class="form-select" name="subjects" disabled>
+                                <option selected value="">Select Subject</option>
+                                <?php
+                                $stmt = $conn->query("SELECT id, subject_name FROM subjects");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['subject_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="inpthall" class="form-label">Hall</label>
+                            <select id="einpthall" class="form-select" name="lecture_halls">
+                                <option value="">Select Lecture Hall</option>
+                                <?php
+                                $stmt = $conn->query("SELECT id, hall_name FROM lecture_halls");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['hall_name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="days" class="form-label">Days</label>
+                            <select id="edays" class="form-select" name="days">
+                                <option value="">Select Days </option>
+                                <option value="Monday">Monday </option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday </option>
+                                <option value="Friday">Friday </option>
+
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="time_slot" class="form-label">Batch Year</label>
+                            <select id="einputtime" class="form-select" name="time_slot">
+                                <option selected>Add your time</option>
+                                <?php
+                                $stmt = $conn->query("SELECT slot_id, start_time, end_time FROM timeslot");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['slot_id'] . "'>" . $row['start_time'] . "-" . $row['end_time'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="EbatchForm" class="btn btn-primary" id="submitButton">Save</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal Lecture Edit-->
+
+
+
     <!-- Blank Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-3 mb-2">
@@ -169,7 +284,7 @@
                 <a class="btn  btn-primary ms-4" href="timetable_batch.php">Batch Timetables</a>
                 <a class="btn  btn-primary ms-4" href="timetable_hall.php">Hall Timetables</a>
             </div>
-            
+
         </div>
 
         <div class="bg-light text-center rounded p-4">
@@ -188,12 +303,12 @@
                                 <label for="department_name" class="form-label">Department</label>
                                 <select id="department_name" name="department_name" class="form-select">
                                     <option value="">Select Department</option>
-                                <?php
-                                $stmt = $conn->query("SELECT id, department_name FROM departments");
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    echo "<option value='" . $row['department_name']  . "'>" . $row['department_name'] . "</option>";
-                                }
-                                ?>
+                                    <?php
+                                    $stmt = $conn->query("SELECT id, department_name FROM departments");
+                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                        echo "<option value='" . $row['department_name']  . "'>" . $row['department_name'] . "</option>";
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -243,7 +358,7 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#batchModal">Add Lecturers</button>
             </div>
             <div class="table-responsive">
-                
+
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
@@ -364,7 +479,7 @@
                                 echo '<td>' . htmlspecialchars($row['days']) . '</td>';
                                 echo '<td>' . htmlspecialchars($row['start_time'] . ' - ' . $row['end_time']) . '</td>';
                                 echo '<td class="d-flex align-items-lg-center justify-content-around">';
-                                echo '<a href="" class="ms-4"><i class="fas fa-user-edit fa-lg"></i></a>';
+                                echo '<a href="#" class="edit-lecture ms-4" data-id="' . $row['id'] . '" data-bs-toggle="modal" data-bs-target="#EditbatchModal"><i class="fas fa-user-edit fa-lg"></i></a>';
                                 echo '<a href="" class="ms-4 me-3"><i class="fas fa-trash-alt fa-lg"></i></a>';
                                 echo '</td>';
                                 echo '</tr>';
@@ -380,6 +495,47 @@
                 </table>
             </div>
         </div>
+
+        <script>
+            document.querySelectorAll('.edit-lecture').forEach(function(editButton) {
+                editButton.addEventListener('click', function() {
+                    var lectureId = this.getAttribute('data-id');
+
+                    // Fetch lecture details via AJAX
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'include/get_lecture.php?id=' + lectureId, true);
+                    xhr.responseType = 'json';
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            
+                            var data = xhr.response;
+                            if (data) {
+                                // Populate form with lecture data
+                                document.getElementById('eid').value = data.id;
+                                document.getElementById('einputlec').value = data.lecturer_id;
+                                document.getElementById('einputdept').value = data.department_id;
+                                document.getElementById('ebatch_id').value = data.batch_id;
+                                document.getElementById('einputsub').value = data.subject_id;
+                                document.getElementById('einpthall').value = data.hall_id;
+                                document.getElementById('edays').value = data.days;
+                                document.getElementById('einputtime').value = data.time_slot;
+                            } else {
+                                console.error('Data is null or undefined');
+                            }
+                        } else {
+                            console.error('Error:', xhr.statusText);
+                        }
+                    };
+
+
+                    xhr.onerror = function() {
+                        console.error('Request error...');
+                    };
+
+                    xhr.send();
+                });
+            });
+        </script>
 
 
     </div>
