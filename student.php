@@ -154,8 +154,8 @@ $stmt = null;
                                 <p>Name: <?php echo htmlspecialchars($Students['username']); ?></p>
                                 <p>Email: <?php echo htmlspecialchars($Students['email']); ?></p>
                                 <p>Email: <?php echo htmlspecialchars($Students['index_number']); ?></p>
-                                <p>Department: <?php echo htmlspecialchars($Students['username']); ?></p>
-                                <p>Batch: <?php echo htmlspecialchars($Students['username']); ?></p>
+                                <p>Department: <?php echo htmlspecialchars($Students['department_id']); ?></p>
+                                <p>Batch: <?php echo htmlspecialchars($Students['batch_id']); ?></p>
                             </div>
                             <div class="highlight mb-3">
                                 <strong>Important:</strong> Make sure to check your timetable regularly!
@@ -164,7 +164,7 @@ $stmt = null;
                                 <a href="#" class="btn btn-custom btn-primary btn-block mb-2">Edit Profile</a>
                                 <a href="#" class="btn btn-custom btn-info btn-block mb-2">View Semester Timetable</a>
                                 <a href="#" class="btn btn-custom btn-info btn-block mb-2">Timetable</a>
-                                <a href="#" class="btn btn-custom btn-danger btn-block mb-2">Logout</a>
+                                <a href="./include/logout.php" class="btn btn-custom btn-danger btn-block mb-2">Logout</a>
                             </div>
                             <hr />
                             <div class="download-section mb-4">

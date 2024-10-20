@@ -188,9 +188,12 @@
                                 <label for="department_name" class="form-label">Department</label>
                                 <select id="department_name" name="department_name" class="form-select">
                                     <option value="">Select Department</option>
-                                    <option value="Computer Science">Computer Science</option>
-                                    <option value="Mathematics">Mathematics</option>
-                                    <!-- Add other department options dynamically here -->
+                                <?php
+                                $stmt = $conn->query("SELECT id, department_name FROM departments");
+                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                    echo "<option value='" . $row['department_name']  . "'>" . $row['department_name'] . "</option>";
+                                }
+                                ?>
                                 </select>
                             </div>
                         </div>
