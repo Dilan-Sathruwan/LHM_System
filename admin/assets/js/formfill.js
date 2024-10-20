@@ -1,7 +1,7 @@
 // ################student update
 
-document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function(button) {
-    button.addEventListener('click', function() {
+document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function (button) {
+    button.addEventListener('click', function () {
         const id = this.getAttribute('data-id');
         const index_number = this.getAttribute('data-index_number');
         const username = this.getAttribute('data-username');
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Event listener for when the modal is triggered
     var LecturecreateModal = document.getElementById('Lecturecreate');
     var LectureViewModal = document.getElementById('LectureView');
-    
+
     LecturecreateModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget; // Button that triggered the modal
 
@@ -65,12 +65,20 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.querySelector('#inputPassword').value = password;
 
         // Update the image preview
+        // Update the image preview
         var profileImage = modal.querySelector('.profile-image-pic');
         if (image_path) {
             profileImage.src = './include/' + image_path; // Use the correct path for your images
+
+            // Set the onerror fallback to default image if the image path is not valid
+            profileImage.onerror = function () {
+                this.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+            };
         } else {
+            // If no image_path provided, set default image directly
             profileImage.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
         }
+
     });
 
 
@@ -103,7 +111,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var profileImage = modal.querySelector('#view-profile-image');
         if (image_path) {
             profileImage.src = './include/' + image_path; // Use the correct path for your images
+
+            // Set the onerror fallback to default image if the image path is not valid
+            profileImage.onerror = function () {
+                this.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+            };
         } else {
+            // If no image_path provided, set default image directly
             profileImage.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
         }
     });
