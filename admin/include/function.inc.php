@@ -236,8 +236,27 @@ function batchUpdate($conn, $id, $batch_name, $batch_year, $dept_id, $sem_id)
 function lectureCreate($conn, $lname, $dept, $batches, $subjects, $lecture_halls, $days, $time_slot)
 {
     try {
-        // Prepare SQL statement to insert lecture schedule data
-        $sql = "INSERT INTO lhm_system2.lecture_schedule (lecturer_id, hall_id, department_id, batch_id, subject_id, slot_id, days)
+        // Check if a lecture with the same hall_id, slot_id, and days already exists
+        $checkSql = "SELECT COUNT(*) FROM lecture_schedule 
+                     WHERE hall_id = :hall_id AND slot_id = :slot_id AND days = :days";
+        
+        $checkStmt = $conn->prepare($checkSql);
+        $checkStmt->execute([
+            ':hall_id' => $lecture_halls,
+            ':slot_id' => $time_slot,
+            ':days' => $days
+        ]);
+
+        // Fetch the count of existing rows
+        $count = $checkStmt->fetchColumn();
+
+        // If count is greater than 0, return error message
+        if ($count > 0) {
+            return "A lecture is already scheduled in this hall at the same time on this day.";
+        }
+
+        // Prepare SQL statement to insert lecture schedule data if no conflict
+        $sql = "INSERT INTO lecture_schedule (lecturer_id, hall_id, department_id, batch_id, subject_id, slot_id, days)
                 VALUES (:lecturer_id, :hall_id, :department_id, :batch_id, :subject_id, :slot_id, :days)";
 
         $stmt = $conn->prepare($sql);
@@ -254,7 +273,6 @@ function lectureCreate($conn, $lname, $dept, $batches, $subjects, $lecture_halls
         ]);
 
         return "Lecture scheduled successfully!";
-        exit();
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }
@@ -267,6 +285,25 @@ function lectureCreate($conn, $lname, $dept, $batches, $subjects, $lecture_halls
 function lectureUpdate($conn, $id, $lname, $lecture_halls, $days, $time_slot)
 {
     try {
+        // Check if a lecture with the same hall_id, slot_id, and days already exists
+        $checkSql = "SELECT COUNT(*) FROM lecture_schedule 
+                     WHERE hall_id = :hall_id AND slot_id = :slot_id AND days = :days";
+        
+        $checkStmt = $conn->prepare($checkSql);
+        $checkStmt->execute([
+            ':hall_id' => $lecture_halls,
+            ':slot_id' => $time_slot,
+            ':days' => $days
+        ]);
+
+        // Fetch the count of existing rows
+        $count = $checkStmt->fetchColumn();
+
+        // If count is greater than 0, return error message
+        if ($count > 0) {
+            return "A lecture is already scheduled in this hall at the same time on this day.";
+        }
+
         $sql = "UPDATE lhm_system2.lecture_schedule SET 
                 lecturer_id = :lecturer_id,
                 hall_id = :hall_id,
