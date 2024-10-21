@@ -31,8 +31,8 @@
         <label for="department">Department:</label>
         <select id="department" name="department" required>
             <option value=""disabled selected>Select Department</option>
-            <option value="Higher National Diploma In INformation Technology">Higher National Diploma In INformation Technology</option>
-            <option value="Higher National Diploma In English">Higher National Diploma In English</option>
+            <option value="1">Higher National Diploma In INformation Technology</option>
+            <option value="2">Higher National Diploma In English</option>
             <option value="Higher National Diploma In Acoountancy">Higher National Diploma In Acoountancy</option>
             <option value="Higher National Diploma In Projecct Management">Higher National Diploma In Projecct Management</option>
             <!-- Add more department as needed -->
@@ -48,28 +48,9 @@
             
         </select><br><br>
 
-        <button type="submit" >Add Subject</button>
+        <button type="submit">Add Subject</button>
     </form>
 </body>
 </html>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collecting form data
-    $subject_number = $_POST['subject_number'];
-    $subject_name = $_POST['subject_name'];
-    $credits = $_POST['credits'];
-    $department = $_POST['department'];
-    $semester = $_POST['semester'];
 
-    
-
-    // For now, just display the collected data
-    echo "<h1>Subject Added</h1>";
-    echo "Subject Number: " . htmlspecialchars($subject_number) . "<br>";
-    echo "Subject Name: " . htmlspecialchars($subject_name) . "<br>";
-    echo "Credits: " . htmlspecialchars($credits) . "<br>";
-    echo "Department: " . htmlspecialchars($department) . "<br>";
-    echo "Semester: " . htmlspecialchars($semester) . "<br>";
-}
-?>
 
