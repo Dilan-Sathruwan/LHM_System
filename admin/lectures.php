@@ -7,7 +7,7 @@
     <!-- Navbar End -->
 
     <!-- Lecture Add /Edit Modal -->
-    <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1 "
+    <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
             <div class="modal-content bg-colors2">
@@ -281,51 +281,17 @@
                                             <th>chekout</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php
-                                        if (!empty($result)) {
-                                            foreach ($result as $row) {
-                                                echo '<tr>';
-                                                echo '<td>' . htmlspecialchars($row['index_number']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['username']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['email']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['expertise']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['address']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['mobile_no']) . '</td>';
-                                                echo '<td class="d-flex align-items-lg-center justify-content-around">';
-                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView" ';
-                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
-                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
-                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
-                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
-                                                echo 'data-about="' . htmlspecialchars($row['expertise']) . '" ';
-                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
-                                                echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
-                                                echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
-                                                echo 'data-image_path="' . htmlspecialchars($row['image_path']) . '"';
-                                                echo '><i class="fas fa-eye fa-lg"></i></a>';
-                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate" ';
-                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
-                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
-                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
-                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
-                                                echo 'data-about="' . htmlspecialchars($row['expertise']) . '" ';
-                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
-                                                echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
-                                                echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
-                                                echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
-                                                echo 'data-image_path="' . htmlspecialchars($row['image_path']) . '"';
-                                                echo '><i class="fas fa-user-edit fa-lg"></i></a>';
-                                                echo '<a href="include/delete.php?type=lectures&id=' . $row['id'] . ' class="m-1" onclick="return confirm(\'Are you sure you want to delete this Lecture?\')"><i class="fas fa-trash-alt fa-lg"></i></a>';
-                                                echo '</td>';
-                                                echo '</tr>';
-                                            }
-                                        } else {
-                                            echo '<tr><td colspan="7">No results found</td></tr>';
-                                        }
-                                        ?>
+                                    <tr>
+                                        <input type="search" placeholder="search.." id="search_student">
+                                    </tr>
+                                    <tbody id="output">
+                                        
                                     </tbody>
                                 </table>
+                               
+  </div>
+
+
                                 <?php
                                 // Close the connection
 
@@ -346,3 +312,4 @@
 <!-- Content End -->
 
 <?php include './include/footer.php'; ?>
+<script src="./assets/js/search_lectures.js"></script>
