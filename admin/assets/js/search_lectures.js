@@ -31,6 +31,51 @@ search_input.addEventListener("keyup", (e) => {
               <td>${lecture.mobile_no || "N/A"}</td>
               <td>${lecture.address}</td>
               <td>${lecture.created_at || "N/A"}</td>
+               <td> 
+              <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView" 
+                                            data-id= ${lecture.id}
+                                               data-index_number=${
+                                                 lecture.index_number
+                                               }
+                                               data-username=${lecture.username}
+                                               data-email= ${lecture.email}
+                                               data-about= ${lecture.expertise}
+                                               data-address= ${lecture.address}
+                                               data-mobile_no=${
+                                                 lecture.mobile_no
+                                               }
+                                               data-lecturerole=${lecture.role}
+                                               data-image_path=${
+                                                 lecture.image_path
+                                               }>
+                                                <i class="fas fa-eye fa-lg"></i>
+                                               </a>
+
+                                               <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate"
+                                            data-id= ${lecture.id}
+                                               data-index_number=${
+                                                 lecture.index_number
+                                               }
+                                               data-username=${lecture.username}
+                                               data-email= ${lecture.email}
+                                               data-about= ${lecture.expertise}
+                                               data-address= ${lecture.address}
+                                               data-mobile_no=${
+                                                 lecture.mobile_no
+                                               }
+                                               data-lecturerole=${lecture.role}
+                                               data-inputPassword=${
+                                                 lecture.password
+                                               }
+                                               data-image_path=${
+                                                 lecture.image_path
+                                               }>
+                                                <i class="fas fa-user-edit fa-lg"></i>
+                                               </a>
+                                               <a href="include/delete.php?type=lectures&id=${
+                                                 lecture.id
+                                               } class="m-1" onclick="return confirm(\'Are you sure you want to delete this Lecture?\')"><i class="fas fa-trash-alt fa-lg"></i></a>
+                      </td>
             </tr>
           `;
           outputEl.innerHTML += row;
@@ -77,6 +122,51 @@ function fillInputs() {
               <td>${lecture.mobile_no || "N/A"}</td>
               <td>${lecture.address}</td>
               <td>${lecture.created_at || "N/A"}</td>
+              <td> 
+              <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView" 
+                                            data-id= ${lecture.id}
+                                               data-index_number=${
+                                                 lecture.index_number
+                                               }
+                                               data-username=${lecture.username}
+                                               data-email= ${lecture.email}
+                                               data-about= ${lecture.expertise}
+                                               data-address= ${lecture.address}
+                                               data-mobile_no=${
+                                                 lecture.mobile_no
+                                               }
+                                               data-lecturerole=${lecture.role}
+                                               data-image_path=${
+                                                 lecture.image_path
+                                               }>
+                                                <i class="fas fa-eye fa-lg"></i>
+                                               </a>
+
+                                               <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate"
+                                            data-id= ${lecture.id}
+                                               data-index_number=${
+                                                 lecture.index_number
+                                               }
+                                               data-username=${lecture.username}
+                                               data-email= ${lecture.email}
+                                               data-about= ${lecture.expertise}
+                                               data-address= ${lecture.address}
+                                               data-mobile_no=${
+                                                 lecture.mobile_no
+                                               }
+                                               data-lecturerole=${lecture.role}
+                                               data-inputPassword=${
+                                                 lecture.password
+                                               }
+                                               data-image_path=${
+                                                 lecture.image_path
+                                               }>
+                                                <i class="fas fa-user-edit fa-lg"></i>
+                                               </a>
+                                               <a href="include/delete.php?type=lectures&id=${
+                                                 lecture.id
+                                               } class="m-1" onclick="return confirm(\'Are you sure you want to delete this Lecture?\')"><i class="fas fa-trash-alt fa-lg"></i></a>
+                      </td>
             </tr>
           `;
           outputEl.innerHTML += row;
