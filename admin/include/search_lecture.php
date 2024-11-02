@@ -1,15 +1,8 @@
 <?php
-// Database configuration
-$servername = "localhost";
-$username = "root";
-$password = "12345";
-$dbname = "lhm_system2";
+require_once 'db_connection.inc.php';
 
 try {
-    // Create a PDO connection
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    
     if (isset($_GET["query"])) {
         $query = $_GET["query"];
 

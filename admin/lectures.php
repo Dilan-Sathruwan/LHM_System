@@ -255,9 +255,14 @@
 
                                 <hr>
 
+                                <!-- Search Input Above the Table -->
+                                <div class="mb-3">
+                                    <input type="search" placeholder="Search..." id="search_student" class="form-control" />
+                                </div>
+
 
                                 <!-- Table with striped rows -->
-                                <table class="table datatable text-start align-middle table-bordered table-hover mb-0">
+                                <table class="table text-start align-middle table-bordered table-hover mb-0 table-responsive">
                                     <thead>
                                         <tr>
                                             <th>Index Number</th>
@@ -265,17 +270,10 @@
                                             <th>Email</th>
                                             <th>Phone Number</th>
                                             <th>Roles</th>
-                                            <th>Re. Date</th>
+                                            <!-- <th>Re. Date</th> -->
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td colspan="7">
-                                                <input type="search" placeholder="Search lecture name.." id="search_student" class="form-control" />
-                                            </td>
-                                        </tr>
-                                    </tbody>
                                     <tbody id="output"></tbody>
                                 </table>
                                 <script>
@@ -285,7 +283,7 @@
                                     // Function to fetch and display lectures
                                     function fetchLectures(query = "") {
                                         const xhr = new XMLHttpRequest();
-                                        xhr.open("GET", `./include/search.php?query=${query}`, true);
+                                        xhr.open("GET", `./include/search_lecture.php?query=${query}`, true);
 
                                         xhr.onload = function() {
                                             if (xhr.status === 200) {
@@ -302,7 +300,6 @@
                                 <td>${lecture.email}</td>
                                 <td>${lecture.mobile_no || "N/A"}</td>
                                 <td>${lecture.role}</td>
-                                <td>${lecture.created_at || "N/A"}</td>
                                 <td>
                                     <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView"
                                         data-id="${lecture.id}" data-index_number="${lecture.index_number}" 

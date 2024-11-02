@@ -364,6 +364,7 @@
                                                 echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
                                                 echo 'data-department_id="' . htmlspecialchars($row['department_id']) . '" ';
                                                 echo 'data-re_date="' . htmlspecialchars($row['enrollment_date']) . '"';
+                                                echo 'data-image_path="' . htmlspecialchars($row['image_path']) . '"';
                                                 echo '><i class="fas fa-user-edit fa-lg"></i></a>';
                                                 echo '<a href="include/delete.php?type=student&id=' . $row['id'] . '" class="m-1" onclick="return confirm(\'Are you sure you want to delete this student?\')"> <i class="fas fa-trash-alt fa-lg"></i> </a>';
                                                 echo '</td>';
