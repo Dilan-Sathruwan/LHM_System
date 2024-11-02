@@ -89,25 +89,25 @@ function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $
 
 // ############################# Function to Add the student's details ######################
 
-function studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id)
+function studentCreate($conn, $index_num, $student_name, $email, $mobile_num, $address, $courses, $batch_id, $imagePath)
 {
     try {
-        $sql = "INSERT INTO students (`index_number`, `username`, `email`, `mobile_num`, `address`, `batch_id`, `department_id`) VALUES (:index_num, :username, :email, :mobile_num, :address, :batch_id, :department_id)";
+        $sql = "INSERT INTO students (`index_number`, `username`, `email`, `mobile_num`, `address`, `batch_id`, `department_id`, `image_path`) 
+                VALUES (:index_num, :username, :email, :mobile_num, :address, :batch_id, :department_id, :image_path)";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute([
-
             ':index_num' => $index_num,
             ':username' => $student_name,
             ':email' => $email,
             ':mobile_num' => $mobile_num,
             ':address' => $address,
             ':batch_id' => $batch_id,
-            ':department_id' => $courses
+            ':department_id' => $courses,
+            ':image_path' => $imagePath
         ]);
 
-        return "student registered successfully!";
-        exit();
+        return "Student registered successfully!";
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }
@@ -381,6 +381,62 @@ function uploadOrUpdateImage($conn, $file, $id = null) {
         }
     } else {
         return "There was an error uploading the file!";
+    }
+}
+
+
+// ############################# Function Update to image student######################
+function sUploadOrUpdateImage($conn, $file, $id = null)
+{
+    // Check if file upload was attempted
+    if ($file && $file['error'] === UPLOAD_ERR_OK) {
+        // Define allowed file types and size limit
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $maxFileSize = 2 * 1024 * 1024; // 2MB
+
+        // Validate file type
+        if (!in_array($file['type'], $allowedTypes)) {
+            return "Only JPG, PNG, and GIF files are allowed!";
+        }
+
+        // Validate file size
+        if ($file['size'] > $maxFileSize) {
+            return "File size exceeds the 2MB limit!";
+        }
+
+        // Define upload directory
+        $uploadDir = "uploads/profile_images/";
+        
+        // Ensure directory exists, if not create it
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        // Generate a unique file name
+        $fileName = uniqid() . '_' . time() . '_' . basename($file['name']);
+        $targetFile = $uploadDir . $fileName;
+
+        // Attempt to move the uploaded file to the directory
+        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+            if ($id) {
+                // For updates, update the student's image path
+                try {
+                    $sql = "UPDATE students SET image_path = :image_path WHERE id = :id";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute([':image_path' => $targetFile, ':id' => $id]);
+                    return "Image updated successfully!";
+                } catch (PDOException $e) {
+                    return "Database error: " . $e->getMessage();
+                }
+            } else {
+                // For new records, return the file path
+                return $targetFile;
+            }
+        } else {
+            return "There was an error uploading the file!";
+        }
+    } else {
+        return null; // No file was uploaded
     }
 }
 

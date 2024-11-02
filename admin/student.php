@@ -28,7 +28,7 @@
 
                                 <div class="card my-1">
 
-                                    <form action="./include/create_student.php" method="POST" id="myFormS" class="card-body cardbody-color p-lg-2">
+                                    <form action="./include/create_student.php" method="POST" id="myFormS" class="card-body cardbody-color p-lg-2" enctype="multipart/form-data">
 
                                         <div class="row g-3">
 
