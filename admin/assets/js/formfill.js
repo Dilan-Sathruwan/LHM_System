@@ -72,11 +72,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Set the onerror fallback to default image if the image path is not valid
             profileImage.onerror = function () {
-                this.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+                this.src = './include/uploads/pngwing.com.png'; // Default image
             };
         } else {
             // If no image_path provided, set default image directly
-            profileImage.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+            profileImage.src = './include/uploads/pngwing.com.png'; // Default image
         }
 
     });
@@ -114,11 +114,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Set the onerror fallback to default image if the image path is not valid
             profileImage.onerror = function () {
-                this.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+                this.src = './include/uploads/pngwing.com.png'; // Default image
             };
         } else {
             // If no image_path provided, set default image directly
-            profileImage.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+            profileImage.src = './include/uploads/pngwing.com.png'; // Default image
         }
     });
 

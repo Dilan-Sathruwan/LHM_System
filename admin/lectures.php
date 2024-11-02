@@ -30,10 +30,10 @@
 
                                         <div class="row g-3">
 
-                                            <input type="number" name="id" id="lecturer-id">
+                                            <input type="hidden" name="id" id="lecturer-id">
 
                                             <div class="text-center">
-                                                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                                                <img src="./include/uploads/pngwing.com.png"
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                                                     width="200px" alt="profile">
                                             </div>
@@ -161,7 +161,7 @@
                                         <div class="row g-3">
                                             <!-- Profile Image -->
                                             <div class="text-center">
-                                                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                                                <img src="./include/uploads/pngwing.com.png"
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                                                     width="200px" alt="profile" id="view-profile-image">
                                             </div>
@@ -256,19 +256,7 @@
                                 <hr>
 
 
-                                <?php
-                                try {
-                                    // Prepare the SQL statement
-                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, password, expertise, address, mobile_no, role, image_path FROM lecturers");
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                } catch (PDOException $e) {
-                                    echo "Connection failed: " . $e->getMessage();
-                                }
-                                $conn = null;
-                                ?>
-
-                                <!-- Table with stripped rows -->
+                                <!-- Table with striped rows -->
                                 <table class="table datatable text-start align-middle table-bordered table-hover mb-0">
                                     <thead>
                                         <tr>
@@ -277,60 +265,83 @@
                                             <th>Email</th>
                                             <th>Phone Number</th>
                                             <th>Roles</th>
-                                            <th data-type="date" data-format="YYYY/DD/MM">Re. Date</th>
-                                            <th>chekout</th>
+                                            <th>Re. Date</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        if (!empty($result)) {
-                                            foreach ($result as $row) {
-                                                echo '<tr>';
-                                                echo '<td>' . htmlspecialchars($row['index_number']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['username']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['email']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['expertise']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['address']) . '</td>';
-                                                echo '<td>' . htmlspecialchars($row['mobile_no']) . '</td>';
-                                                echo '<td class="d-flex align-items-lg-center justify-content-around">';
-                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView" ';
-                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
-                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
-                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
-                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
-                                                echo 'data-about="' . htmlspecialchars($row['expertise']) . '" ';
-                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
-                                                echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
-                                                echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
-                                                echo 'data-image_path="' . htmlspecialchars($row['image_path']) . '"';
-                                                echo '><i class="fas fa-eye fa-lg"></i></a>';
-                                                echo '<a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate" ';
-                                                echo 'data-id="' . htmlspecialchars($row['id']) . '" ';
-                                                echo 'data-index_number="' . htmlspecialchars($row['index_number']) . '" ';
-                                                echo 'data-username="' . htmlspecialchars($row['username']) . '" ';
-                                                echo 'data-email="' . htmlspecialchars($row['email']) . '" ';
-                                                echo 'data-about="' . htmlspecialchars($row['expertise']) . '" ';
-                                                echo 'data-address="' . htmlspecialchars($row['address']) . '" ';
-                                                echo 'data-mobile_no="' . htmlspecialchars($row['mobile_no']) . '"';
-                                                echo 'data-lecturerole="' . htmlspecialchars($row['role']) . '"';
-                                                echo 'data-inputPassword="' . htmlspecialchars($row['password']) . '"';
-                                                echo 'data-image_path="' . htmlspecialchars($row['image_path']) . '"';
-                                                echo '><i class="fas fa-user-edit fa-lg"></i></a>';
-                                                echo '<a href="include/delete.php?type=lectures&id=' . $row['id'] . ' class="m-1" onclick="return confirm(\'Are you sure you want to delete this Lecture?\')"><i class="fas fa-trash-alt fa-lg"></i></a>';
-                                                echo '</td>';
-                                                echo '</tr>';
-                                            }
-                                        } else {
-                                            echo '<tr><td colspan="7">No results found</td></tr>';
-                                        }
-                                        ?>
+                                        <tr>
+                                            <td colspan="7">
+                                                <input type="search" placeholder="Search lecture name.." id="search_student" class="form-control" />
+                                            </td>
+                                        </tr>
                                     </tbody>
+                                    <tbody id="output"></tbody>
                                 </table>
-                                <?php
-                                // Close the connection
+                                <script>
+                                    const searchInput = document.getElementById("search_student");
+                                    const outputEl = document.getElementById("output");
 
-                                ?>
-                                <!-- End Table with stripped rows -->
+                                    // Function to fetch and display lectures
+                                    function fetchLectures(query = "") {
+                                        const xhr = new XMLHttpRequest();
+                                        xhr.open("GET", `./include/search.php?query=${query}`, true);
+
+                                        xhr.onload = function() {
+                                            if (xhr.status === 200) {
+                                                const data = JSON.parse(xhr.responseText);
+                                                outputEl.innerHTML = ""; // Clear previous output
+
+                                                // Check if any results were returned
+                                                if (data.length > 0) {
+                                                    data.forEach((lecture) => {
+                                                        const row = `
+                            <tr>
+                                <td>${lecture.index_number}</td>
+                                <td>${lecture.username}</td>
+                                <td>${lecture.email}</td>
+                                <td>${lecture.mobile_no || "N/A"}</td>
+                                <td>${lecture.role}</td>
+                                <td>${lecture.created_at || "N/A"}</td>
+                                <td>
+                                    <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView"
+                                        data-id="${lecture.id}" data-index_number="${lecture.index_number}" 
+                                        data-username="${lecture.username}" data-email="${lecture.email}" 
+                                        data-about="${lecture.expertise}" data-address="${lecture.address}" 
+                                        data-mobile_no="${lecture.mobile_no}" data-lecturerole="${lecture.role}" 
+                                        data-image_path="${lecture.image_path}">
+                                        <i class="fas fa-eye fa-lg"></i>
+                                    </a>
+                                    <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate"
+                                        data-id="${lecture.id}" data-index_number="${lecture.index_number}" 
+                                        data-username="${lecture.username}" data-email="${lecture.email}" 
+                                        data-about="${lecture.expertise}" data-address="${lecture.address}" 
+                                        data-mobile_no="${lecture.mobile_no}" data-lecturerole="${lecture.role}" 
+                                        data-inputPassword="${lecture.password}" data-image_path="${lecture.image_path}">
+                                        <i class="fas fa-user-edit fa-lg"></i>
+                                    </a>
+                                    <a href="include/delete.php?type=lectures&id=${lecture.id}" 
+                                        class="m-1" onclick="return confirm('Are you sure you want to delete this Lecture?')">
+                                        <i class="fas fa-trash-alt fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>`;
+                                                        outputEl.innerHTML += row;
+                                                    });
+                                                } else {
+                                                    outputEl.innerHTML = `<tr><td colspan="7" class="text-center">No results found</td></tr>`;
+                                                }
+                                            }
+                                        };
+                                        xhr.send();
+                                    }
+
+                                    // Event listener for search input
+                                    searchInput.addEventListener("keyup", (e) => fetchLectures(e.target.value));
+
+                                    // Initial fetch to display all lectures
+                                    document.addEventListener("DOMContentLoaded", () => fetchLectures("init"));
+                                </script>
 
                             </div>
                         </div>
