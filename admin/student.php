@@ -40,6 +40,9 @@
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                                                     width="200px" alt="profile">
                                             </div>
+                                            <div class="col-12">
+                                                <input type="file" name="profile_image" class="form-control" id="image_path">
+                                            </div>
 
                                             <div class="col-sm-6">
                                                 <label for="Index_num" class="form-label">Student Index Number</label>
