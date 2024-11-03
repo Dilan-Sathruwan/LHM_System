@@ -3,7 +3,7 @@ session_start();
 include "include/db_connection.inc.php";
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location:../signin.php"); 
+    header("Location:../signin.php");
     exit();
 }
 
@@ -79,8 +79,8 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0"><?php if (isset($_SESSION['user_id'])) {
-                                    echo "Welcome, " . $_SESSION['user_name']; // Display the username
-                                } ?></h6>
+                                                echo "Welcome, " . $_SESSION['user_name']; // Display the username
+                                            } ?></h6>
                         <span>Active</span>
                     </div>
                 </div>
@@ -140,10 +140,32 @@ if (!isset($_SESSION['user_id'])) {
                                                                             echo 'active';
                                                                         } ?>"><i
                             class="fa fa-table me-2"></i>Schedules</a>
-                    <a href="Events.php" class="nav-item nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'Events.php') {
+                    
+
+
+
+                    <div class="nav-item dropdown">
+                        <a href="" class="nav-link dropdown-toggle <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_lecture.php') {
                                                                         echo 'active';
-                                                                    } ?>"><i
-                            class="fa fa-chart-bar me-2"></i>Events</a>
+                                                                    } elseif (basename($_SERVER['PHP_SELF']) == 'timetable_batch.php') {
+                                                                        echo 'active';
+                                                                    } elseif (basename($_SERVER['PHP_SELF']) == 'timetable_hall.php') {
+                                                                        echo 'active';
+                                                                    }
+                                                                    ?>" data-bs-toggle="dropdown"><i
+                                class="fa fa-university me-2"></i>Time table</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="timetable_lecture.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_lecture.php') {
+                                                                                echo 'active';
+                                                                            } ?>">Lecture Timetable</a>
+                            <a href="timetable_batch.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_batch.php') {
+                                                                                echo 'active';
+                                                                            } ?>">Batch Timetable</a>
+                            <a href="timetable_hall.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_hall.php') {
+                                                                            echo 'active';
+                                                                        } ?>">Hall Timetable</a>
+                        </div>
+                    </div>
 
 
                     <div class="nav-item dropdown">
