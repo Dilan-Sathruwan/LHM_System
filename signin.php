@@ -112,7 +112,7 @@
 
                                 </div>
                                 <button type="submit" name="Ssubmit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                                <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
+                                <p class="text-center mb-0">Lecture Hall Management System </p>
                             </form>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
 
                                 </div>
                                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="Asubmit">Sign In</button>
-                                <p class="text-center mb-0">Don't have an Account? <a href="">Home</a></p>
+                                <p class="text-center mb-0">Lecture Hall Management System </p>
                             </form>
 
                         </div>

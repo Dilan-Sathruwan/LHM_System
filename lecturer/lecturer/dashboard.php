@@ -25,6 +25,18 @@ if ($stmt->rowCount() > 0) {
     exit();
 }
 
+// Set the file path
+$filePath = '../../admin/include/' . htmlspecialchars($lecturer['image_path']);
+
+// Check if the file exists
+if (file_exists($filePath)) {
+    // If file exists, use the student's image
+    $imagePath = $filePath;
+} else {
+    // If file does not exist, use a default image path
+    $imagePath = '../../admin/include/uploads/pngwing.com.png';  // Update with your default image path
+}
+
 // Close the statement (optional with PDO, but you can unset it)
 $stmt = null;
 ?>
@@ -161,9 +173,10 @@ include '../includes/lecturer_header.php';
                 <div class="usercard">
                     <div class="ucard_pic mb-3">
                         <!-- <img src="https://dilan-sathruwan.github.io/Project_Grapher_Website/About%20Us/Photos/Loku.jpg" alt="Profile Image" class="img-fluid rounded-circle" /> -->
-                        <img src="../../admin/include/<?php echo htmlspecialchars($lecturer['image_path']); ?>" alt="Profile Image" class="img-fluid rounded-circle" />
+                        <img src="<?php echo $imagePath ?>" alt="Profile Image" class="img-fluid rounded-circle" />
                     </div>
                     <h2>Hello, <?php echo htmlspecialchars($lecturer['username']); ?></h2>
+                    
                 </div>
             </div>
 

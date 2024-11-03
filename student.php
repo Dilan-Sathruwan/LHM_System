@@ -25,10 +25,22 @@ if ($stmt->rowCount() > 0) {
     exit();
 }
 
+
+// Set the file path
+$filePath = './admin/include/' . htmlspecialchars($Students['image_path']);
+
+// Check if the file exists
+if (file_exists($filePath)) {
+    // If file exists, use the student's image
+    $imagePath = $filePath;
+} else {
+    // If file does not exist, use a default image path
+    $imagePath = './admin/include/uploads/pngwing.com.png';  // Update with your default image path
+}
+
 // Close the statement (optional with PDO, but you can unset it)
 $stmt = null;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -137,9 +149,10 @@ $stmt = null;
             <div class="col-md-4 mb-4">
                 <div class="usercard text-center shadow-effect">
                     <div class="ucard_pic mb-3">
-                        <img src="./DP.png" alt="Profile Image" class="img-fluid rounded-circle">
+                    <img src="<?php echo $imagePath; ?>" alt="Profile Image" class="img-fluid rounded-circle">
                     </div>
                     <h2 class="mt-3 text-dark">Hello, <?php echo htmlspecialchars($Students['username']); ?></h2>
+                    <?php echo $imagePath; ?>
                 </div>
             </div>
 
@@ -153,7 +166,7 @@ $stmt = null;
                             <div class="profile-info mb-4">
                                 <p>Name: <?php echo htmlspecialchars($Students['username']); ?></p>
                                 <p>Email: <?php echo htmlspecialchars($Students['email']); ?></p>
-                                <p>Email: <?php echo htmlspecialchars($Students['index_number']); ?></p>
+                                <p>Index Number: <?php echo htmlspecialchars($Students['index_number']); ?></p>
                                 <p>Department: <?php echo htmlspecialchars($Students['department_id']); ?></p>
                                 <p>Batch: <?php echo htmlspecialchars($Students['batch_id']); ?></p>
                             </div>
