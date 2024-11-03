@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Event listener for when the modal is triggered
     var StudentCreateModal = document.getElementById('studentcreate');
+    var StudentViewModal = document.getElementById('studentView');
 
     StudentCreateModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget; // Button that triggered the modal
@@ -45,6 +46,43 @@ document.addEventListener('DOMContentLoaded', function () {
             profileImage.src = './include/uploads/pngwing.com.png'; // Default image
         }
     });
+
+    StudentViewModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+
+        var id = button.getAttribute('data-id');
+        var index_number = button.getAttribute('data-index_number');
+        var student_name = button.getAttribute('data-username');
+        var email = button.getAttribute('data-email');
+        var mobile_num = button.getAttribute('data-mobile_num');
+        var address = button.getAttribute('data-address');
+        var department_id = button.getAttribute('data-department_id');
+        var batch_id = button.getAttribute('data-batch_id');
+        var image_path = button.getAttribute('data-image_path'); // Get image path
+
+
+        var modal = StudentViewModal;
+        modal.querySelector('#view-student_id').value = id;
+        modal.querySelector('#view-Index_Num').value = index_number;
+        modal.querySelector('#view-Student_name').value = student_name;
+        modal.querySelector('#view-email').value = email;
+        modal.querySelector('#view-Mobile_num').value = mobile_num;
+        modal.querySelector('#view-address').value = address;
+        modal.querySelector('#view-department_id').value = department_id;
+        modal.querySelector('#view-batch_id').value = batch_id;
+
+        var profileImage = modal.querySelector('#view-student-profile-image');
+        if (image_path) {
+            profileImage.src = './include/' + image_path;
+
+            profileImage.onerror = function () {
+                this.src = './include/uploads/pngwing.com.png';
+            };
+        } else {
+            profileImage.src = './include/uploads/pngwing.com.png';
+        }
+    });
+
 });
 
 
@@ -54,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-// ##########lecturers update and view 
+
+
+// ##########lecturers update and view #################
 
 // Function to populate the modal with the lecturer's data
 document.addEventListener('DOMContentLoaded', function () {

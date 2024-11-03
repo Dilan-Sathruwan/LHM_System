@@ -257,7 +257,7 @@
 
                                 <!-- Search Input Above the Table -->
                                 <div class="mb-3">
-                                    <input type="search" placeholder="Search..." id="search_student" class="form-control" />
+                                    <input type="search" placeholder="Search lecture name.." id="search_lecture" class="form-control" />
                                 </div>
 
 
@@ -277,7 +277,7 @@
                                     <tbody id="output"></tbody>
                                 </table>
                                 <script>
-                                    const searchInput = document.getElementById("search_student");
+                                    const searchInput = document.getElementById("search_lecture");
                                     const outputEl = document.getElementById("output");
 
                                     // Function to fetch and display lectures
@@ -300,7 +300,7 @@
                                 <td>${lecture.email}</td>
                                 <td>${lecture.mobile_no || "N/A"}</td>
                                 <td>${lecture.role}</td>
-                                <td>
+                                <td class="d-flex justify-content-center">
                                     <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView"
                                         data-id="${lecture.id}" data-index_number="${lecture.index_number}" 
                                         data-username="${lecture.username}" data-email="${lecture.email}" 
