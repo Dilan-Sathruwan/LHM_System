@@ -268,8 +268,7 @@
                             <div class="card-body table-responsive">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h3 class="mb-0">Student Datatable</h3>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#studentcreate">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentcreate">
                                         Add Student
                                     </button>
 

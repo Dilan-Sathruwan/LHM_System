@@ -18,7 +18,7 @@ function lecturersCreate($conn, $index_num, $username, $email, $password, $lectu
             ':index_num' => $index_num,
             ':username' => $username,
             ':email' => $email,
-            ':password' => $hashedPassword,  
+            ':password' => $hashedPassword,
             ':lecturerole' => $lecturerole,
             ':address' => $address,
             ':about' => $about,
@@ -34,12 +34,12 @@ function lecturersCreate($conn, $index_num, $username, $email, $password, $lectu
 
 
 
- // Hash the password if it's being updated (if not empty)
-        // $password_sql = '';
-        // if (!empty($password)) {
-        //     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-        //     $password_sql = ", password = :password";
-        // }
+// Hash the password if it's being updated (if not empty)
+// $password_sql = '';
+// if (!empty($password)) {
+//     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+//     $password_sql = ", password = :password";
+// }
 
 
 
@@ -239,7 +239,7 @@ function lectureCreate($conn, $lname, $dept, $batches, $subjects, $lecture_halls
         // Check if a lecture with the same hall_id, slot_id, and days already exists
         $checkSql = "SELECT COUNT(*) FROM lecture_schedule 
                      WHERE hall_id = :hall_id AND slot_id = :slot_id AND days = :days";
-        
+
         $checkStmt = $conn->prepare($checkSql);
         $checkStmt->execute([
             ':hall_id' => $lecture_halls,
@@ -288,7 +288,7 @@ function lectureUpdate($conn, $id, $lname, $lecture_halls, $days, $time_slot)
         // Check if a lecture with the same hall_id, slot_id, and days already exists
         $checkSql = "SELECT COUNT(*) FROM lecture_schedule 
                      WHERE hall_id = :hall_id AND slot_id = :slot_id AND days = :days";
-        
+
         $checkStmt = $conn->prepare($checkSql);
         $checkStmt->execute([
             ':hall_id' => $lecture_halls,
@@ -331,7 +331,8 @@ function lectureUpdate($conn, $id, $lname, $lecture_halls, $days, $time_slot)
 
 
 // ############################# Function Update to image ######################
-function uploadOrUpdateImage($conn, $file, $id = null) {
+function uploadOrUpdateImage($conn, $file, $id = null)
+{
     // Check if the file was uploaded
     if ($file['error'] === UPLOAD_ERR_NO_FILE) {
         return;
@@ -353,7 +354,7 @@ function uploadOrUpdateImage($conn, $file, $id = null) {
 
     // Define upload directory
     $uploadDir = "uploads/profile_images/";
-    
+
     // Ensure directory exists, if not create it
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0755, true);
@@ -406,7 +407,7 @@ function sUploadOrUpdateImage($conn, $file, $id = null)
 
         // Define upload directory
         $uploadDir = "uploads/profile_images/";
-        
+
         // Ensure directory exists, if not create it
         if (!file_exists($uploadDir)) {
             mkdir($uploadDir, 0755, true);
@@ -444,8 +445,9 @@ function sUploadOrUpdateImage($conn, $file, $id = null)
 
 
 
-  // ############################# Function to Create the Subject ######################
-function SubjectCreate($conn, $subject_nam, $subject_number, $credits, $dept, $semester){
+// ############################# Function to Create the Subject ######################
+function SubjectCreate($conn, $subject_nam, $subject_number, $credits, $dept, $semester)
+{
 
     try {
         // Check if batch name or batch year already exists
@@ -476,12 +478,13 @@ function SubjectCreate($conn, $subject_nam, $subject_number, $credits, $dept, $s
     } catch (PDOException $e) {
         return "Error: " . $e->getMessage();
     }
-}  
+}
 
 
 
 
-function SubjectUpdate($conn, $id, $subject_nam, $subject_number, $credits, $dept, $semester){
+function SubjectUpdate($conn, $id, $subject_nam, $subject_number, $credits, $dept, $semester)
+{
     try {
         // Check if batch name already exists
         $sql_check = "SELECT * FROM subjects WHERE subject_name = :subject_name AND id != :id";
@@ -520,4 +523,71 @@ function SubjectUpdate($conn, $id, $subject_nam, $subject_number, $credits, $dep
         return "Error: " . $e->getMessage();
     }
 }
-?>
+
+
+// ############################# Function to Create the Hall ######################
+function createHall($conn, $hall_name, $capacity, $location)
+{
+    try {
+        // Check for an existing hall name
+        $sql_check = "SELECT * FROM lecture_halls WHERE hall_name = :hall_name";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->bindParam(':hall_name', $hall_name);
+        $stmt_check->execute();
+        if ($stmt_check->fetch(PDO::FETCH_ASSOC)) {
+            return "Error: A hall with this name already exists.";
+        }
+
+        // Insert new hall
+        $sql_insert = "INSERT INTO lecture_halls (hall_name, capacity, location) VALUES (:hall_name, :capacity, :location)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bindParam(':hall_name', $hall_name);
+        $stmt_insert->bindParam(':capacity', $capacity);
+        $stmt_insert->bindParam(':location', $location);
+
+        if ($stmt_insert->execute()) {
+            return "Hall added successfully!";
+        } else {
+            return "Error adding hall.";
+        }
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
+
+
+// ############################# Function to Update the Hall ######################
+function updateHall($conn, $hall_name, $capacity, $location, $id)
+{
+    try {
+        // Check for an existing hall name, excluding the current hall
+        $sql_check = "SELECT * FROM lecture_halls WHERE hall_name = :hall_name AND id != :id";
+        $stmt_check = $conn->prepare($sql_check);
+        $stmt_check->bindParam(':hall_name', $hall_name);
+        $stmt_check->bindParam(':id', $id);
+        $stmt_check->execute();
+
+        if ($stmt_check->fetch(PDO::FETCH_ASSOC)) {
+            return "Error: A hall with this name already exists.";
+        }
+
+        // Update hall information
+        $stmt = $conn->prepare("UPDATE lecture_halls SET hall_name = :hall_name, capacity = :capacity, location = :location WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':hall_name', $hall_name);
+        $stmt->bindParam(':capacity', $capacity);
+        $stmt->bindParam(':location', $location);
+
+        if ($stmt->execute()) {
+            return "Hall updated successfully!";
+            exit; 
+        } else {
+            return "Error updating hall.";
+            exit;
+        }
+    } catch (PDOException $e) {
+        return "Error: " . $e->getMessage();
+    }
+}
+
