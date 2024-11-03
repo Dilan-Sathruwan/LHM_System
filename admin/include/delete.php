@@ -22,6 +22,9 @@ if (isset($_GET['type']) && isset($_GET['id'])) {
             case 'LectureHall':
                 $sql = "DELETE FROM lecture_halls WHERE id = :id";
                 break;
+            case 'Subject':
+                $sql = "DELETE FROM subjects WHERE id = :id";
+                break;
             default:
                 echo "Invalid type!";
                 exit();

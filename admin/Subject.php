@@ -137,7 +137,77 @@
                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#subModal">Add Subject
                 </button>
             </div>
-            <nav>
+            <form method="GET" action="">
+                <div class="input-group mb-3 ">
+                    <input type="text" class="form-control" name="search" placeholder="Search subjects..." aria-label="Search subjects" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                    <button class="btn btn-outline-secondary btn-primary" type="submit">Find subject</button>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+                            <th scope="col">Id</th>
+                            <th scope="col">Subject Index</th>
+                            <th scope="col">Subject Name</th>
+                            <th scope="col">Semester</th>
+                            <th scope="col">Credits</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Retrieve the search term from the query parameters
+                        $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+
+                        // Modify the query to join the semester table and add search functionality
+                        $query = "
+            SELECT s.id, s.subject_number, s.subject_name, s.credits, sem.sem_name AS semester_name 
+            FROM subjects s
+            JOIN semester sem ON s.semester_id = sem.id
+        ";
+
+                        // Add a search condition if a search term is provided
+                        if (!empty($searchTerm)) {
+                            $query .= " WHERE s.subject_name LIKE :searchTerm OR s.subject_number LIKE :searchTerm";
+                        }
+
+                        $stmt = $conn->prepare($query);
+
+                        // Bind the search term if provided
+                        if (!empty($searchTerm)) {
+                            $searchWildcard = '%' . $searchTerm . '%'; // Add wildcards for partial matches
+                            $stmt->bindParam(':searchTerm', $searchWildcard);
+                        }
+
+                        $stmt->execute();
+                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        if (!empty($result)) {
+                            foreach ($result as $row) {
+                                echo '<tr>';
+                                echo '<td>' . htmlspecialchars($row['id']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['subject_number']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['subject_name']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['semester_name']) . '</td>';
+                                echo '<td>' . htmlspecialchars($row['credits']) . '</td>';
+                                echo '<td class="d-flex align-items-lg-center justify-content-around">';
+                                echo '<a href="#" class="edit-subject me-3" data-bs-toggle="modal" data-bs-target="#subUpdateModal" data-id="' . $row['id'] . '"><i class="fas fa-user-edit fa-lg"></i></a>';
+                                echo '<a href="include/delete.php?type=Subject&id=' . $row['id'] . '" class="me-1" onclick="return confirm(\'Are you sure you want to delete this subject?\')"> <i class="fas fa-trash-alt fa-lg"></i> </a>';
+                                echo '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="5">No results found</td></tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <button class="nav-link active" id="nav-1semester-tab" data-bs-toggle="tab"
                         data-bs-target="#nav-1semester" type="button" role="tab" aria-controls="nav-1semester"
@@ -153,44 +223,7 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-1semester" role="tabpanel"
                     aria-labelledby="nav-1semester-tab">
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Subject Index</th>
-                                    <th scope="col">Subject Name</th>
-                                    <th scope="col">Semester</th>
-                                    <th scope="col">Credits</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $stmt = $conn->query("SELECT id, subject_number, subject_name, semester_id, credits FROM subjects");
-                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                if (!empty($result)) {
-                                    foreach ($result as $row) {
-                                        echo '<tr>';
-                                        echo '<td>' . htmlspecialchars($row['id']) . '</td>';
-                                        echo '<td>' . htmlspecialchars($row['subject_number']) . '</td>';
-                                        echo '<td>' . htmlspecialchars($row['subject_name']) . '</td>';
-                                        echo '<td>' . htmlspecialchars($row['semester_id']) . '</td>';
-                                        echo '<td>' . htmlspecialchars($row['credits']) . '</td>';
-                                        echo '<td class="d-flex align-items-lg-center justify-content-around">';
-                                        echo '<a href="#" class="edit-subject" data-bs-toggle="modal" data-bs-target="#subUpdateModal" data-id="' . $row['id'] . '"><i class="fas fa-user-edit fa-lg"></i></a>';
-                                        echo '<a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>';
-                                        echo '</td>';
-                                        echo '</tr>';
-                                    }
-                                } else {
-                                    echo '<tr><td colspan="5">No results found</td></tr>';
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                    
                 </div>
                 <div class="tab-pane fade" id="nav-2semester" role="tabpanel" aria-labelledby="nav-2semester-tab">
                     <div class="table-responsive">
@@ -408,7 +441,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
 
             <script>
