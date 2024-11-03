@@ -46,6 +46,13 @@
             height: 100%;
             align-content: center;
         }
+
+        .bg-color-fram{
+            background-color:#0B0B45;
+        }
+        .bg-color-btn{
+            background-color: #CB0000;
+        }
     </style>
 
 </head>
@@ -59,7 +66,7 @@
 
 
             <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4 ">
-                <ul class="nav nav-pills mb-3 align-items-center justify-content-center bg-secondary p-2 bg-secondary rounded mx-3"
+                <ul class="nav nav-pills mb-3 align-items-center justify-content-center p-2 bg-color-fram rounded mx-3"
                     id="pills-tab" role="tablist">
                     <li class="nav-item " role="presentation">
                         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
@@ -86,7 +93,7 @@
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                         aria-labelledby="pills-home-tab">
 
-                        <div class="rounded p-4 p-sm-5 my-4 mx-3 bg-dark bg-gradient ">
+                        <div class="rounded p-4 p-sm-5 my-4 mx-3 bg-color-fram bg-gradient ">
 
                             <form action="./include/Login_student.php" method="POST">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -123,7 +130,7 @@
                     <!-- ####################Lecture login################### -->
 
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                        <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                        <div class="bg-color-fram rounded p-4 p-sm-5 my-4 mx-3">
 
                             <form action="./include/Login_lecture.php" method="POST">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
@@ -161,7 +168,7 @@
                     <!-- ####################Admin login################### -->
 
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                        <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                        <div class="bg-color-fram rounded p-4 p-sm-5 my-4 mx-3">
                             
                             <form action="./include/Login_Admin.php" method="POST">
                                 <div class="d-flex align-items-center justify-content-between mb-3">

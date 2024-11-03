@@ -6,13 +6,14 @@
 
 /* admin colors */
 .back-colors {
-    background: rgb(135, 17, 193);
-    background: linear-gradient(270deg, rgba(135, 17, 193, 1) 0%, rgba(36, 114, 252, 1) 100%);
+    background: rgb(36, 114, 252);
+    background: linear-gradient(270deg, rgba(36, 114, 252, 1) 0%, rgba(135, 17, 193, 1) 100%);
+    
 }
 
 .bg-colors2 {
-    background: rgb(36, 114, 252);
-    background: linear-gradient(270deg, rgba(36, 114, 252, 1) 0%, rgba(135, 17, 193, 1) 100%);
+    background: rgb(135, 17, 193);
+    background: linear-gradient(270deg, rgba(135, 17, 193, 1) 0%, rgba(36, 114, 252, 1) 100%);
 }
 
 
