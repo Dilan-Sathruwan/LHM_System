@@ -152,7 +152,7 @@ $stmt = null;
                     <img src="<?php echo $imagePath; ?>" alt="Profile Image" class="img-fluid rounded-circle">
                     </div>
                     <h2 class="mt-3 text-dark">Hello, <?php echo htmlspecialchars($Students['username']); ?></h2>
-                    <?php echo $imagePath; ?>
+                    
                 </div>
             </div>
 
