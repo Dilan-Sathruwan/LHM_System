@@ -137,12 +137,17 @@
                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#subModal">Add Subject
                 </button>
             </div>
+
+            <!--search form start-->
             <form method="GET" action="">
                 <div class="input-group mb-3 ">
                     <input type="text" class="form-control" name="search" placeholder="Search subjects..." aria-label="Search subjects" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
                     <button class="btn btn-outline-secondary btn-primary" type="submit">Find subject</button>
                 </div>
             </form>
+
+          <!--search form end-->
+
 
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -168,14 +173,14 @@
             JOIN semester sem ON s.semester_id = sem.id
         ";
 
-                        // Add a search condition if a search term is provided
+                        // Add a search condition if
                         if (!empty($searchTerm)) {
                             $query .= " WHERE s.subject_name LIKE :searchTerm OR s.subject_number LIKE :searchTerm";
                         }
 
                         $stmt = $conn->prepare($query);
 
-                        // Bind the search term if provided
+                       
                         if (!empty($searchTerm)) {
                             $searchWildcard = '%' . $searchTerm . '%'; // Add wildcards for partial matches
                             $stmt->bindParam(':searchTerm', $searchWildcard);
@@ -206,242 +211,6 @@
                 </table>
             </div>
 
-
-            <!-- <nav>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-1semester-tab" data-bs-toggle="tab"
-                        data-bs-target="#nav-1semester" type="button" role="tab" aria-controls="nav-1semester"
-                        aria-selected="true">1 Semester</button>
-                    <button class="nav-link" id="nav-2semester-tab" data-bs-toggle="tab" data-bs-target="#nav-2semester"
-                        type="button" role="tab" aria-controls="nav-2semester" aria-selected="false">2 Semester</button>
-                    <button class="nav-link" id="nav-3semester-tab" data-bs-toggle="tab" data-bs-target="#nav-3semester"
-                        type="button" role="tab" aria-controls="nav-3semester" aria-selected="false">3 Semester</button>
-                    <button class="nav-link" id="nav-4semester-tab" data-bs-toggle="tab" data-bs-target="#nav-4semester"
-                        type="button" role="tab" aria-controls="nav-4semester" aria-selected="false">4 Semester</button>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-1semester" role="tabpanel"
-                    aria-labelledby="nav-1semester-tab">
-                    
-                </div>
-                <div class="tab-pane fade" id="nav-2semester" role="tabpanel" aria-labelledby="nav-2semester-tab">
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th scope="col">Subject Index</th>
-                                    <th scope="col">Subject Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Enroll Lecture</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="nav-3semester" role="tabpanel" aria-labelledby="nav-3semester-tab">
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th scope="col">Subject Index</th>
-                                    <th scope="col">Subject Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Enroll Lecture</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="nav-4semester" role="tabpanel" aria-labelledby="nav-4semester-tab">
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-dark">
-                                    <th scope="col">Subject Index</th>
-                                    <th scope="col">Subject Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Enroll Lecture</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td class="d-flex align-items-lg-center justify-content-around">
-                                        <a href="" class=""><i class="fas fa-eye fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-user-edit fa-lg"></i></a>
-                                        <a href="" class=""><i class="fas fa-trash-alt fa-lg"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> -->
 
 
             <script>
