@@ -11,8 +11,8 @@
     <div class="modal fade" id="hallForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="lectureHalllabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="lectureHalllabel">Add Hall</h5>
+                <div class="modal-header bg-color-fram">
+                    <h1 class="modal-title fs-5" id="lectureHalllabel">Add Hall</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

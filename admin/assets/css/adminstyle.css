@@ -16,6 +16,22 @@
     background: linear-gradient(270deg, rgba(135, 17, 193, 1) 0%, rgba(36, 114, 252, 1) 100%);
 }
 
+.bg-color-fram{
+    background-color:#0B0B45;
+}
+
+.bg-color-fram h1 {
+    color: #ffffff;
+}
+
+.bg-color-fram button {
+    background-color: #ffffff;
+}
+
+.bg-color-btn{
+    background-color: #CB0000;
+}
+
 
 
 /* Style for the message div */

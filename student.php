@@ -175,8 +175,7 @@ $stmt = null;
                             </div>
                             <div class="button-group mb-3">
                                 <a href="#" class="btn btn-custom btn-primary btn-block mb-2">Edit Profile</a>
-                                <a href="#" class="btn btn-custom btn-info btn-block mb-2">View Semester Timetable</a>
-                                <a href="#" class="btn btn-custom btn-info btn-block mb-2">Timetable</a>
+                                <a href="./student_timetable.php" class="btn btn-custom btn-info btn-block mb-2">Your Timetable</a>
                                 <a href="./include/logout.php" class="btn btn-custom btn-danger btn-block mb-2">Logout</a>
                             </div>
                             <hr />
