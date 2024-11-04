@@ -34,7 +34,7 @@ SELECT
     s.subject_number,
     lh.hall_name,
     b.batch_name,
-    d.department_name,
+    d.dept_code,
     ts.start_time,
     ts.end_time,
     ls.days AS day_of_week
