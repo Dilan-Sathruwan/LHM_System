@@ -22,16 +22,16 @@ try {
 
     // ##########  Query to get department names and number of students in each department
     $query = "
-     SELECT departments.department_name, COUNT(students.id) as student_count 
+     SELECT departments.dept_code, COUNT(students.id) as student_count 
      FROM departments 
      LEFT JOIN students ON departments.id = students.department_id
-     GROUP BY departments.department_name";
+     GROUP BY departments.dept_code";
     $stmt = $conn->query($query);
     $departments = [];
     $student_counts = [];
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $departments[] = $row['department_name'];
+        $departments[] = $row['dept_code'];
         $student_counts[] = $row['student_count'];
 
 

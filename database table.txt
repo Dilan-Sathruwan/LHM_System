@@ -156,3 +156,17 @@ CREATE TABLE `lecture_schedule` (
   FOREIGN KEY (`slot_id`) REFERENCES `timeslot` (`slot_id`) ON DELETE CASCADE,
   FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE
 );
+
+
+-- Inserting time slot data
+INSERT INTO `timeslot` (start_time, end_time, is_interval)
+VALUES 
+('08:30:00', '09:30:00', FALSE),
+('09:30:00', '10:30:00', FALSE),
+('10:30:00', '11:30:00', FALSE),
+('11:30:00', '12:30:00', FALSE),
+('12:30:00', '13:00:00', TRUE),  -- Interval
+('13:00:00', '14:00:00', FALSE),
+('14:00:00', '15:00:00', FALSE),
+('15:00:00', '16:00:00', FALSE),
+('16:00:00', '17:00:00', FALSE);

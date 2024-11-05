@@ -8,9 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $capacity = filter_input(INPUT_POST, 'capacity', FILTER_SANITIZE_SPECIAL_CHARS);
     $location = filter_input(INPUT_POST, 'hall_location', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    // Check if the hall name already exists
-    $result = createHall($conn, $hall_name, $capacity, $location);
-
     if (!empty($id)) {
         //update lectures details
         $result = updateHall($conn, $hall_name, $capacity, $location, $id);
