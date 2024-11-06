@@ -243,11 +243,11 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <div class="card">
+                        <div class="card bg-light">
                             <div class="card-body table-responsive">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h3 class="mb-0">Lectures Datatable</h3>
-                                    <button type="button" class="btn btn-primary" id="mybutton1" data-bs-toggle="modal"
+                                    <button type="button" class="btn button-29" id="mybutton1" data-bs-toggle="modal"
                                         data-bs-target="#Lecturecreate">
                                         Add Lecture
                                     </button>
