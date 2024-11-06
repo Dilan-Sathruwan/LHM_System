@@ -1,6 +1,6 @@
 <?php
 // Database configuration
-$servername = "localhost";
+$servername = "localhost:3307";
 $username = "root";
 $password = "12345";
 $dbname = "lhm_system2";
