@@ -178,6 +178,68 @@ foreach ($lectures as $lecture) {
 <body>
 
 
+<div class="container mt-5">
+
+<div class="bg-light text-center rounded mb-16">
+    <div class="d-flex align-items-center justify-content-start mb-1">
+        <a class="btn  btn-dark" href="student.php">Lecture Timetables</a>
+        
+    </div>
+
+</div>
+<h2 class="bg-light text-center rounded mb-16">Your Full Student Timetable</h2>
+
+<table class="table table-bordered table-hover timetable-table">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <?php foreach ($days_of_week as $day) : ?>
+                <th><?php echo $day; ?></th>
+            <?php endforeach; ?>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($time_slots as $time) : ?>
+            <tr>
+                <td><?php echo htmlspecialchars($time); ?></td>
+                <?php foreach ($days_of_week as $day) : ?>
+                    <td>
+                        <?php
+                        // Extract start and end time for comparison
+                        list($start_time, $end_time) = explode(' - ', $time);
+                        $lecture_found = false;
+
+                        // Check if the lecture exists in this time slot
+                        if (isset($timetable[$day][$start_time . ' - ' . $end_time])) {
+                            $lecture = $timetable[$day][$start_time . ' - ' . $end_time];
+                            echo "<strong>" . htmlspecialchars($lecture['subject_number']) . "</strong><br>";
+                            echo "<em>" . htmlspecialchars($lecture['dept_code']) . "</em><br>";
+                            echo "Batch: " . htmlspecialchars($lecture['batch_name']) . "<br>";
+                            echo "Hall: " . htmlspecialchars($lecture['hall_name']);
+                            $lecture_found = true;
+                        }
+
+                        // If no lecture found, show empty cell or Interval label
+                        if (!$lecture_found) {
+                            if ($time === '12:30:00 - 13:00:00') {
+                                echo "<div class='interval-label'>Interval</div>";
+                            } else {
+                                echo "<span>--</span>";
+                            }
+                        }
+                        ?>
+                    </td>
+                <?php endforeach; ?>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<?php if (empty($lectures)) : ?>
+    <p>You have no scheduled lectures.</p>
+<?php endif; ?>
+</div>
+
 
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
