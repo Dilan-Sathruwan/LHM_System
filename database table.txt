@@ -28,6 +28,7 @@ CREATE TABLE `admin_actions` (
 -- Create the `departments` table
 CREATE TABLE `departments` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `dept_code` VARCHAR(50) DEFAULT NULL,
   `department_name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`)
 );
@@ -157,7 +158,7 @@ CREATE TABLE `lecture_schedule` (
 );
 
 
--- Insert time slot data
+-- Inserting time slot data
 INSERT INTO `timeslot` (start_time, end_time, is_interval)
 VALUES 
 ('08:30:00', '09:30:00', FALSE),

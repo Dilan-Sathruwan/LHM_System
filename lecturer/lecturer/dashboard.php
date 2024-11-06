@@ -192,7 +192,7 @@ include '../includes/lecturer_header.php';
                             <br>
                             <div class="f">
                                 <a href="view_schedule.php" class="but2">View Your Schedule</a>
-                                <a href="manage_lectures.php" class="but2">Manage Lectures</a>
+                                <!-- <a href="manage_lectures.php" class="but2">Manage Lectures</a> -->
                                 <a href="time_table.php" class="but2">View Timetable</a>
                                 <a href="view_all_lectures.php" class="but2">View All Lectures</a>
                                 <a href="../auth/logout.php" class="but2">Logout</a>
@@ -202,7 +202,7 @@ include '../includes/lecturer_header.php';
                                 <p>Download your Timetable</p>
                             <div class="f">
                                 <div class="coco">
-                                    <a href="download_timetable.php" class="but1">Download Now</a> <!-- Download link styled as button -->
+                                    <a href="./time_table.php" class="but1">Download Now</a> <!-- Download link styled as button -->
                                 </div>
                             </div>
                             <br><br>
