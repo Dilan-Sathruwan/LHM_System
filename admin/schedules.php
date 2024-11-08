@@ -480,7 +480,7 @@
                                 echo '<td>' . htmlspecialchars($row['start_time'] . ' - ' . $row['end_time']) . '</td>';
                                 echo '<td class="d-flex align-items-lg-center justify-content-around">';
                                 echo '<a href="#" class="edit-lecture ms-4" data-id="' . $row['id'] . '" data-bs-toggle="modal" data-bs-target="#EditbatchModal"><i class="fas fa-user-edit fa-lg"></i></a>';
-                                echo '<a href="" class="ms-4 me-3"><i class="fas fa-trash-alt fa-lg"></i></a>';
+                                echo '<a href="include/delete.php?type=schedules&id=' . $row['id'] . '" class="ms-4 me-3"><i class="fas fa-trash-alt fa-lg" onclick="return confirm(\'Are you sure you want to delete this shedules?\')"></i></a>';
                                 echo '</td>';
                                 echo '</tr>';
                             }
