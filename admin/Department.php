@@ -16,7 +16,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
                     <h5 class="mb-4">Departments</h5>
-                    <table class="table table-bordered text-start">
+                    <table class="table table-bordered text-start table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
@@ -56,7 +56,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
                     <h5 class="mb-4">Semesters & etc</h5>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
