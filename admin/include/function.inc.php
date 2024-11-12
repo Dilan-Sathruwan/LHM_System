@@ -304,7 +304,7 @@ function lectureUpdate($conn, $id, $lname, $lecture_halls, $days, $time_slot)
             return "A lecture is already scheduled in this hall at the same time on this day.";
         }
 
-        $sql = "UPDATE lhm_system2.lecture_schedule SET 
+        $sql = "UPDATE lecture_schedule SET 
                 lecturer_id = :lecturer_id,
                 hall_id = :hall_id,
                 slot_id = :slot_id, 
