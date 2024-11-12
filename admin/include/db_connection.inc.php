@@ -5,6 +5,11 @@ $username = "sql12743113";
 $password = "98czmEvKyu";
 $dbname = "sql12743113";
 
+// $servername = "localhost";
+// $username = "root";
+// $password = "12345";
+// $dbname = "lhm_system2";
+
 try {
     // Create a PDO connection
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
