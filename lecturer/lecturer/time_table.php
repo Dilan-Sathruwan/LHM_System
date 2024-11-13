@@ -181,7 +181,7 @@ foreach ($lectures as $lecture) {
     include '../includes/lecturer_header.php';
     ?>
 
-    <div class="container mt-5">
+    <div class="container mt-5 text-center">
         <h2>Your Full Lecture Timetable</h2>
 
         <table class="table table-bordered table-hover timetable-table">
