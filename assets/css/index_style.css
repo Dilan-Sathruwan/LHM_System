@@ -1,0 +1,167 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    background-image: var(--current-background), var(--next-background);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out;
+  }
+
+  .hero.fade-transition {
+    background-image: var(--next-background), var(--current-background);
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-weight: 400;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: fadeInDown 2s ease-out;
+  }
+
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    animation: fadeInUp 2s ease-out;
+  }
+/* Add the initial background setup for the hero section */
+#hero-section {
+    --current-background: url('./assets/img/index/h1.jpg'); /* Initial background */
+    --next-background: url('./assets/img/index/h1.jpg');    /* Next background (starting) */
+    background-image: var(--current-background);
+    background-size: cover;
+    background-position: center;
+    height: 100vh; /* Make the hero section take up the full viewport height */
+    transition: background-image 1s ease-in-out; /* Smooth transition for background change */
+  }
+  
+  /* Apply the fade transition when the class is added */
+  #hero-section.fade-transition {
+    background-image: var(--next-background);
+  }
+  
+  /* Style the hero-content (text section) to ensure it remains visible */
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  /* Optional: Add styles for responsiveness and better readability */
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .hero-content p {
+    font-size: 1.5rem;
+  }
+  
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .section-heading {
+    margin: 30px 0;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  img {
+    height: 375px;
+  }
+
+  .testimonial-item {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .icon-box {
+    padding: 30px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .icon-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .img-fluid.rounded-circle {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  footer {
+    margin-top: 12px;
+    background-color: #343a40;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
