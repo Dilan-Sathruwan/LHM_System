@@ -1,10 +1,16 @@
+<?php
+session_start();
+include 'admin/include/db_connection.inc.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create By Loku</title>
+  <title>LHM System</title>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
@@ -135,11 +141,11 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
-    .imgcard{
+    .imgcard {
       transition: all 0.3s ease;
     }
 
-    .imgcard:hover{
+    .imgcard:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
@@ -201,17 +207,44 @@
           <li class="nav-item active">
             <a class="nav-link" href="#contact">contact</a>
           </li>
+
+
         </ul>
         <div class="my-2 my-lg-0">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item ">
-              <a class="nav-link active" href="#">Home</a>
+            <li class="nav-item mx-3">
+              <a class="nav-link active" href="#"><?php if (isset($_SESSION['user_id'])) {
+                                                    echo 'Hi, ' . $_SESSION['user_name'];
+                                                  } elseif (isset($_SESSION['user'])) {
+                                                    echo 'Hi, ' . $_SESSION['user'];
+                                                  } elseif (isset($_SESSION['St_id'])) {
+                                                    echo 'Hi, ' . $_SESSION['user_name'];
+                                                  }
+                                                  ?></a>
             </li>
-            <li>
-              <a class="btn btn-outline-success my-2 my-sm-0" href="./signin.php">Sign in</a>
-            </li>
+            <?php
+            if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
+              echo '<li class="nav-item active mx-2"> 
+            <a class="nav-link" href="';
+              if (isset($_SESSION['user_id'])) {
+                echo './admin/index.php';
+              } elseif (isset($_SESSION['user'])) {
+                echo './lecturer/lecturer/dashboard.php';
+              } elseif (isset($_SESSION['St_id'])) {
+                echo './student.php';
+              }
+              echo '">My Profile</a>
+          </li>';
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
+              echo '<li class="nav-item active"> <a class="btn btn-outline-success my-2 my-sm-0" href="./include/logout.php">Sign out</a></li>';
+            } else {
+              echo '<li><a class="btn btn-outline-success my-2 my-sm-0" href="./signin.php">Sign in</a></li>';
+            }
+            ?>
           </ul>
-
         </div>
       </div>
     </nav>
@@ -329,9 +362,9 @@
         <div class="col-md-4" data-aos="zoom-in">
           <div class="icon-box text-center bg-light">
             <div class="icon">
-              <i class="fas fa-headset fa-3x"></i>
+              <i class="fas fa-calendar-alt fa-3x"></i>
             </div>
-            <h4>24/7 Customer Support</h4>
+            <h4>24/7 Timetable</h4>
             <p>
               Our dedicated support team is available around the clock to
               assist you with any queries or issues.
@@ -343,9 +376,9 @@
         <div class="col-md-4" data-aos="zoom-in">
           <div class="icon-box text-center bg-light">
             <div class="icon">
-              <i class="fas fa-comments fa-3x"></i>
+              <i class="fas fa-university fa-3x"></i>
             </div>
-            <h4>Live Chat</h4>
+            <h4>Check hall</h4>
             <p>
               Connect with us instantly via our live chat for real-time
               assistance and quick responses.
@@ -357,9 +390,9 @@
         <div class="col-md-4" data-aos="zoom-in">
           <div class="icon-box text-center bg-light">
             <div class="icon">
-              <i class="fas fa-laptop-code fa-3x"></i>
+              <i class="fas fa-table fa-3x"></i>
             </div>
-            <h4>Technical Workshops</h4>
+            <h4>shedule manage</h4>
             <p>
               Join our interactive workshops to learn the latest technical
               skills and stay ahead in the industry.
@@ -442,7 +475,7 @@
         `url(${images[currentImageIndex]})`
       );
 
-    window.addEventListener("load", function () {
+    window.addEventListener("load", function() {
       changeBackgroundImage();
       setInterval(changeBackgroundImage, 5000);
     });
