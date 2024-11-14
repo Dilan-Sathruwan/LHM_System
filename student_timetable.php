@@ -3,7 +3,7 @@ session_start();
 include 'admin/include/db_connection.inc.php';
 
 if (!isset($_SESSION['St_id'])) {
-    header("Location:signin.php"); 
+    header("Location:signin.php");
     exit();
 }
 
@@ -87,6 +87,7 @@ foreach ($lectures as $lecture) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Full Lecture Timetable</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <link href="./assets/vendor/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/theme.css"> <!-- Link to theme CSS -->
     <style>
         /* General Theme Styles */
@@ -172,73 +173,158 @@ foreach ($lectures as $lecture) {
             background-color: #28a745;
             /* Change color for dark theme */
         }
+
+        .navbar {
+            padding: 1rem;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .navbar-dark {
+            background-color: #212529;
+        }
+
+        .navbar-brand {
+            color: #ffffff !important;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #00bfff !important;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            margin-left: 1rem;
+            transition: color 0.3s ease, transform 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00bfff !important;
+            transform: translateY(-3px);
+        }
+
+        .btn-logout {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 13px;
+            transition: background-color 0.4s ease, transform 0.3s ease;
+        }
+
+        .text-light {
+            color: #f8f9fa;
+            /* Light text color for readability in dark mode */
+        }
+
+        .btn-logout:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        /* Remove the white dot next to the logout button */
+        .nav-item:last-child {
+            margin-right: 0;
+        }
+
+        th{
+            background-color: #007bff !important;
+        }
     </style>
 </head>
 
-<body>
+<body class="light-theme">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="./student.php">Studets Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./student_timetable.php">View Timetable</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./student.php">Student</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-logout" href="./include/logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
 
-<div class="container mt-5">
+    <div class="container mt-5">
 
-<div class="bg-light text-center rounded mb-16">
-    <div class="d-flex align-items-center justify-content-start mb-1">
-        <a class="btn  btn-dark" href="student.php">Lecture Timetables</a>
-        
-    </div>
+        <div class="bg-light text-center rounded mb-16">
+            <div class="d-flex align-items-center justify-content-start mb-1">
+                <a class="btn  btn-dark" href="student.php">Lecture Timetables</a>
 
-</div>
-<h2 class="bg-light text-center rounded mb-16">Your Full Student Timetable</h2>
+            </div>
 
-<table class="table table-bordered table-hover timetable-table">
-    <thead>
-        <tr>
-            <th>Time</th>
-            <?php foreach ($days_of_week as $day) : ?>
-                <th><?php echo $day; ?></th>
-            <?php endforeach; ?>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($time_slots as $time) : ?>
-            <tr>
-                <td><?php echo htmlspecialchars($time); ?></td>
-                <?php foreach ($days_of_week as $day) : ?>
-                    <td>
-                        <?php
-                        // Extract start and end time for comparison
-                        list($start_time, $end_time) = explode(' - ', $time);
-                        $lecture_found = false;
+        </div>
+        <h2 class="bg-light text-center rounded mb-16">Your Full Student Timetable</h2>
 
-                        // Check if the lecture exists in this time slot
-                        if (isset($timetable[$day][$start_time . ' - ' . $end_time])) {
-                            $lecture = $timetable[$day][$start_time . ' - ' . $end_time];
-                            echo "<strong>" . htmlspecialchars($lecture['subject_number']) . "</strong><br>";
-                            echo "<em>" . htmlspecialchars($lecture['dept_code']) . "</em><br>";
-                            echo "Batch: " . htmlspecialchars($lecture['batch_name']) . "<br>";
-                            echo "Hall: " . htmlspecialchars($lecture['hall_name']);
-                            $lecture_found = true;
-                        }
+        <table class="table table-bordered table-hover timetable-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <?php foreach ($days_of_week as $day) : ?>
+                        <th><?php echo $day; ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($time_slots as $time) : ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($time); ?></td>
+                        <?php foreach ($days_of_week as $day) : ?>
+                            <td>
+                                <?php
+                                // Extract start and end time for comparison
+                                list($start_time, $end_time) = explode(' - ', $time);
+                                $lecture_found = false;
 
-                        // If no lecture found, show empty cell or Interval label
-                        if (!$lecture_found) {
-                            if ($time === '12:30:00 - 13:00:00') {
-                                echo "<div class='interval-label'>Interval</div>";
-                            } else {
-                                echo "<span>--</span>";
-                            }
-                        }
-                        ?>
-                    </td>
+                                // Check if the lecture exists in this time slot
+                                if (isset($timetable[$day][$start_time . ' - ' . $end_time])) {
+                                    $lecture = $timetable[$day][$start_time . ' - ' . $end_time];
+                                    echo "<strong>" . htmlspecialchars($lecture['subject_number']) . "</strong><br>";
+                                    echo "<em>" . htmlspecialchars($lecture['dept_code']) . "</em><br>";
+                                    echo "Batch: " . htmlspecialchars($lecture['batch_name']) . "<br>";
+                                    echo "Hall: " . htmlspecialchars($lecture['hall_name']);
+                                    $lecture_found = true;
+                                }
+
+                                // If no lecture found, show empty cell or Interval label
+                                if (!$lecture_found) {
+                                    if ($time === '12:30:00 - 13:00:00') {
+                                        echo "<div class='interval-label'>Interval</div>";
+                                    } else {
+                                        echo "<span>--</span>";
+                                    }
+                                }
+                                ?>
+                            </td>
+                        <?php endforeach; ?>
+                    </tr>
                 <?php endforeach; ?>
-            </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+            </tbody>
+        </table>
 
-<?php if (empty($lectures)) : ?>
-    <p>You have no scheduled lectures.</p>
-<?php endif; ?>
-</div>
+        <?php if (empty($lectures)) : ?>
+            <p>You have no scheduled lectures.</p>
+        <?php endif; ?>
+    </div>
 
 
 

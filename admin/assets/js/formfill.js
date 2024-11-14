@@ -114,7 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var address = button.getAttribute('data-address');
         var mobile_no = button.getAttribute('data-mobile_no');
         var lecturerole = button.getAttribute('data-lecturerole');
-        var password = button.getAttribute('data-inputPassword');
+        // var password = button.getAttribute('data-inputPassword');
+        var password = '';
         var image_path = button.getAttribute('data-image_path'); // Get image path
 
         // Populate the form fields
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.querySelector('#lecturerole').value = lecturerole;
         modal.querySelector('#inputPassword').value = password;
 
-        // Update the image preview
+        
         // Update the image preview
         var profileImage = modal.querySelector('.profile-image-pic');
         if (image_path) {

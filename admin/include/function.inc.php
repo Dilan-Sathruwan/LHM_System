@@ -1,7 +1,7 @@
 <?php
 // ############################ Function to register a lecturers #####################
 
-function lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about, $imageUploadResult)
+function lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $mobile_no, $about, $imageUploadResult)
 {
     try {
         // Hash the password before storing it in the database
@@ -22,7 +22,7 @@ function lecturersCreate($conn, $index_num, $username, $email, $password, $lectu
             ':lecturerole' => $lecturerole,
             ':address' => $address,
             ':about' => $about,
-            ':phone_num' => $phonenum,
+            ':phone_num' => $mobile_no,
             ':image_path' => $imageUploadResult  // Include the image path here
         ]);
 
@@ -46,7 +46,7 @@ function lecturersCreate($conn, $index_num, $username, $email, $password, $lectu
 
 
 // ############################# Function to update the lecturer's details ######################
-function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about)
+function lecturersUpdate($conn, $id, $index_num, $username, $email, $lecturerole, $address, $mobile_no, $about)
 {
     try {
         // Prepare SQL statement to update lecturer data
@@ -57,8 +57,7 @@ function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $
                     `role` = :role, 
                     `address` = :address, 
                     `mobile_no` = :phonenum, 
-                    `expertise` = :expertise, 
-                    `password` = :password 
+                    `expertise` = :expertise
                 WHERE id = :id";
 
         $stmt = $conn->prepare($sql);
@@ -68,10 +67,9 @@ function lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $
             ':index_num' => $index_num,
             ':username' => $username,
             ':email' => $email,
-            ':password' => $password,
             ':role' => $lecturerole,
             ':address' => $address,
-            ':phonenum' => $phonenum,
+            ':phonenum' => $mobile_no,
             ':expertise' => $about, // Make sure the parameter name matches
             ':id' => $id
         ]);

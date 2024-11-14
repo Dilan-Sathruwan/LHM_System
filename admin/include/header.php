@@ -67,7 +67,8 @@ if (!isset($_SESSION['user_id'])) {
         <div class="sidebar pe-4 pb-3 back-colors">
             <nav class="navbar navbar-light bg-transparent">
                 <a href="#" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3>
+                    <!-- <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3> -->
+                    <h3 class="text-danger">SLIATE LHM</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -167,8 +168,12 @@ if (!isset($_SESSION['user_id'])) {
                         </div>
                     </div>
 
+                    <a href="Reserve.php" class="nav-item nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'Reserve.php') {
+                                                                            echo 'active';
+                                                                        } ?>"><i
+                            class="fa fa-table me-2"></i>Lectures Booking</a>
 
-                    <div class="nav-item dropdown">
+                    <!-- <div class="nav-item dropdown">
                         <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -177,7 +182,7 @@ if (!isset($_SESSION['user_id'])) {
                             <a href="404.html" class="dropdown-item">404 Error</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </nav>

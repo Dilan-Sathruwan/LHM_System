@@ -47,10 +47,11 @@
             align-content: center;
         }
 
-        .bg-color-fram{
-            background-color:#0B0B45;
+        .bg-color-fram {
+            background-color: #0B0B45;
         }
-        .bg-color-btn{
+
+        .bg-color-btn {
             background-color: #CB0000;
         }
     </style>
@@ -90,17 +91,12 @@
                 <div class="tab-content " id="pills-tabContent ">
 
                     <!-- ####################Student login################### -->
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                        aria-labelledby="pills-home-tab">
-
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                         <div class="rounded p-4 p-sm-5 my-4 mx-3 bg-color-fram bg-gradient ">
-
                             <form action="./include/Login_student.php" method="POST">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-
                                     <h3>Student Login</h3>
                                 </div>
-                                <!-- <input type="hidden" name="role" value="student"> -->
                                 <div class="form-floating mb-3">
                                     <input type="email" name="email" class="form-control" id="floatingInput"
                                         placeholder="name@example.com" required>
@@ -109,20 +105,31 @@
                                 <div class="form-floating mb-4">
                                     <input type="password" name="password" class="form-control" id="floatingPassword"
                                         placeholder="Password" required>
-                                    <label for="floatingPassword">Password</label>
+                                    <label for="floatingPassword">Index Number</label>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" >
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" onclick="togglePasswordVisibility('floatingPassword')">
+                                        <label class="form-check-label" for="exampleCheck1">Visible index number</label>
                                     </div>
-
                                 </div>
                                 <button type="submit" name="Ssubmit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
-                                <p class="text-center mb-0">Lecture Hall Management System </p>
+                                <p class="text-center mb-0">Lecture Hall Management System</p>
                             </form>
                         </div>
                     </div>
+
+                    <script>
+                        function togglePasswordVisibility(passwordFieldId) {
+                            const passwordField = document.getElementById(passwordFieldId);
+                            if (passwordField.type === "password") {
+                                passwordField.type = "text";
+                            } else {
+                                passwordField.type = "password";
+                            }
+                        }
+                    </script>
+
                     <!--End-->
 
 
@@ -144,16 +151,15 @@
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-4">
-                                    <input type="password" name="password" class="form-control" id="floatingPassword"
+                                    <input type="password" name="password" class="form-control" id="floatingPassword1"
                                         placeholder="Password" required>
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" onclick="togglePasswordVisibility('floatingPassword1')">
+                                        <label class="form-check-label" for="exampleCheck1">Show password</label>
                                     </div>
-
                                 </div>
                                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="Lsubmit">Sign In</button>
                                 <p class="text-center mb-0">Don't have an Account? <a href="./register.php">Sign Up</a></p>
@@ -169,7 +175,7 @@
 
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <div class="bg-color-fram rounded p-4 p-sm-5 my-4 mx-3">
-                            
+
                             <form action="./include/Login_Admin.php" method="POST">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
                                     <h3>Admin Sign In</h3>
@@ -181,16 +187,15 @@
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating mb-4">
-                                    <input type="password" name="password" class="form-control" id="floatingPassword"
+                                    <input type="password" name="password" class="form-control" id="floatingPassword2"
                                         placeholder="Password" required>
                                     <label for="floatingPassword">Password</label>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" onclick="togglePasswordVisibility('floatingPassword2')">
+                                        <label class="form-check-label" for="exampleCheck1">Show password</label>
                                     </div>
-
                                 </div>
                                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="Asubmit">Sign In</button>
                                 <p class="text-center mb-0">Lecture Hall Management System </p>

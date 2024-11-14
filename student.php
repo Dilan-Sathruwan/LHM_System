@@ -140,10 +140,87 @@ $stmt = null;
             padding: 10px;
             border-radius: 5px;
         }
+
+        .navbar {
+            padding: 1rem;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .navbar-dark {
+            background-color: #212529;
+        }
+     
+        .navbar-brand {
+            color: #ffffff !important;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            color: #00bfff !important;
+        }
+
+        .nav-link {
+            color: #ffffff !important;
+            margin-left: 1rem;
+            transition: color 0.3s ease, transform 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #00bfff !important;
+            transform: translateY(-3px);
+        }
+
+        .btn-logout {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            background-color: #dc3545;
+            border: none;
+            border-radius: 13px;
+            transition: background-color 0.4s ease, transform 0.3s ease;
+        }
+        .text-light {
+            color: #f8f9fa; /* Light text color for readability in dark mode */
+        }
+
+        .btn-logout:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        /* Remove the white dot next to the logout button */
+        .nav-item:last-child {
+            margin-right: 0;
+        }
     </style>
 </head>
+<body class="light-theme">
 
-<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Studets Portal</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./student_timetable.php">View Timetable</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-logout" href="./include/logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="container py-4">
         <div class="row justify-content-center">
             <div class="col-md-4 mb-4">
