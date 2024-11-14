@@ -140,75 +140,9 @@
 
         </div>
 
-        <div class="bg-light text-center rounded p-4">
-            <div class="">
-                <h5 class="mb-2 text-start">Search Lecture Schedule</h5>
-                <form class="search-form" method="POST" action="">
-                    <div class="row g-3 text-start">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="lecturer_name" class="form-label">Lecturer Name</label>
-                                <input type="text" id="lecturer_name" name="lecturer_name" class="form-control" placeholder="Enter Lecturer's Name">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="department_name" class="form-label">Department</label>
-                                <select id="department_name" name="department_name" class="form-select">
-                                    <option value="">Select Department</option>
-                                    <?php
-                                    $stmt = $conn->query("SELECT id, department_name FROM departments");
-                                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                        echo "<option value='" . $row['department_name']  . "'>" . $row['department_name'] . "</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="batch_name" class="form-label">Batch</label>
-                                <input type="text" id="batch_name" name="batch_name" class="form-control" placeholder="Enter Batch Name">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="subject_num" class="form-label">Subject Number</label>
-                                <input type="text" id="subject_num" name="subject_num" class="form-control" placeholder="Enter Subject Number">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="hall_name" class="form-label">Lecture Hall</label>
-                                <input type="text" id="hall_name" name="hall_name" class="form-control" placeholder="Enter Hall Name">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="days" class="form-label">Days</label>
-                                <select id="days" name="days" class="form-select">
-                                    <option value="">Select Day</option>
-                                    <option value="Monday">Monday</option>
-                                    <option value="Tuesday">Tuesday</option>
-                                    <option value="Wednesday">Wednesday</option>
-                                    <option value="Thursday">Thursday</option>
-                                    <option value="Friday">Friday</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-12 text-center ">
-                            <button type="submit" class="btn btn-primary mt-3">Find avalible lecture</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         <div class="bg-light text-center rounded p-4 mt-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h3 class="mb-0">All Avalible Lecturers</h3>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#batchModal">Add Lecturers</button>
+                <h3 class="mb-0">Booking Lecturers</h3>
             </div>
             <div class="table-responsive">
 

@@ -8,7 +8,7 @@
 $servername = "localhost:3306";
 $username = "root";
 $password = "12345";
-$dbname = "lhm_system";
+$dbname = "lhm_system2";
 
 try {
     // Create a PDO connection
