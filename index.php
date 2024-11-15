@@ -14,27 +14,24 @@ include 'admin/include/db_connection.inc.php';
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/index_style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-    }
-
-    .hero {
-      height: 100vh;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      overflow: hidden;
-      background-image: var(--current-background), var(--next-background);
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      transition: background-image 1s ease-in-out;
-    }
+    
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  background-image: var(--current-background), var(--next-background);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
+}
 
     .hero.fade-transition {
       background-image: var(--next-background), var(--current-background);
@@ -171,31 +168,6 @@ include 'admin/include/db_connection.inc.php';
       background-color: #d2e4f7;
       color: blue !important;
     }
-
-    /* Style for the message div */
-    .message-popup {
-      opacity: 0;
-      position: fixed;
-      cursor: default;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-30px);
-      z-index: 2000;
-      font-size: 20px;
-      padding: 16px;
-      color: green;
-      font-weight: 200;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      /* Optional: add shadow */
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      /* Transition for fade-in/fade-out */
-    }
-
-    .show-message {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-      /* Move down to its original position */
-    }
   </style>
 </head>
 
@@ -252,70 +224,75 @@ include 'admin/include/db_connection.inc.php';
       </div>
     </header> -->
 
-
-
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark py-1">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse " id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="#"><img src="./assets/img/logo.png" class="img-fluid py-0" width="170px" height:auto;
-            alt="Logo"></a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-          <li class="nav-item active">
-            <a class="nav-link" href="#features">features</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#services">services</a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="#contact">contact</a>
-          </li>
-
-
-        </ul>
-        <div class="my-2 my-lg-0">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item mx-3">
-              <a class="nav-link active" href="#"><?php if (isset($_SESSION['user_id'])) {
-                                                    echo 'Hi, ' . $_SESSION['user_name'];
-                                                  } elseif (isset($_SESSION['user'])) {
-                                                    echo 'Hi, ' . $_SESSION['user'];
-                                                  } elseif (isset($_SESSION['St_id'])) {
-                                                    echo 'Hi, ' . $_SESSION['user_name'];
-                                                  }
-                                                  ?></a>
-            </li>
-            <?php
-            if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
-              echo '<li class="nav-item active mx-2"> 
-            <a class="nav-link" href="';
-              if (isset($_SESSION['user_id'])) {
-                echo './admin/index.php';
-              } elseif (isset($_SESSION['user'])) {
-                echo './lecturer/lecturer/dashboard.php';
-              } elseif (isset($_SESSION['St_id'])) {
-                echo './student.php';
-              }
-              echo '">My Profile</a>
-          </li>';
-            }
-            ?>
-            <?php
-            if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
-              echo '<li class="nav-item active"> <a class="btn btn-outline-success my-2 my-sm-0" href="./include/logout.php">Sign out</a></li>';
-            } else {
-              echo '<li><a class="btn btn-outline-success my-2 my-sm-0" href="./signin.php">Sign in</a></li>';
-            }
-            ?>
-          </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <!-- Logo on the left -->
+            <a class="navbar-brand" href="#">
+                <img src="./assets/img/logo.png" class="img-fluid" width="170px" height="auto" alt="Logo">
+            </a>
+            <!-- Navbar Links - Centered -->
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#features">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+            <!-- User Profile & Authentication - Right aligned -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-3">
+                    <a class="nav-link" href="#">
+                        <?php 
+                            if (isset($_SESSION['user_id'])) {
+                                echo 'Hi, ' . $_SESSION['user_name'];
+                            } elseif (isset($_SESSION['user'])) {
+                                echo 'Hi, ' . $_SESSION['user'];
+                            } elseif (isset($_SESSION['St_id'])) {
+                                echo 'Hi, ' . $_SESSION['user_name'];
+                            }
+                        ?>
+                    </a>
+                </li>
+                <?php
+                    if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
+                        echo '<li class="nav-item"> 
+                            <a class="nav-link" href="';
+                        if (isset($_SESSION['user_id'])) {
+                            echo './admin/index.php';
+                        } elseif (isset($_SESSION['user'])) {
+                            echo './lecturer/lecturer/dashboard.php';
+                        } elseif (isset($_SESSION['St_id'])) {
+                            echo './student.php';
+                        }
+                        echo '">My Profile</a></li>';
+                    }
+                ?>
+                <?php
+                    if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
+                        echo '<li class="nav-item">
+                            <a class="btn btn-outline-light my-2 my-sm-0" href="./include/logout.php">Sign out</a>
+                        </li>';
+                    } else {
+                        echo '<li class="nav-item">
+                            <a class="btn btn-outline-light my-2 my-sm-0" href="./signin.php">Sign in</a>
+                        </li>';
+                    }
+                ?>
+            </ul>
         </div>
-      </div>
     </nav>
-  </header>
+</header>
+
+
 
   <!-- <?php include 'pages/hero.html'; ?> -->
 
@@ -356,6 +333,7 @@ include 'admin/include/db_connection.inc.php';
               </p>
             </div>
           </div>
+
         </div>
 
         <div class="col-md-4" data-aos="fade-left">
@@ -368,52 +346,6 @@ include 'admin/include/db_connection.inc.php';
                 update facility.
               </p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="section bg-light">
-    <div class="container">
-      <h2 class="section-heading" data-aos="zoom-in">Testimonials</h2>
-      <div class="row">
-        <!-- Testimonial 1 -->
-        <div class="col-md-4" data-aos="fade-up">
-          <div class="testimonial-item">
-            <img src="./assets/img/user01.jpg" alt="User 1: Jane Doe" class="img-fluid rounded-circle" />
-            <h5>Jane Doe</h5>
-            <p>
-              "The support team was amazing! They answered all my questions
-              and helped me set up everything seamlessly. Highly recommend!"
-            </p>
-          </div>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="col-md-4" data-aos="fade-up">
-          <div class="testimonial-item">
-            <img src="./assets/img/user02.jpg" alt="User 2: John Smith" class="img-fluid rounded-circle" />
-            <h5>John Smith</h5>
-            <p>
-              "Exceptional service and very knowledgeable staff. They went
-              above and beyond to ensure I had the resources needed for
-              success."
-            </p>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="col-md-4" data-aos="fade-up">
-          <div class="testimonial-item">
-            <img src="./assets/img/user03.jpg" alt="User 3: Sarah Lee" class="img-fluid rounded-circle" />
-            <h5>Sarah Lee</h5>
-            <p>
-              "I attended one of their technical workshops, and it was
-              incredibly informative. I learned valuable skills that I now use
-              every day."
-            </p>
           </div>
         </div>
       </div>
@@ -470,29 +402,48 @@ include 'admin/include/db_connection.inc.php';
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="section mb-5">
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section bg-light">
     <div class="container">
-      <h2 class="section-heading" data-aos="fade-up">Contact Us</h2>
-      <form>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Your Name" required />
-          </div>
-          <div class="form-group col-md-6">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Your Email" required />
+      <h2 class="section-heading" data-aos="zoom-in">Our Developers</h2>
+      <div class="row">
+        <!-- Testimonial 1 -->
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="testimonial-item text-center">
+            <img src="./assets/img/index/Dev/Tharuka.jpg" alt="User 1: Jane Doe" class="rounded-circle" />
+            <h5>Tharuka</h5>
+            <p>
+              "Co-developer and main Co-Leader of the Developer Team"
+            </p>
           </div>
         </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea class="form-control" id="message" rows="4" placeholder="Your Message" required></textarea>
+
+        <!-- Testimonial 2 -->
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="testimonial-item">
+            <img src="./assets/img/index/Dev/Ravindu.jpg" alt="User 2: John Smith" class="rounded-circle" />
+            <h5>Ravindu</h5>
+            <p>
+              "Main Developer And Leader Of Develper Team."
+            </p>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Send Message</button>
-      </form>
+
+        <!-- Testimonial 3 -->
+        <div class="col-md-4" data-aos="fade-up">
+          <div class="testimonial-item">
+            <img src="./assets/img/index/Dev/Shehani.jpg" alt="User 3: Sarah Lee" class=" rounded-circle" />
+            <h5>Shehani</h5>
+            <p>
+              "Main Desgner and Main Qulity Checker Of The Team"
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
 
   <!-- Footer -->
   <footer>
