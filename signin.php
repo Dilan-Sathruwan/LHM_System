@@ -54,11 +54,75 @@
         .bg-color-btn {
             background-color: #CB0000;
         }
+
+        /* Style for the message div */
+        .message-popup {
+            opacity: 0;
+            position: fixed;
+            cursor: default;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-30px);
+            z-index: 2000;
+            font-size: 20px;
+            padding: 16px;
+            color: green;
+            font-weight: 200;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            /* Optional: add shadow */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            /* Transition for fade-in/fade-out */
+        }
+
+        .show-message {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            /* Move down to its original position */
+        }
     </style>
 
 </head>
 
 <body>
+
+    <!-- Massage show -->
+    <div id="messagePopup" class="alert alert-success message-popup">
+        <i class="bi bi-check-square-fill">&nbsp;</i>
+        <span id="messageText"></span>
+    </div>
+    <!--Massage End -->
+
+    <script>
+        function getQueryParam(param) {
+            let params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+        // Function to remove the message parameter from the URL
+        function removeQueryParam(param) {
+            let url = new URL(window.location);
+            url.searchParams.delete(param);
+            window.history.replaceState({}, document.title, url.pathname); // Update the URL without reloading
+        }
+        // Function to show the message after the page has loaded
+        window.onload = function() {
+            let message = getQueryParam('message');
+            if (message) {
+                let messagePopup = document.getElementById('messagePopup');
+                let messageText = document.getElementById('messageText');
+                messageText.textContent = decodeURIComponent(message); // Show the message text
+
+
+                messagePopup.classList.add('show-message'); // Add class to trigger fade-in
+
+                // Remove the message parameter from the URL
+                removeQueryParam('message');
+
+                setTimeout(() => {
+                    messagePopup.classList.remove('show-message'); // Remove class to trigger fade-out
+                }, 3000);
+            }
+        };
+    </script>
 
     <!-- Sign In Start -->
     <div class="container-fluid">
