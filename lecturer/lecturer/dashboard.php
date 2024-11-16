@@ -195,6 +195,7 @@ include '../includes/lecturer_header.php';
                                 <!-- <a href="manage_lectures.php" class="but2">Manage Lectures</a> -->
                                 <a href="time_table.php" class="but2">View Timetable</a>
                                 <a href="view_all_lectures.php" class="but2">View All Lectures</a>
+                                <a href="booking_time_table.php" class="but2">Booking</a>
                                 <a href="../auth/logout.php" class="but2">Logout</a>
                             </div>
                             <br><br>
