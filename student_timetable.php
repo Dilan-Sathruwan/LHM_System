@@ -268,7 +268,7 @@ foreach ($lectures as $lecture) {
 
         <div class="bg-light text-center rounded mb-16">
             <div class="d-flex align-items-center justify-content-start mb-1">
-                <a class="btn  btn-dark" href="student.php">Lecture Timetables</a>
+                <a class="btn  btn-dark" href="student.php">Back to</a>
 
             </div>
 

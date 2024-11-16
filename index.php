@@ -16,22 +16,21 @@ include 'admin/include/db_connection.inc.php';
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/index_style.css">
   <style>
-    
-.hero {
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: white;
-  overflow: hidden;
-  background-image: var(--current-background), var(--next-background);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  transition: background-image 1s ease-in-out;
-}
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      background-image: var(--current-background), var(--next-background);
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: background-image 1s ease-in-out;
+    }
 
     .hero.fade-transition {
       background-image: var(--next-background), var(--current-background);
@@ -160,57 +159,36 @@ include 'admin/include/db_connection.inc.php';
       text-align: center;
     }
 
-    .nav-link {
-      color: #d2e4f7 !important;
-    }
-
     .nav-link:hover {
-      background-color: #d2e4f7;
+      background-color: #B5B4D9;
       color: blue !important;
     }
+
+    .nav-link {
+            display: inline-block;
+            color: #d2e4f7 !important;
+            text-decoration: none;
+            overflow: hidden;
+          }
+
+          .hover-underline {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #ff4500;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+          }
+
+          .nav-link:hover .hover-underline {
+            transform: translateX(0);
+          }
   </style>
 </head>
 
 <body>
-  <!-- Massage show -->
-  <div id="messagePopup" class="alert alert-success message-popup">
-    <i class="bi bi-check-square-fill">&nbsp;</i>
-    <span id="messageText"></span>
-  </div>
-  <!--Massage End -->
-
-  <script>
-    function getQueryParam(param) {
-      let params = new URLSearchParams(window.location.search);
-      return params.get(param);
-    }
-    // Function to remove the message parameter from the URL
-    function removeQueryParam(param) {
-      let url = new URL(window.location);
-      url.searchParams.delete(param);
-      window.history.replaceState({}, document.title, url.pathname); // Update the URL without reloading
-    }
-    // Function to show the message after the page has loaded
-    window.onload = function() {
-      let message = getQueryParam('message');
-      if (message) {
-        let messagePopup = document.getElementById('messagePopup');
-        let messageText = document.getElementById('messageText');
-        messageText.textContent = decodeURIComponent(message); // Show the message text
-
-
-        messagePopup.classList.add('show-message'); // Add class to trigger fade-in
-
-        // Remove the message parameter from the URL
-        removeQueryParam('message');
-
-        setTimeout(() => {
-          messagePopup.classList.remove('show-message'); // Remove class to trigger fade-out
-        }, 5000);
-      }
-    };
-  </script>
-
 
   <!-- Header -->
   <!-- <header class="bg-light py-3">
@@ -226,71 +204,83 @@ include 'admin/include/db_connection.inc.php';
 
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <!-- Logo on the left -->
-            <a class="navbar-brand" href="#">
-                <img src="./assets/img/logo.png" class="img-fluid" width="170px" height="auto" alt="Logo">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        
+        <!-- Logo on the left -->
+        <a class="navbar-brand" href="#">
+          <img src="./assets/img/logo.png" class="img-fluid" width="300px" height="auto" alt="Logo">
+        </a>
+
+        <!-- Navbar Links - Centered -->
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#features" style="position: relative;">
+              Features
+              <span class="hover-underline"></span>
             </a>
-            <!-- Navbar Links - Centered -->
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#features">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#services">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
-            <!-- User Profile & Authentication - Right aligned -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item mx-3">
-                    <a class="nav-link" href="#">
-                        <?php 
-                            if (isset($_SESSION['user_id'])) {
-                                echo 'Hi, ' . $_SESSION['user_name'];
-                            } elseif (isset($_SESSION['user'])) {
-                                echo 'Hi, ' . $_SESSION['user'];
-                            } elseif (isset($_SESSION['St_id'])) {
-                                echo 'Hi, ' . $_SESSION['user_name'];
-                            }
-                        ?>
-                    </a>
-                </li>
-                <?php
-                    if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
-                        echo '<li class="nav-item"> 
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services" style="position: relative;">
+              Services
+              <span class="hover-underline"></span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact" style="position: relative;">
+              Contact
+              <span class="hover-underline"></span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Navbar Links - Right -->
+        <ul class="navbar-nav ml-auto d-flex justify-content-end ">
+          <li class="nav-item mx-3">
+            <a class="nav-link" href="#">
+              <?php
+              if (isset($_SESSION['user_id'])) {
+                echo 'Hi, ' . $_SESSION['user_name'];
+              } elseif (isset($_SESSION['user'])) {
+                echo 'Hi, ' . $_SESSION['user'];
+              } elseif (isset($_SESSION['St_id'])) {
+                echo 'Hi, ' . $_SESSION['user_name'];
+              }
+              ?>
+            </a>
+          </li>
+          <?php
+          if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
+            echo '<li class="nav-item"> 
                             <a class="nav-link" href="';
-                        if (isset($_SESSION['user_id'])) {
-                            echo './admin/index.php';
-                        } elseif (isset($_SESSION['user'])) {
-                            echo './lecturer/lecturer/dashboard.php';
-                        } elseif (isset($_SESSION['St_id'])) {
-                            echo './student.php';
-                        }
-                        echo '">My Profile</a></li>';
-                    }
-                ?>
-                <?php
-                    if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
-                        echo '<li class="nav-item">
+            if (isset($_SESSION['user_id'])) {
+              echo './admin/index.php';
+            } elseif (isset($_SESSION['user'])) {
+              echo './lecturer/lecturer/dashboard.php';
+            } elseif (isset($_SESSION['St_id'])) {
+              echo './student.php';
+            }
+            echo '">My Profile</a></li>';
+          }
+          ?>
+          <?php
+          if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
+            echo '<li class="nav-item">
                             <a class="btn btn-outline-light my-2 my-sm-0" href="./include/logout.php">Sign out</a>
                         </li>';
-                    } else {
-                        echo '<li class="nav-item">
+          } else {
+            echo '<li class="nav-item">
                             <a class="btn btn-outline-light my-2 my-sm-0" href="./signin.php">Sign in</a>
                         </li>';
-                    }
-                ?>
-            </ul>
-        </div>
+          }
+          ?>
+        </ul>
+      </div>
     </nav>
-</header>
+  </header>
 
 
 
@@ -403,13 +393,13 @@ include 'admin/include/db_connection.inc.php';
   </section>
 
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section bg-light">
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section bg-light">
     <div class="container">
       <h2 class="section-heading" data-aos="zoom-in">Our Developers</h2>
       <div class="row">
         <!-- Testimonial 1 -->
-        <div class="col-md-4" data-aos="fade-up">
+        <div class="col-md-3" data-aos="fade-up">
           <div class="testimonial-item text-center">
             <img src="./assets/img/index/Dev/Tharuka.jpg" alt="User 1: Jane Doe" class="rounded-circle" />
             <h5>Tharuka</h5>
@@ -420,7 +410,7 @@ include 'admin/include/db_connection.inc.php';
         </div>
 
         <!-- Testimonial 2 -->
-        <div class="col-md-4" data-aos="fade-up">
+        <div class="col-md-3" data-aos="fade-up">
           <div class="testimonial-item">
             <img src="./assets/img/index/Dev/Ravindu.jpg" alt="User 2: John Smith" class="rounded-circle" />
             <h5>Ravindu</h5>
@@ -431,12 +421,24 @@ include 'admin/include/db_connection.inc.php';
         </div>
 
         <!-- Testimonial 3 -->
-        <div class="col-md-4" data-aos="fade-up">
+        <div class="col-md-3" data-aos="fade-up">
           <div class="testimonial-item">
             <img src="./assets/img/index/Dev/Shehani.jpg" alt="User 3: Sarah Lee" class=" rounded-circle" />
             <h5>Shehani</h5>
             <p>
               "Main Desgner and Main Qulity Checker Of The Team"
+            </p>
+          </div>
+        </div>
+
+
+        <!-- Testimonial 4 -->
+        <div class="col-md-3" data-aos="fade-up">
+          <div class="testimonial-item">
+            <img src="./assets/img/index/Dev/Dilan.jpg" alt="User 3: Sarah Lee" class=" rounded-circle" />
+            <h5>Dilan</h5>
+            <p>
+              "Main Co-Leader and project manager of the Developer Team"
             </p>
           </div>
         </div>

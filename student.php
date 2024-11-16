@@ -10,7 +10,19 @@ if (!isset($_SESSION['St_id'])) {
 
 // Get the logged-in lecturer's information
 $Student_id = $_SESSION['St_id'];
-$query = "SELECT * FROM students WHERE id = :id";
+$query = "
+    SELECT 
+        students.*, 
+        departments.department_name 
+    FROM 
+        students 
+    LEFT JOIN 
+        departments 
+    ON 
+        students.department_id = departments.id 
+    WHERE 
+        students.id = :id";
+
 $stmt = $conn->prepare($query);
 $stmt->bindParam(':id', $Student_id, PDO::PARAM_INT);
 $stmt->execute();
@@ -20,7 +32,7 @@ $stmt->execute();
 if ($stmt->rowCount() > 0) {
     $Students = $stmt->fetch(PDO::FETCH_ASSOC);
 } else {
-    echo "Lecturer not found.";
+    echo "Student not found.";
     exit();
 }
 
@@ -336,12 +348,12 @@ $stmt = null;
                     </div>
                     <div class="card-body">
                         <div class="text-center">
-                            <div class="profile-info mb-4">
-                                <p>Name: <?php echo htmlspecialchars($Students['username']); ?></p>
-                                <p>Email: <?php echo htmlspecialchars($Students['email']); ?></p>
-                                <p>Index Number: <?php echo htmlspecialchars($Students['index_number']); ?></p>
-                                <p>Department: <?php echo htmlspecialchars($Students['department_id']); ?></p>
-                                <p>Batch: <?php echo htmlspecialchars($Students['batch_id']); ?></p>
+                            <div class="profile-info mb-4" style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; background-color: #f9f9f9;">
+                                <p style="margin-bottom: 5px; font-weight: bold; color: #333;">Name: <span style="font-weight: normal;"><?php echo htmlspecialchars($Students['username']); ?></span></p>
+                                <p style="margin-bottom: 5px; font-weight: bold; color: #333;">Email: <span style="font-weight: normal;"><?php echo htmlspecialchars($Students['email']); ?></span></p>
+                                <p style="margin-bottom: 5px; font-weight: bold; color: #333;">Index Number: <span style="font-weight: normal;"><?php echo htmlspecialchars($Students['index_number']); ?></span></p>
+                                <p style="margin-bottom: 5px; font-weight: bold; color: #333;">Department: <span style="font-weight: normal;"><?php echo htmlspecialchars($Students['department_name']); ?></span></p>
+                                <p style="margin-bottom: 5px; font-weight: bold; color: #333;">Batch: <span style="font-weight: normal;"><?php echo htmlspecialchars($Students['batch_id']); ?></span></p>
                             </div>
                             <div class="highlight mb-3">
                                 <strong>Important:</strong> Make sure to check your timetable regularly!
@@ -357,6 +369,7 @@ $stmt = null;
                                 <a href="#" class="download-btn">Download Now</a>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
