@@ -31,7 +31,7 @@
                             <input type="number" class="form-control" id="credits" name="credits" min="0" max="9">
                         </div>
                         <div class="col-12">
-                            <label for="inputdept" class="form-label">Department</label>
+                            <label for="inputdept" class="form-label">Department Name</label>
                             <select id="inputdept" class="form-select" name="dept">
                                 <option selected>Choose...</option>
                                 <?php
