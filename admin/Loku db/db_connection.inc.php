@@ -5,11 +5,6 @@
 // $password = "98czmEvKyu";
 // $dbname = "sql12743113";
 
-// $servername = "localhost:3306";
-// $username = "root";
-// $password = "12345";
-// $dbname = "lhm_system2";
-
 $servername = "localhost";
 $username = "root";
 $password = "";
