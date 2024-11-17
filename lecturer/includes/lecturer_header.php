@@ -90,9 +90,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="view_schedule.php">View Schedule</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="manage_lectures.php">Manage Lectures</a>
-                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="booking_time_table.php">Manage Lectures</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="time_table.php">View Timetable</a>
                     </li>
