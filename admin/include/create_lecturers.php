@@ -10,27 +10,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = filter_input(INPUT_POST, 'username',  FILTER_SANITIZE_SPECIAL_CHARS);
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $password = filter_input(INPUT_POST, 'password',  FILTER_SANITIZE_SPECIAL_CHARS);
-    $phonenum = filter_input(INPUT_POST, 'phonenumber',  FILTER_VALIDATE_INT);
+    $mobile_no = filter_input(INPUT_POST, 'phonenumber',  FILTER_SANITIZE_SPECIAL_CHARS);
     $lecturerole = filter_input(INPUT_POST, 'lecturerole', FILTER_SANITIZE_SPECIAL_CHARS);
     $address = filter_input(INPUT_POST, 'address',  FILTER_SANITIZE_SPECIAL_CHARS);
     $about = filter_input(INPUT_POST, 'about',  FILTER_SANITIZE_SPECIAL_CHARS);
-    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT); // Hidden input field for the lecturer ID
+    $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
     if ($email === false) {
         die('Invalid email address.');
     }
 
-
-    $file = $_FILES['profile_image'] ?? null; // Get the uploaded file
+    $file = $_FILES['profile_image'] ?? null; 
 
     if (!empty($id)) {
         // Update lecturer details
-        $imageUploadResult = uploadOrUpdateImage($conn, $file, $id); // Call your image upload function
-        $result = lecturersUpdate($conn, $id, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about);
+        $imageUploadResult = uploadOrUpdateImage($conn, $file, $id);
+        $result = lecturersUpdate($conn, $id, $index_num, $username, $email, $lecturerole, $address, $mobile_no, $about);
     } else {
         // Create a new lecturer
         $imageUploadResult = uploadOrUpdateImage($conn, $file);
-        $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $phonenum, $about, $imageUploadResult);
+        $result = lecturersCreate($conn, $index_num, $username, $email, $password, $lecturerole, $address, $mobile_no, $about, $imageUploadResult);
 
     }
     

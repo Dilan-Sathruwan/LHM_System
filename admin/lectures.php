@@ -10,9 +10,9 @@
     <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
-            <div class="modal-content bg-colors2">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Lecture profile</h1>
+            <div class="modal-content">
+                <div class="modal-header bg-color-fram">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create / Edit Lecture profile</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
@@ -30,10 +30,10 @@
 
                                         <div class="row g-3">
 
-                                            <input type="number" name="id" id="lecturer-id">
+                                            <input type="hidden" name="id" id="lecturer-id">
 
                                             <div class="text-center">
-                                                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                                                <img src="./include/uploads/pngwing.com.png"
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                                                     width="200px" alt="profile">
                                             </div>
@@ -145,7 +145,7 @@
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-color-fram">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">View Lecture Profile</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -161,7 +161,7 @@
                                         <div class="row g-3">
                                             <!-- Profile Image -->
                                             <div class="text-center">
-                                                <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
+                                                <img src="./include/uploads/pngwing.com.png"
                                                     class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                                                     width="200px" alt="profile" id="view-profile-image">
                                             </div>
@@ -243,11 +243,11 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <div class="card">
+                        <div class="card bg-light">
                             <div class="card-body table-responsive">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h3 class="mb-0">Lectures Datatable</h3>
-                                    <button type="button" class="btn btn-primary" id="mybutton1" data-bs-toggle="modal"
+                                    <button type="button" class="btn button-29" id="mybutton1" data-bs-toggle="modal"
                                         data-bs-target="#Lecturecreate">
                                         Add Lecture
                                     </button>
@@ -255,21 +255,14 @@
 
                                 <hr>
 
+                                <!-- Search Input Above the Table -->
+                                <div class="mb-3">
+                                    <input type="search" placeholder="Search lecture name.." id="search_lecture" class="form-control" />
+                                </div>
 
-                                <?php
-                                try {
-                                    // Prepare the SQL statement
-                                    $stmt = $conn->prepare("SELECT id, index_number, username, email, password, expertise, address, mobile_no, role, image_path FROM lecturers");
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                } catch (PDOException $e) {
-                                    echo "Connection failed: " . $e->getMessage();
-                                }
-                                $conn = null;
-                                ?>
 
-                                <!-- Table with stripped rows -->
-                                <table class="table datatable text-start align-middle table-bordered table-hover mb-0">
+                                <!-- Table with striped rows -->
+                                <table class="table text-start align-middle table-bordered table-hover mb-0 table-responsive">
                                     <thead>
                                         <tr>
                                             <th>Index Number</th>
@@ -277,26 +270,75 @@
                                             <th>Email</th>
                                             <th>Phone Number</th>
                                             <th>Roles</th>
-                                            <th data-type="date" data-format="YYYY/DD/MM">Re. Date</th>
-                                            <th>chekout</th>
+                                            <!-- <th>Re. Date</th> -->
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tr>
-                                        <input type="search" placeholder="search.." id="search_student">
-                                    </tr>
-                                    <tbody id="output">
-                                        
-                                    </tbody>
+                                    <tbody id="output"></tbody>
                                 </table>
-                               
-  </div>
+                                <script>
+                                    const searchInput = document.getElementById("search_lecture");
+                                    const outputEl = document.getElementById("output");
 
+                                    // Function to fetch and display lectures
+                                    function fetchLectures(query = "") {
+                                        const xhr = new XMLHttpRequest();
+                                        xhr.open("GET", `./include/search_lecture.php?query=${query}`, true);
 
-                                <?php
-                                // Close the connection
+                                        xhr.onload = function() {
+                                            if (xhr.status === 200) {
+                                                const data = JSON.parse(xhr.responseText);
+                                                outputEl.innerHTML = ""; // Clear previous output
 
-                                ?>
-                                <!-- End Table with stripped rows -->
+                                                // Check if any results were returned
+                                                if (data.length > 0) {
+                                                    data.forEach((lecture) => {
+                                                        const row = `
+                            <tr>
+                                <td>${lecture.index_number}</td>
+                                <td>${lecture.username}</td>
+                                <td>${lecture.email}</td>
+                                <td>${lecture.mobile_no || "N/A"}</td>
+                                <td>${lecture.role}</td>
+                                <td class="d-flex justify-content-center">
+                                    <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#LectureView"
+                                        data-id="${lecture.id}" data-index_number="${lecture.index_number}" 
+                                        data-username="${lecture.username}" data-email="${lecture.email}" 
+                                        data-about="${lecture.expertise}" data-address="${lecture.address}" 
+                                        data-mobile_no="${lecture.mobile_no}" data-lecturerole="${lecture.role}" 
+                                        data-image_path="${lecture.image_path}">
+                                        <i class="fas fa-eye fa-lg"></i>
+                                    </a>
+                                    <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#Lecturecreate"
+                                        data-id="${lecture.id}" data-index_number="${lecture.index_number}" 
+                                        data-username="${lecture.username}" data-email="${lecture.email}" 
+                                        data-about="${lecture.expertise}" data-address="${lecture.address}" 
+                                        data-mobile_no="${lecture.mobile_no}" data-lecturerole="${lecture.role}" 
+                                        data-inputPassword="${lecture.password}" data-image_path="${lecture.image_path}">
+                                        <i class="fas fa-user-edit fa-lg"></i>
+                                    </a>
+                                    <a href="include/delete.php?type=lectures&id=${lecture.id}" 
+                                        class="m-1" onclick="return confirm('Are you sure you want to delete this Lecture?')">
+                                        <i class="fas fa-trash-alt fa-lg"></i>
+                                    </a>
+                                </td>
+                            </tr>`;
+                                                        outputEl.innerHTML += row;
+                                                    });
+                                                } else {
+                                                    outputEl.innerHTML = `<tr><td colspan="7" class="text-center">No results found</td></tr>`;
+                                                }
+                                            }
+                                        };
+                                        xhr.send();
+                                    }
+
+                                    // Event listener for search input
+                                    searchInput.addEventListener("keyup", (e) => fetchLectures(e.target.value));
+
+                                    // Initial fetch to display all lectures
+                                    document.addEventListener("DOMContentLoaded", () => fetchLectures("init"));
+                                </script>
 
                             </div>
                         </div>

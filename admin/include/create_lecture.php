@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if(!empty($id)) {
 
-        $result = lectureUpdate($conn, $id, $lname, $dept, $batches, $subjects, $lecture_halls, $days, $time_slot);
+        $result = lectureUpdate($conn, $id, $lname, $lecture_halls, $days, $time_slot);
     }else{
 
         $result = lectureCreate($conn, $lname, $dept, $batches, $subjects, $lecture_halls, $days, $time_slot);

@@ -1,9 +1,19 @@
 <?php
 // Database configuration
+// $servername = "sql12.freesqldatabase.com";
+// $username = "sql12743113";
+// $password = "98czmEvKyu";
+// $dbname = "sql12743113";
+
+// $servername = "localhost:3306";
+// $username = "root";
+// $password = "12345";
+// $dbname = "lhm_system2";
+
 $servername = "localhost";
 $username = "root";
-$password = "1234";
-$dbname = "lhm_system2";
+$password = "";
+$dbname = "lhm_system";
 
 try {
     // Create a PDO connection

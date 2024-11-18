@@ -50,7 +50,7 @@
       </form>
       <div class="links">
         <p>Already Have Account ?</p>
-        <a href="login.php"><button id="signInButton">Sign In</button></a>
+        <a href="./signin.php"><button id="signInButton">Sign In</button></a>
       </div>
     </div>
 

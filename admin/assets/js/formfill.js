@@ -1,27 +1,88 @@
 // ################student update
 
-document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function (button) {
-    button.addEventListener('click', function () {
-        const id = this.getAttribute('data-id');
-        const index_number = this.getAttribute('data-index_number');
-        const username = this.getAttribute('data-username');
-        const email = this.getAttribute('data-email');
-        const mobile_num = this.getAttribute('data-mobile_num');
-        const batch_id = this.getAttribute('data-batch_id');
-        const address = this.getAttribute('data-address');
-        const department_id = this.getAttribute('data-department_id');
-        const re_date = this.getAttribute('data-re_date');
+// Function to populate the modal with the student's data
+document.addEventListener('DOMContentLoaded', function () {
+    // Event listener for when the modal is triggered
+    var StudentCreateModal = document.getElementById('studentcreate');
+    var StudentViewModal = document.getElementById('studentView');
 
-        // Populate the form fields with the selected lecturer's data
-        document.getElementById('student_id').value = id;
-        document.getElementById('Index_Num').value = index_number;
-        document.getElementById('Student_name').value = username;
-        document.getElementById('email').value = email;
-        document.getElementById('Mobile_num').value = mobile_num;
-        document.getElementById('address').value = address;
-        document.getElementById('department_id').value = department_id;
-        document.getElementById('batch_id').value = batch_id;
+    StudentCreateModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+
+        // Extract info from data-* attributes
+        var id = button.getAttribute('data-id');
+        var index_number = button.getAttribute('data-index_number');
+        var username = button.getAttribute('data-username');
+        var email = button.getAttribute('data-email');
+        var mobile_num = button.getAttribute('data-mobile_num');
+        var batch_id = button.getAttribute('data-batch_id');
+        var address = button.getAttribute('data-address');
+        var department_id = button.getAttribute('data-department_id');
+        var re_date = button.getAttribute('data-re_date');
+        var image_path = button.getAttribute('data-image_path'); // Get image path
+
+        // Populate the form fields
+        var modal = StudentCreateModal;
+        modal.querySelector('#student_id').value = id;
+        modal.querySelector('#Index_Num').value = index_number;
+        modal.querySelector('#Student_name').value = username;
+        modal.querySelector('#email').value = email;
+        modal.querySelector('#Mobile_num').value = mobile_num;
+        modal.querySelector('#address').value = address;
+        modal.querySelector('#department_id').value = department_id;
+        modal.querySelector('#batch_id').value = batch_id;
+
+        // Update the image preview
+        var profileImage = modal.querySelector('.profile-image-pic'); // Change to the correct class or ID for the image
+        if (image_path) {
+            profileImage.src = './include/' + image_path; // Use the correct path for your images
+
+            // Set the onerror fallback to default image if the image path is not valid
+            profileImage.onerror = function () {
+                this.src = './include/uploads/pngwing.com.png'; // Default image
+            };
+        } else {
+            // If no image_path provided, set default image directly
+            profileImage.src = './include/uploads/pngwing.com.png'; // Default image
+        }
     });
+
+    StudentViewModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+
+        var id = button.getAttribute('data-id');
+        var index_number = button.getAttribute('data-index_number');
+        var student_name = button.getAttribute('data-username');
+        var email = button.getAttribute('data-email');
+        var mobile_num = button.getAttribute('data-mobile_num');
+        var address = button.getAttribute('data-address');
+        var department_id = button.getAttribute('data-department_id');
+        var batch_id = button.getAttribute('data-batch_id');
+        var image_path = button.getAttribute('data-image_path'); // Get image path
+
+
+        var modal = StudentViewModal;
+        modal.querySelector('#view-student_id').value = id;
+        modal.querySelector('#view-Index_Num').value = index_number;
+        modal.querySelector('#view-Student_name').value = student_name;
+        modal.querySelector('#view-email').value = email;
+        modal.querySelector('#view-Mobile_num').value = mobile_num;
+        modal.querySelector('#view-address').value = address;
+        modal.querySelector('#view-department_id').value = department_id;
+        modal.querySelector('#view-batch_id').value = batch_id;
+
+        var profileImage = modal.querySelector('#view-student-profile-image');
+        if (image_path) {
+            profileImage.src = './include/' + image_path;
+
+            profileImage.onerror = function () {
+                this.src = './include/uploads/pngwing.com.png';
+            };
+        } else {
+            profileImage.src = './include/uploads/pngwing.com.png';
+        }
+    });
+
 });
 
 
@@ -29,7 +90,11 @@ document.querySelectorAll('[data-bs-target="#studentcreate"]').forEach(function 
 
 
 
-// ##########lecturers update and view 
+
+
+
+
+// ##########lecturers update and view #################
 
 // Function to populate the modal with the lecturer's data
 document.addEventListener('DOMContentLoaded', function () {
@@ -49,7 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
         var address = button.getAttribute('data-address');
         var mobile_no = button.getAttribute('data-mobile_no');
         var lecturerole = button.getAttribute('data-lecturerole');
-        var password = button.getAttribute('data-inputPassword');
+        // var password = button.getAttribute('data-inputPassword');
+        var password = '';
         var image_path = button.getAttribute('data-image_path'); // Get image path
 
         // Populate the form fields
@@ -64,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.querySelector('#lecturerole').value = lecturerole;
         modal.querySelector('#inputPassword').value = password;
 
-        // Update the image preview
+        
         // Update the image preview
         var profileImage = modal.querySelector('.profile-image-pic');
         if (image_path) {
@@ -72,11 +138,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Set the onerror fallback to default image if the image path is not valid
             profileImage.onerror = function () {
-                this.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+                this.src = './include/uploads/pngwing.com.png'; // Default image
             };
         } else {
             // If no image_path provided, set default image directly
-            profileImage.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+            profileImage.src = './include/uploads/pngwing.com.png'; // Default image
         }
 
     });
@@ -114,11 +180,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Set the onerror fallback to default image if the image path is not valid
             profileImage.onerror = function () {
-                this.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+                this.src = './include/uploads/pngwing.com.png'; // Default image
             };
         } else {
             // If no image_path provided, set default image directly
-            profileImage.src = 'https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png'; // Default image
+            profileImage.src = './include/uploads/pngwing.com.png'; // Default image
         }
     });
 

@@ -85,10 +85,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
+                        <a class="nav-link" href="../../index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="view_schedule.php">View Schedule</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="manage_lectures.php">Manage Lectures</a>
+                        <a class="nav-link" href="booking_time_table.php">Manage Lectures</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="time_table.php">View Timetable</a>

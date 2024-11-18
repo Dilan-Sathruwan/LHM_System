@@ -3,7 +3,7 @@ session_start();
 include "include/db_connection.inc.php";
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location:../signin.php"); 
+    header("Location:../signin.php");
     exit();
 }
 
@@ -67,7 +67,8 @@ if (!isset($_SESSION['user_id'])) {
         <div class="sidebar pe-4 pb-3 back-colors">
             <nav class="navbar navbar-light bg-transparent">
                 <a href="#" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3>
+                    <!-- <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3> -->
+                    <h3 class="text-danger">SLIATE LHM</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -79,8 +80,8 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0"><?php if (isset($_SESSION['user_id'])) {
-                                    echo "Welcome, " . $_SESSION['user_name']; // Display the username
-                                } ?></h6>
+                                                echo "Welcome, " . $_SESSION['user_name']; // Display the username
+                                            } ?></h6>
                         <span>Active</span>
                     </div>
                 </div>
@@ -140,13 +141,39 @@ if (!isset($_SESSION['user_id'])) {
                                                                             echo 'active';
                                                                         } ?>"><i
                             class="fa fa-table me-2"></i>Schedules</a>
-                    <a href="Events.php" class="nav-item nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'Events.php') {
-                                                                        echo 'active';
-                                                                    } ?>"><i
-                            class="fa fa-chart-bar me-2"></i>Events</a>
+                    
+
 
 
                     <div class="nav-item dropdown">
+                        <a href="" class="nav-link dropdown-toggle <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_lecture.php') {
+                                                                        echo 'active';
+                                                                    } elseif (basename($_SERVER['PHP_SELF']) == 'timetable_batch.php') {
+                                                                        echo 'active';
+                                                                    } elseif (basename($_SERVER['PHP_SELF']) == 'timetable_hall.php') {
+                                                                        echo 'active';
+                                                                    }
+                                                                    ?>" data-bs-toggle="dropdown"><i
+                                class="fa fa-university me-2"></i>Time table</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="timetable_lecture.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_lecture.php') {
+                                                                                echo 'active';
+                                                                            } ?>">Lecture Timetable</a>
+                            <a href="timetable_batch.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_batch.php') {
+                                                                                echo 'active';
+                                                                            } ?>">Batch Timetable</a>
+                            <a href="timetable_hall.php" class="dropdown-item <?php if (basename($_SERVER['PHP_SELF']) == 'timetable_hall.php') {
+                                                                            echo 'active';
+                                                                        } ?>">Hall Timetable</a>
+                        </div>
+                    </div>
+
+                    <a href="Reserve.php" class="nav-item nav-link <?php if (basename($_SERVER['PHP_SELF']) == 'Reserve.php') {
+                                                                            echo 'active';
+                                                                        } ?>"><i
+                            class="fa fa-table me-2"></i>Lectures Booking</a>
+
+                    <!-- <div class="nav-item dropdown">
                         <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -155,7 +182,7 @@ if (!isset($_SESSION['user_id'])) {
                             <a href="404.html" class="dropdown-item">404 Error</a>
                             <a href="blank.html" class="dropdown-item">Blank Page</a>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </nav>

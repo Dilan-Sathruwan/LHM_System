@@ -4,10 +4,17 @@
     box-sizing:border-box;
     font-family:"poppins",sans-serif;
 }
-body{
-    background-color: #c9d6ff;
-    background:linear-gradient(to right,#e2e2e2,#c9d6ff);
+
+
+body {
+    /* background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg'); */
+    background-image: url('../img/hnd1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Numans', sans-serif;
 }
+
 .container{
     background:#fff;
     width:450px;

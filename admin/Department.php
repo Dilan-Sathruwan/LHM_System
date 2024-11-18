@@ -16,7 +16,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
                     <h5 class="mb-4">Departments</h5>
-                    <table class="table table-bordered text-start">
+                    <table class="table table-bordered text-start table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
@@ -35,8 +35,8 @@
                                     echo '<tr>';
                                     echo '<td>' . htmlspecialchars($row['id']) . '</td>';
                                     echo '<td>' . htmlspecialchars($row['department_name']) . '</td>';
-                                    echo '<td class="text-center ">';
-                                    echo '<a href="#" class="mx-3"';
+                                    echo '<td class="d-flex justify-content-center ">';
+                                    echo '<a href="#" class="mx-1"';
                                     echo '><i class="fas fa-eye fa-lg"></i></a>';
                                     echo '<a href="#" class="ms-3"';
                                     echo '><i class="fas fa-trash fa-lg"></i></a>';
@@ -56,7 +56,7 @@
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-light rounded h-100 p-4">
                     <h5 class="mb-4">Semesters & etc</h5>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
