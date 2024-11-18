@@ -413,7 +413,7 @@ include 'admin/include/db_connection.inc.php';
             <img src="./assets/img/index/Dev/Tharuka.jpg" alt="User 1: Jane Doe" class="rounded-circle" />
             <h5>Tharuka</h5>
             <p>
-              "Co-developer and main Co-Leader of the Developer Team"
+              "Co-developer and main Co-Leader of the Team"
             </p>
           </div>
         </div>
@@ -447,7 +447,7 @@ include 'admin/include/db_connection.inc.php';
             <img src="./assets/img/index/Dev/Dilan.jpg" alt="User 3: Sarah Lee" class=" rounded-circle" />
             <h5>Dilan</h5>
             <p>
-              "Main Co-Leader and project manager of the Developer Team"
+            "Just a Guy For Fixing Little Things"
             </p>
           </div>
         </div>
