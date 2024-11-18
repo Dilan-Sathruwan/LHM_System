@@ -90,7 +90,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="time_slot" class="form-label">Batch Year</label>
+                            <label for="time_slot" class="form-label">Lecture time</label>
                             <select id="inputtime" class="form-select" name="time_slot">
                                 <option selected>Add your time</option>
                                 <?php
@@ -251,7 +251,7 @@
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <label for="time_slot" class="form-label">Batch Year</label>
+                            <label for="time_slot" class="form-label">Lecture Time</label>
                             <select id="einputtime" class="form-select" name="time_slot">
                                 <option selected>Add your time</option>
                                 <?php
@@ -280,9 +280,9 @@
     <div class="container-fluid pt-4 px-4">
         <div class="bg-light text-center rounded p-3 mb-2">
             <div class="d-flex align-items-center justify-content-start mb-1">
-                <a class="btn  btn-primary" href="timetable_lecture.php">Lecture Timetables</a>
-                <a class="btn  btn-primary ms-4" href="timetable_batch.php">Batch Timetables</a>
-                <a class="btn  btn-primary ms-4" href="timetable_hall.php">Hall Timetables</a>
+                <a class="btn  button-29" href="timetable_lecture.php">Lecture Timetables</a>
+                <a class="btn  button-29 ms-4" href="timetable_batch.php">Batch Timetables</a>
+                <a class="btn  button-29 ms-4" href="timetable_hall.php">Hall Timetables</a>
             </div>
 
         </div>
@@ -355,7 +355,7 @@
         <div class="bg-light text-center rounded p-4 mt-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h3 class="mb-0">All Avalible Lecturers</h3>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#batchModal">Add Lecturers</button>
+                <button type="button" class="btn button-29" data-bs-toggle="modal" data-bs-target="#batchModal">Add Lecturers</button>
             </div>
             <div class="table-responsive">
 

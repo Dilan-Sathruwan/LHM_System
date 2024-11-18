@@ -159,32 +159,39 @@ include 'admin/include/db_connection.inc.php';
       text-align: center;
     }
 
-    .nav-link:hover {
-      background-color: #B5B4D9;
-      color: blue !important;
+    .nav-link {
+        display: inline-block;
+        color: #222 !important;
+        text-decoration: none;
+        overflow: hidden;
+        font-weight: bolder;
+        transition: color 0.4s ease, background-color 0.4s ease;
     }
 
-    .nav-link {
-            display: inline-block;
-            color: #d2e4f7 !important;
-            text-decoration: none;
-            overflow: hidden;
-          }
+    .nav-link:hover {
+        background-color: rgba(0, 0, 0, 0.70);
+        color: linear-gradient(to right, #ff4500, #ff7f50)!important;
+    }
 
-          .hover-underline {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background-color: #ff4500;
-            bottom: 0;
-            left: 0;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-          }
+    .hover-underline {
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(to right, #ff4500, #ff7f50);
+        bottom: 0;
+        left: 0;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease, width 0.3s ease;
+    }
 
-          .nav-link:hover .hover-underline {
-            transform: translateX(0);
-          }
+    .nav-link:hover .hover-underline {
+        transform: translateY(0);
+        width: 110%;
+    }
+
+    a{
+      font-weight: 600 !important;
+    }
   </style>
 </head>
 
@@ -203,7 +210,7 @@ include 'admin/include/db_connection.inc.php';
     </header> -->
 
   <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light py-2">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
         aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -212,7 +219,7 @@ include 'admin/include/db_connection.inc.php';
         
         <!-- Logo on the left -->
         <a class="navbar-brand" href="#">
-          <img src="./assets/img/logo.png" class="img-fluid" width="300px" height="auto" alt="Logo">
+          <img src="./assets/img/logo2.png" class="img-fluid" width="300px" height="auto" alt="Logo">
         </a>
 
         <!-- Navbar Links - Centered -->
@@ -269,11 +276,13 @@ include 'admin/include/db_connection.inc.php';
           <?php
           if (isset($_SESSION['user_id']) || isset($_SESSION['user']) || isset($_SESSION['St_id'])) {
             echo '<li class="nav-item">
-                            <a class="btn btn-outline-light my-2 my-sm-0" href="./include/logout.php">Sign out</a>
+                            <a class="nav-link my-2 my-sm-0" href="./include/logout.php">Sign out
+                            <span class="hover-underline"></span></a>
                         </li>';
           } else {
             echo '<li class="nav-item">
-                            <a class="btn btn-outline-light my-2 my-sm-0" href="./signin.php">Sign in</a>
+                            <a class="nav-link my-2 my-sm-0" href="./signin.php">Sign in
+                            <span class="hover-underline"></span></a>
                         </li>';
           }
           ?>

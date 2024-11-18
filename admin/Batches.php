@@ -69,7 +69,7 @@
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h3 class="mb-0">batches</h3>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#batchModal">Create Batch
+                <button type="button" class="btn button-29" data-bs-toggle="modal" data-bs-target="#batchModal">Create Batch
                 </button>
             </div>
             <div class="table-responsive">

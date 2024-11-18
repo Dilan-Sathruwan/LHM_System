@@ -134,7 +134,7 @@
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h3 class="mb-0">Higher National Diploma All Subject</h3>
-                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#subModal">Add Subject
+                <button type="button" class="btn btn-sm button-29" data-bs-toggle="modal" data-bs-target="#subModal">Add Subject
                 </button>
             </div>
 

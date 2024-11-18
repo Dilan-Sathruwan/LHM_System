@@ -8,130 +8,139 @@ include '../../admin/include/db_connection.inc.php';
 //     exit();
 // }
 
-$lecturer_id = $_SESSION['user'];
+$lecturer_id = $_SESSION['user']; // Assuming this contains the lecturer's ID
 
 // Handle adding a new lecture
 if (isset($_POST['add_lecture'])) {
     $subject_id = $_POST['subject_id'];
-    $lecturer_id = $_POST['hall_id'];
-    $hall_id = $_POST['batch_id'];
+    $hall_id = $_POST['hall_id'];
     $department_id = $_POST['department_id'];
-    $batch_id = $_POST['day_of_week'];
+    $batch_id = $_POST['batch_id'];
     $slot_id = $_POST['slot_id'];
-    $days = $_POST['slot_id'];
+    $days = $_POST['day_of_week'];
 
     try {
-        // Check if the lecture already exists in the BookingTimetable table
+        // Check if the lecture already exists
         $check_query = "SELECT * FROM lecture_book 
                         WHERE subject_id = :subject_id 
-                        AND lecturer_id = :lecturer_id 
-                        AND hall_id = :hall_id 
-                        AND department_id = :department_id 
-                        AND batch_id = :batch_id 
-                        AND slot_id = :slot_id
-                        AND days = :days";
+                          AND hall_id = :hall_id 
+                          AND department_id = :department_id 
+                          AND batch_id = :batch_id 
+                          AND slot_id = :slot_id 
+                          AND days = :days 
+                          AND lecturer_id = :lecturer_id";
         $check_stmt = $conn->prepare($check_query);
         $check_stmt->execute([
             ':subject_id' => $subject_id,
-            ':lecturer_id' => $lecturer_id,
             ':hall_id' => $hall_id,
             ':department_id' => $department_id,
             ':batch_id' => $batch_id,
             ':slot_id' => $slot_id,
             ':days' => $days,
+            ':lecturer_id' => $lecturer_id,
         ]);
 
         if ($check_stmt->rowCount() > 0) {
             $error_message = "This lecture booking already exists.";
         } else {
-            // Insert the new lecture into BookingTimetable table
+            // Insert the new lecture
             $add_query = "INSERT INTO lecture_book 
-                          (lecturer_id, subject_id, hall_id, batch_id,day_of_week, slot_id) 
-                          VALUES (:lecturer_id, :subject_id, :hall_id, :batch_id, :day_of_week, :slot_id)";
+                          (subject_id, hall_id, department_id, batch_id, days, slot_id, lecturer_id) 
+                          VALUES (:subject_id, :hall_id, :department_id, :batch_id, :days, :slot_id, :lecturer_id)";
             $add_stmt = $conn->prepare($add_query);
             $add_stmt->execute([
-                ':lecturer_id' => $lecturer_id,
                 ':subject_id' => $subject_id,
                 ':hall_id' => $hall_id,
+                ':department_id' => $department_id,
                 ':batch_id' => $batch_id,
-                ':day_of_week' => $day_of_week,
+                ':days' => $days,
                 ':slot_id' => $slot_id,
+                ':lecturer_id' => $lecturer_id,
             ]);
 
-            // Redirect after successful insertion
-            header("Location: booking_time_table.php");
-            exit();
+            $success_message = "Lecture added success";
         }
     } catch (PDOException $e) {
         $error_message = "Error: " . $e->getMessage();
     }
 }
 
+// Fetch all lecture bookings
+try {
+    $query = "
+        SELECT 
+            lb.id AS booking_id,
+            s.subject_name,
+            b.batch_name,
+            d.department_name AS dept_name,
+            lb.days AS day_of_week,
+            ts.start_time,
+            ts.end_time,
+            lh.hall_name
+        FROM 
+            lecture_book lb
+        INNER JOIN 
+            subjects s ON lb.subject_id = s.id
+        INNER JOIN 
+            batches b ON lb.batch_id = b.id
+        INNER JOIN 
+            departments d ON lb.department_id = d.id
+        INNER JOIN 
+            timeslot ts ON lb.slot_id = ts.slot_id
+        INNER JOIN 
+            lecture_halls lh ON lb.hall_id = lh.id
+        WHERE 
+            lb.lecturer_id = :lecturer_id
+        ORDER BY 
+            FIELD(lb.days, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'), ts.start_time;
+    ";
+    $stmt = $conn->prepare($query);
+    $stmt->execute([':lecturer_id' => $lecturer_id]);
+    $lectures = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 
-// // Handle deletion of a lecture booking
-// if (isset($_GET['delete'])) {
-//     $booking_id = $_GET['delete'];
-//     $delete_query = "DELETE FROM BookingTimetable WHERE booking_id = ? AND lecturer_id = ?";
-//     $stmt = $conn->prepare($delete_query);
-//     $stmt->bind_param("ii", $booking_id, $lecturer_id);
-//     $stmt->execute();
-//     $stmt->close();
-//     header("Location: booking_time_table.php");
-//     exit();
-// }
+// Handle deletion
+if (isset($_GET['delete'])) {
+    $booking_id = $_GET['delete'];
 
+    try {
+        $delete_query = "DELETE FROM lecture_book WHERE id = :booking_id";
+        $delete_stmt = $conn->prepare($delete_query);
+        $delete_stmt->execute([':booking_id' => $booking_id]);
 
+        header("Location: booking_time_table.php?massage=deleted success");
+        exit();
+    } catch (PDOException $e) {
+        die("Error: " . $e->getMessage());
+    }
+}
 
-// Fetch the lectures for the logged-in lecturer
-$query = "
-    SELECT 
-        t.id AS timetable_id,
-        s.subject_name,
-        h.hall_name,
-        b.batch_name,
-        d.department_name AS dept_name,
-        ts.start_time,
-        ts.end_time,
-        t.days AS day_of_week,
-    FROM lecture_schedule t
-    JOIN subjects s ON t.subject_id = s.id
-    JOIN lecture_halls h ON t.hall_id = h.id
-    JOIN batches b ON t.batch_id = b.id
-    JOIN departments d ON b.department_id = d.id
-    JOIN timeslot ts ON t.slot_id = ts.slot_id
-    WHERE t.lecturer_id = :lecturer_id
-    ORDER BY FIELD(t.days, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'), ts.start_time
-";
+// Fetch data for dropdowns
+try {
+    $departments_query = "SELECT id AS dept_id, department_name AS dept_name FROM departments";
+    $departments_stmt = $conn->query($departments_query);
+    $departments = $departments_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Prepare and execute the statement
-$stmt = $conn->prepare($query);
-$stmt->bindParam(':lecturer_id', $lecturer_id, PDO::PARAM_INT);
-$lectures = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $subjects_query = "SELECT id AS subject_id, subject_name FROM subjects";
+    $subjects_stmt = $conn->query($subjects_query);
+    $subjects = $subjects_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Fetch departments for the first dropdown
-$departments_query = "SELECT id AS dept_id, department_name AS dept_name FROM departments";
-$departments_stmt = $conn->query($departments_query);
-$departments = $departments_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $batches_query = "SELECT id AS batch_id, batch_name FROM batches";
+    $batches_stmt = $conn->query($batches_query);
+    $batches = $batches_stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $halls_query = "SELECT id AS hall_id, hall_name FROM lecture_halls";
+    $halls_stmt = $conn->query($halls_query);
+    $halls = $halls_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$subjects_query = "SELECT id AS subject_id, subject_name AS subject_name FROM subjects";
-$subjects_stmt = $conn->query($subjects_query);
-$subjects = $subjects_stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$batches_query = "SELECT id AS batch_id, batch_name AS batch_name FROM batches";
-$batches_stmt = $conn->query($batches_query);
-$batches = $batches_stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-// Fetch halls for static dropdown
-$halls_query = "SELECT id AS hall_id, hall_name FROM lecture_halls";
-$halls_stmt = $conn->query($halls_query);
-$halls = $halls_stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// Fetch time slots for static dropdown
-$timeslots_query = "SELECT slot_id, start_time, end_time FROM timeslot WHERE is_interval = 0";
-$timeslots_stmt = $conn->query($timeslots_query);
-$timeslots = $timeslots_stmt->fetchAll(PDO::FETCH_ASSOC);
+    $timeslots_query = "SELECT slot_id, start_time, end_time FROM timeslot WHERE is_interval = 0";
+    $timeslots_stmt = $conn->query($timeslots_query);
+    $timeslots = $timeslots_stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -245,6 +254,10 @@ $timeslots = $timeslots_stmt->fetchAll(PDO::FETCH_ASSOC);
         <!-- Display error message if exists -->
         <?php if (isset($error_message)): ?>
             <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
+        <?php endif; ?>
+
+        <?php if (isset($success_message)): ?>
+            <div class="alert alert-primary text-center"><?php echo htmlspecialchars($success_message); ?></div>
         <?php endif; ?>
 
         <!-- Form to add new lecture -->
