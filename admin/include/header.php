@@ -67,8 +67,8 @@ if (!isset($_SESSION['user_id'])) {
         <div class="sidebar pe-4 pb-3 back-colors">
             <nav class="navbar navbar-light bg-transparent">
                 <a href="#" class="navbar-brand mx-4 mb-3">
-                    <!-- <h3 class="text-primary"><img src="./assets/img/Icon/FB.gif" alt=""></h3> -->
-                    <h3 class="text-danger">SLIATE LHM</h3>
+                    <h3 class="text-primary"><img src="../assets/img/logo2.png" class="img-fluid" alt=""></h3>
+                    <!-- <h3 class="text-danger">SLIATE LHM</h3> -->
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">

@@ -2,8 +2,8 @@
 // Database connection configuration
 $servername = "localhost";  // Replace with your server name if different
 $username = "root";         // Replace with your MySQL username
-$password = "12345";             // Replace with your MySQL password
-$dbname = "lhm_system2";  // Replace with your actual database name
+$password = "1234";             // Replace with your MySQL password
+$dbname = "lhm_system";  // Replace with your actual database name
 
 // Enable or disable debug mode
 $debug = false; // Set to true during development to see debug messages
