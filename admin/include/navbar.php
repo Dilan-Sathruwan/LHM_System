@@ -10,7 +10,7 @@
     </form>
     <div class="navbar-nav align-items-center ms-auto">
 
-        <div class="nav-item dropdown">
+        <!-- <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <i class="fa fa-bell me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Notificatin</span>
@@ -33,7 +33,7 @@
                 <hr class="dropdown-divider">
                 <a href="#" class="dropdown-item text-center">See all notifications</a>
             </div>
-        </div>
+        </div> -->
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <img class="rounded-circle me-lg-2" src="./assets/img/Icon/Gest.gif" alt=""

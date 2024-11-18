@@ -14,7 +14,7 @@
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-color-fram">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Student profile</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -156,7 +156,7 @@
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-color-fram">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">View Student Profile</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -268,7 +268,7 @@
                             <div class="card-body table-responsive">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h3 class="mb-0">Student Datatable</h3>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#studentcreate">
+                                    <button type="button" class="btn button-29" data-bs-toggle="modal" data-bs-target="#studentcreate">
                                         Add Student
                                     </button>
 
@@ -292,7 +292,8 @@
                                             <th>Student Email</th>
                                             <th>Mobile Number</th>
                                             <th>Semester year</th>
-                                            <th>Re. Date</th>
+                                            <!-- <th>Re. Date</th>
+                                            <td>${student.enrollment_date}</td> -->
                                             <th>chekout</th>
                                         </tr>
                                     </thead>
@@ -311,9 +312,9 @@
                                         xhr.onload = function() {
                                             if (xhr.status === 200) {
                                                 const data = JSON.parse(xhr.responseText);
-                                                outputEl.innerHTML = ""; // Clear previous output
+                                                outputEl.innerHTML = ""; 
 
-                                                // Check if any results were returned
+                                                
                                                 if (data.length > 0) {
                                                     data.forEach((student) => {
                                                         const row = `
@@ -323,7 +324,7 @@
                                 <td>${student.email}</td>
                                 <td>${student.mobile_num || "N/A"}</td>
                                 <td>${student.batch_name}</td>
-                                <td>${student.enrollment_date}</td>
+                                
                                 <td class="d-flex justify-content-center">
                                     <a href="#" class="m-1" data-bs-toggle="modal" data-bs-target="#studentView"
                                         data-id="${student.id}"

@@ -165,7 +165,7 @@ include 'admin/include/db_connection.inc.php';
         text-decoration: none;
         overflow: hidden;
         font-weight: bolder;
-        transition: color 0.3s ease;
+        transition: color 0.4s ease, background-color 0.4s ease;
     }
 
     .nav-link:hover {
