@@ -68,7 +68,7 @@
 
                                             <div class="col-sm-6">
                                                 <label for="Mobile_num" class="form-label">Mobile Number</label>
-                                                <input type="number" class="form-control" id="Mobile_num" name="Mobile_num">
+                                                <input type="number" class="form-control" id="Mobile_num" name="mobile_num">
                                             </div>
 
                                             <div class="col-12">
