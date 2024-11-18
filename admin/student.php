@@ -78,7 +78,7 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="department" class="form-label">Department</label>
+                                                <label for="department" class="form-label">Department Name</label>
                                                 <select class="form-select" name="department_id" id="department_id" onchange="fetchSemesters(this.value)" required>
                                                     <option value="">Check your department</option>
                                                     <?php
@@ -264,7 +264,7 @@
                 <div class="row">
                     <div class="col-lg-12">
 
-                        <div class="card">
+                        <div class="card bg-light">
                             <div class="card-body table-responsive">
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <h3 class="mb-0">Student Datatable</h3>
