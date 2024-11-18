@@ -7,7 +7,7 @@
     <!-- Navbar End -->
 
     <!-- Lecture Add /Edit Modal -->
-    <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1 "
+    <div class="modal fade" id="Lecturecreate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg ">
             <div class="modal-content">
@@ -354,3 +354,4 @@
 <!-- Content End -->
 
 <?php include './include/footer.php'; ?>
+<script src="./assets/js/search_lectures.js"></script>
