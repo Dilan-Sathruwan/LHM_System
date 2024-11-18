@@ -237,8 +237,8 @@ include 'admin/include/db_connection.inc.php';
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#contact" style="position: relative;">
-              Contact
+            <a class="nav-link" href="#testimonials" style="position: relative;">
+              Developers
               <span class="hover-underline"></span>
             </a>
           </li>
@@ -459,7 +459,7 @@ include 'admin/include/db_connection.inc.php';
   <!-- Footer -->
   <footer>
     <div class="container">
-      <p>&copy; 2024 Create By Loku. All Rights Reserved.</p>
+      <p>&copy; LHM System 2024 . All Rights Reserved.</p>
       <p>
         <a href="#" class="text-white">Privacy Policy</a> |
         <a href="#" class="text-white">Terms of Service</a>
