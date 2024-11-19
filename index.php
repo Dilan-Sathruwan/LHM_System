@@ -410,7 +410,7 @@ include 'admin/include/db_connection.inc.php';
         <!-- Testimonial 1 -->
         <div class="col-md-3" data-aos="fade-up">
           <div class="testimonial-item text-center">
-            <img src="./assets/img/index/Dev/Tharuka.jpg" alt="User 1: Jane Doe" class="rounded-circle" />
+            <img src="./assets/img/index/Dev/aaa.jpg" alt="User 1: Jane Doe" class="rounded-circle" />
             <h5>Tharuka</h5>
             <p>
               "Co-developer and main Co-Leader of the Team"
@@ -421,7 +421,7 @@ include 'admin/include/db_connection.inc.php';
         <!-- Testimonial 2 -->
         <div class="col-md-3" data-aos="fade-up">
           <div class="testimonial-item">
-            <img src="./assets/img/index/Dev/Ravindu.jpg" alt="User 2: John Smith" class="rounded-circle" />
+            <img src="./assets/img/index/Dev/aaa.jpg" alt="User 2: John Smith" class="rounded-circle" />
             <h5>Ravindu</h5>
             <p>
               "Main Developer And Leader Of Develper Team."
@@ -432,7 +432,7 @@ include 'admin/include/db_connection.inc.php';
         <!-- Testimonial 3 -->
         <div class="col-md-3" data-aos="fade-up">
           <div class="testimonial-item">
-            <img src="./assets/img/index/Dev/Shehani.jpg" alt="User 3: Sarah Lee" class=" rounded-circle" />
+            <img src="./assets/img/index/Dev/aaa.jpg" alt="User 3: Sarah Lee" class=" rounded-circle" />
             <h5>Shehani</h5>
             <p>
               "Main Desgner and Main Qulity Checker Of The Team"
