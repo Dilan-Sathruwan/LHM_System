@@ -7,8 +7,8 @@
 
 $servername = "localhost:3306";
 $username = "root";
-$password = "12345";
-$dbname = "lhm_system2";
+$password = "1234";
+$dbname = "lhm_system";
 
 // $servername = "localhost";
 // $username = "root";
